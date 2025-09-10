@@ -10,4 +10,5 @@ public interface IRolService {
     public Rol listIdRol(int id_rol);
     public void deleteRol(int id_rol);
     public void updateRol(Rol rol);
+    public List<Rol> buscarPorRol(String nombre_rol);
 }

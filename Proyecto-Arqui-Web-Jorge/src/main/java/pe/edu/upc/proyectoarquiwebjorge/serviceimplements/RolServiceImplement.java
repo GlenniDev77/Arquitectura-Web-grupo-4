@@ -39,4 +39,9 @@ public class RolServiceImplement implements IRolService {
         rS.save(rol);
     }
 
+    @Override
+    public List<Rol> buscarPorRol(String nombre_rol) {
+        return rS.buscarPorNombreRol(nombre_rol);
+    }
+
 }

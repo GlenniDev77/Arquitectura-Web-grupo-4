@@ -79,4 +79,21 @@ public class RolController {
         rS.updateRol(rol);
         return ResponseEntity.ok("Rol con ID " + rol.getId_rol() + " modificado correctamente.");
     }
+
+    @GetMapping("/busquedas")
+    public ResponseEntity<?> buscar(@RequestParam String t) {
+        List<Rol> roles = rS.buscarPorRol(t);
+
+        if (roles.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron roles del tipo: " + t);
+        }
+
+        List<RolDTO> listaDTO = roles.stream().map(x -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(x, RolDTO.class);
+        }).collect(Collectors.toList());
+
+        return ResponseEntity.ok(listaDTO);
+    }
 }
