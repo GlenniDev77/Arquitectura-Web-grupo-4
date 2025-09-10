@@ -2,6 +2,8 @@ package pe.edu.upc.proyectoarquiwebjorge.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.RolDTO;
 import pe.edu.upc.proyectoarquiwebjorge.entities.Rol;
@@ -31,5 +33,50 @@ public class RolController {
         rS.insert(d);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> listarRolPorId(@PathVariable("id") Integer id) {
+        Rol dev = rS.listIdRol(id);
+        if (dev == null) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("No existe un rol con el ID: " + id);
+        }
+        ModelMapper m = new ModelMapper();
+        RolDTO dto = m.map(dev, RolDTO.class);
+        return ResponseEntity.ok(dto);
+    }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminarRol(@PathVariable("id") Integer id) {
+        Rol d = rS.listIdRol(id);
+        if (d == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No existe un rol con el ID: " + id);
+        }
+        rS.deleteRol(id);
+        return ResponseEntity.ok("Rol con ID " + id + " eliminado correctamente.");
+    }
+
+    @PutMapping
+    public ResponseEntity<String> modificar(@RequestBody RolDTO dto) {
+        ModelMapper m = new ModelMapper();
+        Rol rol = m.map(dto, Rol.class);
+
+        // Validación de presupuesto
+        /* if (dev.getPriceDevice() < 0) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("No se permite ingresar un precio negativo. Valor recibido: " + dev.getPriceDevice());
+        } */
+
+        // Validación de existencia
+        Rol existente = rS.listIdRol(rol.getId_rol());
+        if (existente == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se puede modificar. No existe un rol con el ID: " + rol.getId_rol());
+        }
+
+        // Actualización si pasa validaciones
+        rS.updateRol(rol);
+        return ResponseEntity.ok("Rol con ID " + rol.getId_rol() + " modificado correctamente.");
+    }
 }
