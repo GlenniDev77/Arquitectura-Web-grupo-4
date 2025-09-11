@@ -25,7 +25,23 @@ public class UsuarioServiceImplement implements IUsuarioService {
     }
 
     @Override
-    public Usuario listIdRol(int id_usuario) {
+    public Usuario listIdUsuario(int id_usuario) {
         return uS.findById(id_usuario).orElse(null);
+    }
+
+
+    @Override
+    public void deleteUsuario(int id_usuario) {
+        uS.deleteById(id_usuario);
+    }
+
+    @Override
+    public void updateUsuario(Usuario usuario) {
+        uS.save(usuario);
+    }
+
+    @Override
+    public List<Usuario> buscarPorNombreUsuario(String nombreUsuario) {
+        return uS.buscarPorNombreUs(nombreUsuario);
     }
 }

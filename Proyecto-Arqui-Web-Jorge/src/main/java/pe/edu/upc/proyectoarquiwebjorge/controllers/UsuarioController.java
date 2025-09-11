@@ -28,15 +28,17 @@ public class UsuarioController {
             return (UsuarioDTO)mapper.map(y, UsuarioDTO.class);
         }).collect(Collectors.toList());
     }
+
     @PostMapping
     public void insert(@RequestBody UsuarioDTO dto) {
         ModelMapper mapper = new ModelMapper();
         Usuario u=mapper.map(dto, Usuario.class);
         uS.insert(u);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> listarUsuarioPorId(@PathVariable("id") Integer id) {
-        Usuario usa = uS.listIdRol(id);
+        Usuario usa = uS.listIdUsuario(id);
         if (usa == null) {
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
@@ -47,4 +49,54 @@ public class UsuarioController {
         return ResponseEntity.ok(dto);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminarUsuario(@PathVariable("id") Integer id) {
+        Usuario u = uS.listIdUsuario(id);
+        if (u == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No existe un usuario con el ID: " + id);
+        }
+        uS.deleteUsuario(id);
+        return ResponseEntity.ok("Usuario con ID " + id + " eliminado correctamente.");
+    }
+
+    @PutMapping
+    public ResponseEntity<String> modificar(@RequestBody UsuarioDTO dto) {
+        ModelMapper m = new ModelMapper();
+        Usuario usuario = m.map(dto, Usuario.class);
+
+        // Validación de presupuesto
+        /* if (dev.getPriceDevice() < 0) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("No se permite ingresar un precio negativo. Valor recibido: " + dev.getPriceDevice());
+        } */
+
+        // Validación de existencia
+        Usuario existente = uS.listIdUsuario(usuario.getId_usuario());
+        if (existente == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se puede modificar. No existe un usuario con el ID: " + usuario.getId_usuario());
+        }
+
+        // Actualización si pasa validaciones
+        uS.updateUsuario(usuario);
+        return ResponseEntity.ok("Usuario con ID " + usuario.getId_usuario() + " modificado correctamente.");
+    }
+
+    @GetMapping("/busquedas")
+    public ResponseEntity<?> buscar(@RequestParam String t) {
+        List<Usuario> usuarios = uS.buscarPorNombreUsuario(t);
+
+        if (usuarios.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron usuarios del tipo: " + t);
+        }
+
+        List<UsuarioDTO> listaDTO = usuarios.stream().map(x -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(x, UsuarioDTO.class);
+        }).collect(Collectors.toList());
+
+        return ResponseEntity.ok(listaDTO);
+    }
 }
