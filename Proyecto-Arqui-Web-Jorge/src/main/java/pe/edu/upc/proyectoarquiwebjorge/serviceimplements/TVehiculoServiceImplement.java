@@ -23,4 +23,24 @@ public class TVehiculoServiceImplement implements ITipoVehiculoService {
     public void insert(TipoVehiculo vehiculo) {
         vS.save(vehiculo);
     }
+
+    @Override
+    public TipoVehiculo listIdVehiculo(int id_vehiculo) {
+        return vS.findById(id_vehiculo).orElse(null);
+    }
+
+    @Override
+    public void deleteVehiculo(int id_vehiculo) {
+        vS.deleteById(id_vehiculo);
+    }
+
+    @Override
+    public void updateVehiculo(TipoVehiculo vehiculo) {
+        vS.save(vehiculo);
+    }
+
+    @Override
+    public List<TipoVehiculo> buscarPorVehiculo(String nombre_vehiculo) {
+        return vS.buscarPorNombreVehiculo(nombre_vehiculo);
+    }
 }

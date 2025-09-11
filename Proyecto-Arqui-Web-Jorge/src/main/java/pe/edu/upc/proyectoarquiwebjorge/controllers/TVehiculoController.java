@@ -2,6 +2,8 @@ package pe.edu.upc.proyectoarquiwebjorge.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.RolDTO;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.TVehiculoDTO;
@@ -31,5 +33,69 @@ public class TVehiculoController {
         ModelMapper mapper = new ModelMapper();
         TipoVehiculo d=mapper.map(dto,TipoVehiculo.class);
         vS.insert(d);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> listarVehiculoPorId(@PathVariable("id") Integer id) {
+        TipoVehiculo dev = vS.listIdVehiculo(id);
+        if (dev == null) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("No existe un vehiculo con el ID: " + id);
+        }
+        ModelMapper m = new ModelMapper();
+        TVehiculoDTO dto = m.map(dev, TVehiculoDTO.class);
+        return ResponseEntity.ok(dto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminarVehiculo(@PathVariable("id") Integer id) {
+        TipoVehiculo d = vS.listIdVehiculo(id);
+        if (d == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No existe un vehiculo con el ID: " + id);
+        }
+        vS.deleteVehiculo(id);
+        return ResponseEntity.ok("Vehiculo con ID " + id + " eliminado correctamente.");
+    }
+
+    @PutMapping
+    public ResponseEntity<String> modificar(@RequestBody TVehiculoDTO dto) {
+        ModelMapper m = new ModelMapper();
+        TipoVehiculo vehiculo = m.map(dto, TipoVehiculo.class);
+
+        // Validación de presupuesto
+        /* if (dev.getPriceDevice() < 0) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("No se permite ingresar un precio negativo. Valor recibido: " + dev.getPriceDevice());
+        } */
+
+        // Validación de existencia
+        TipoVehiculo existente = vS.listIdVehiculo(vehiculo.getId_tipovehiculo());
+        if (existente == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se puede modificar. No existe un vehiculo con el ID: " + vehiculo.getId_tipovehiculo());
+        }
+
+        // Actualización si pasa validaciones
+        vS.updateVehiculo(vehiculo);
+        return ResponseEntity.ok("Vehiculo con ID " + vehiculo.getId_tipovehiculo() + " modificado correctamente.");
+    }
+
+    @GetMapping("/busquedas")
+    public ResponseEntity<?> buscar(@RequestParam String t) {
+        List<TipoVehiculo> vehiculos = vS.buscarPorVehiculo(t);
+
+        if (vehiculos.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron vehiculos del tipo: " + t);
+        }
+
+        List<TVehiculoDTO> listaDTO = vehiculos.stream().map(x -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(x, TVehiculoDTO.class);
+        }).collect(Collectors.toList());
+
+        return ResponseEntity.ok(listaDTO);
     }
 }
