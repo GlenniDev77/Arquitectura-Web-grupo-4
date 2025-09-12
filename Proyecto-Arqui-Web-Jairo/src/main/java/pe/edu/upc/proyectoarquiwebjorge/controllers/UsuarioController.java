@@ -27,7 +27,7 @@ public class UsuarioController {
     {
         ModelMapper m = new ModelMapper();
         Usuario d=m.map(dto,Usuario.class);
-        uS.insert(d);
+        uS.insert(d); // comentario de pruebas
     }
 
 
