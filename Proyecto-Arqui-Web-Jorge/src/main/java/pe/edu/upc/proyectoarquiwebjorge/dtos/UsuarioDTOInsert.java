@@ -1,10 +1,8 @@
 package pe.edu.upc.proyectoarquiwebjorge.dtos;
 
-import jakarta.persistence.Column;
-
 import java.time.LocalDate;
 
-public class UsuarioDTO {
+public class UsuarioDTOInsert {
     private int id_usuario;
     private String nombre;
     private String correo;

@@ -5,9 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.proyectoarquiwebjorge.dtos.RolDTO;
-import pe.edu.upc.proyectoarquiwebjorge.dtos.UsuarioDTO;
-import pe.edu.upc.proyectoarquiwebjorge.entities.Rol;
+import pe.edu.upc.proyectoarquiwebjorge.dtos.UsuarioDTOInsert;
+import pe.edu.upc.proyectoarquiwebjorge.dtos.UsuarioDTOList;
 import pe.edu.upc.proyectoarquiwebjorge.entities.Usuario;
 import pe.edu.upc.proyectoarquiwebjorge.servicesinterfaces.IUsuarioService;
 
@@ -21,16 +20,16 @@ public class UsuarioController {
     @Autowired
     private IUsuarioService uS;
 
-    @GetMapping
-    public List<UsuarioDTO> list() {
+    @GetMapping("/users")
+    public List<UsuarioDTOList> list() {
         return this.uS.list().stream().map(y -> {
             ModelMapper mapper = new ModelMapper();
-            return (UsuarioDTO)mapper.map(y, UsuarioDTO.class);
+            return (UsuarioDTOList)mapper.map(y, UsuarioDTOList.class);
         }).collect(Collectors.toList());
     }
 
     @PostMapping
-    public void insert(@RequestBody UsuarioDTO dto) {
+    public void insert(@RequestBody UsuarioDTOInsert dto) {
         ModelMapper mapper = new ModelMapper();
         Usuario u=mapper.map(dto, Usuario.class);
         uS.insert(u);
@@ -45,7 +44,7 @@ public class UsuarioController {
                     .body("No existe un usuario con el ID: " + id);
         }
         ModelMapper m = new ModelMapper();
-        UsuarioDTO dto = m.map(usa, UsuarioDTO.class);
+        UsuarioDTOInsert dto = m.map(usa, UsuarioDTOInsert.class);
         return ResponseEntity.ok(dto);
     }
 
@@ -61,7 +60,7 @@ public class UsuarioController {
     }
 
     @PutMapping
-    public ResponseEntity<String> modificar(@RequestBody UsuarioDTO dto) {
+    public ResponseEntity<String> modificar(@RequestBody UsuarioDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         Usuario usuario = m.map(dto, Usuario.class);
 
@@ -92,9 +91,9 @@ public class UsuarioController {
                     .body("No se encontraron usuarios del tipo: " + t);
         }
 
-        List<UsuarioDTO> listaDTO = usuarios.stream().map(x -> {
+        List<UsuarioDTOList> listaDTO = usuarios.stream().map(x -> {
             ModelMapper m = new ModelMapper();
-            return m.map(x, UsuarioDTO.class);
+            return m.map(x, UsuarioDTOList.class);
         }).collect(Collectors.toList());
 
         return ResponseEntity.ok(listaDTO);
