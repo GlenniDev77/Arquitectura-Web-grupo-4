@@ -44,7 +44,7 @@ public class UsuarioController {
                     .body("No existe un usuario con el ID: " + id);
         }
         ModelMapper m = new ModelMapper();
-        UsuarioDTOInsert dto = m.map(usa, UsuarioDTOInsert.class);
+        UsuarioDTOList dto = m.map(usa, UsuarioDTOList.class);
         return ResponseEntity.ok(dto);
     }
 
