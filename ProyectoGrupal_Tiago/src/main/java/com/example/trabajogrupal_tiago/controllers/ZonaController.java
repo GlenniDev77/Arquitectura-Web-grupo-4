@@ -58,7 +58,7 @@ public class ZonaController {
         return ResponseEntity.ok("Registro con ID " + id + " eliminado correctamente.");
     }
 
-    /*@PutMapping
+    @PutMapping
     public ResponseEntity<String> modificar(@RequestBody ZonaDTO dto) {
         ModelMapper m = new ModelMapper();
         Zona dev = m.map(dto, Zona.class);
@@ -73,5 +73,5 @@ public class ZonaController {
         // Actualización si pasa validaciones
         ds.update(dev);
         return ResponseEntity.ok("Registro con ID " + dev.getId_zona() + " modificado correctamente.");
-    }*/
+    }
 }

@@ -33,7 +33,7 @@ public class ZonaServiceImplement implements IZonaService {
     @Override
     public void update(Zona zona) {ds.save(zona);}
 
-    /*@Override
-    public List<Zona> buscarService(String tipo) {return ds.buscarR(tipo);}*/
+    @Override
+    public List<Zona> buscarService(String tipo) {return ds.buscarR(tipo);}
 
 }

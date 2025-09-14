@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface IZonaRepository extends JpaRepository<Zona,Integer> {
-    /*@Query("Select dev from Zona dev where dev.typeDevice like %:tipo%")
-    public List<Zona> buscarR(@Param("tipo") String tipo);*/
+    @Query("Select dev from Zona dev where dev.typeDevice like %:tipo%")
+    public List<Zona> buscarR(@Param("tipo") String tipo);
 }

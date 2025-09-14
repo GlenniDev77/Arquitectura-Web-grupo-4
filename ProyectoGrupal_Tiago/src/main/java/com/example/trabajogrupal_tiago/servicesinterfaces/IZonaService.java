@@ -10,5 +10,5 @@ public interface IZonaService {
     public Zona listId(Integer id);
     public void delete(int id);
     public void update(Zona zona);
-    // public List<Zona> buscarService(String tipo);
+    public List<Zona> buscarService(String tipo);
 }
