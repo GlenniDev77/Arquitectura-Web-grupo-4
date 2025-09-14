@@ -2,6 +2,8 @@ package pe.edu.upc.proyectoarquiwebjorge.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.NotificacionDTOInsert;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.NotificacionDTOList;
@@ -35,5 +37,6 @@ public class NotificacionController {
         Notificacion n=mapper.map(dto, Notificacion.class);
         nS.insert(n);
     }
+
 
 }

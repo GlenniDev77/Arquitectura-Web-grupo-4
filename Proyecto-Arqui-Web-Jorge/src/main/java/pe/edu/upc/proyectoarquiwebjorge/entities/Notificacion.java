@@ -14,9 +14,23 @@ public class Notificacion {
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
-    private Usuario id_usuario;
+    private Usuario usuario;
 
     public Notificacion() {
+    }
+
+    public Notificacion(int id_notificacion, String mensaje, Usuario usuario) {
+        this.id_notificacion = id_notificacion;
+        this.mensaje = mensaje;
+        this.usuario = usuario;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public int getId_notificacion() {
@@ -35,11 +49,5 @@ public class Notificacion {
         this.mensaje = mensaje;
     }
 
-    public Usuario getUsuario() {
-        return id_usuario;
-    }
 
-    public void setUsuario(Usuario usuario) {
-        this.id_usuario = usuario;
-    }
 }
