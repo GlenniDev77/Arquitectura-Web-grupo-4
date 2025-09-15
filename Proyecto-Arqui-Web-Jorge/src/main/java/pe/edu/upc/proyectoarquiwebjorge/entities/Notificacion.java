@@ -16,13 +16,26 @@ public class Notificacion {
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
+    @ManyToOne
+    @JoinColumn(name = "id_zona")
+    private Zona zona;
+
     public Notificacion() {
     }
 
-    public Notificacion(int id_notificacion, String mensaje, Usuario usuario) {
+    public Notificacion(int id_notificacion, String mensaje, Usuario usuario, Zona zona) {
         this.id_notificacion = id_notificacion;
         this.mensaje = mensaje;
         this.usuario = usuario;
+        this.zona = zona;
+    }
+
+    public Zona getZona() {
+        return zona;
+    }
+
+    public void setZona(Zona zona) {
+        this.zona = zona;
     }
 
     public Usuario getUsuario() {

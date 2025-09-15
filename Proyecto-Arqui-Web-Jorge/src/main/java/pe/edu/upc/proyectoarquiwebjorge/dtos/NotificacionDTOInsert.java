@@ -4,11 +4,21 @@ import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import pe.edu.upc.proyectoarquiwebjorge.entities.Usuario;
+import pe.edu.upc.proyectoarquiwebjorge.entities.Zona;
 
 public class NotificacionDTOInsert {
     private int id_notificacion;
     private String mensaje;
     private Usuario usuario;
+    private Zona zona;
+
+    public Zona getZona() {
+        return zona;
+    }
+
+    public void setZona(Zona zona) {
+        this.zona = zona;
+    }
 
     public Usuario getUsuario() {
         return usuario;
