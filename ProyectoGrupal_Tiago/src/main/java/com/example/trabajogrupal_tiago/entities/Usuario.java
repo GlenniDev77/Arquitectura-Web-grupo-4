@@ -1,9 +1,6 @@
 package com.example.trabajogrupal_tiago.entities;
 
 import jakarta.persistence.*;
-import org.hibernate.Length;
-import org.hibernate.annotations.Comment;
-
 import java.time.LocalDate;
 
 @Entity

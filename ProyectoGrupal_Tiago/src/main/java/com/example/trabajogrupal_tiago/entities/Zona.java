@@ -1,7 +1,6 @@
 package com.example.trabajogrupal_tiago.entities;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.Comment;
 
 @Entity
 @Table(name = "Zona")

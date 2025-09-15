@@ -1,6 +1,4 @@
 package com.example.trabajogrupal_tiago.servicesinterfaces;
-
-import com.example.trabajogrupal_tiago.entities.Rol;
 import com.example.trabajogrupal_tiago.entities.Usuario;
 
 import java.util.List;
