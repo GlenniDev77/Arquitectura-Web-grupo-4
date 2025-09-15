@@ -28,6 +28,7 @@ public class Usuario {
     @Column(name = "fecha", nullable = false)
     private LocalDate fecha;
 
+
     public Usuario() {}
 
     public Usuario(int id_usuario, String nombre, String correo, int contraseña, int telefono, LocalDate fecha) {
@@ -38,6 +39,7 @@ public class Usuario {
         this.telefono = telefono;
         this.fecha = fecha;
     }
+
 
     public int getId_usuario() {
         return id_usuario;

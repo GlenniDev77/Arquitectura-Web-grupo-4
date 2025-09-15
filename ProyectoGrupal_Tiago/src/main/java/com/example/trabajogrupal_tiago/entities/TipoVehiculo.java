@@ -12,12 +12,16 @@ public class TipoVehiculo {
     @Column(name = "nombre",length = 50,nullable = false)
     private String nombre;
 
+
+
     public TipoVehiculo() {} //constructor
 
     public TipoVehiculo(int id_tipovehiculo, String nombre) {
         this.id_tipovehiculo = id_tipovehiculo;
         this.nombre = nombre;
     }
+
+
 
     public int getId_tipovehiculo() {
         return id_tipovehiculo;

@@ -34,6 +34,22 @@ public class ZonaController {
         ds.insert(d);
     }
 
+    /*@PostMapping //otra opcion del insertar con mensajes pero dejando de usar void
+    public ResponseEntity<String> insertar(@RequestBody ZonaDTO dto) {
+        try {
+            ModelMapper m = new ModelMapper();
+            Zona d = m.map(dto, Zona.class);
+            ds.insert(d);
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body("Zona registrada correctamente");
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("No se pudo registrar la zona: " + e.getMessage());
+        }
+    }*/
+
     @GetMapping("/{id}") //(para obtener un recurso)
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
         Zona dev = ds.listId(id);

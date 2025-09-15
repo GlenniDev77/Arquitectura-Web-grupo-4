@@ -10,6 +10,8 @@ import java.util.List;
 
 @Repository
 public interface IZonaRepository extends JpaRepository<Zona,Integer> {
-    @Query("Select dev from Zona dev where dev.typeDevice like %:tipo%")
-    public List<Zona> buscarR(@Param("tipo") String tipo);
+    //esta 2 lineas de abajo son solo para la funcion buscar, si la entidad no
+    //necesita esa funcion, este repository queda vacio
+    @Query("Select dev from Zona dev where dev.distrito like %:dist%")
+    public List<Zona> buscarR(@Param("dist") String dist);
 }
