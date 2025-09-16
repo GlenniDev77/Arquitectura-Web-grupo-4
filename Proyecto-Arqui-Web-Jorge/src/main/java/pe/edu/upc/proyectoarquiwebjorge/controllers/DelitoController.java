@@ -34,16 +34,7 @@ public class DelitoController {
             return (DelitoDTO)mapper.map(y, DelitoDTO.class);
         }).collect(Collectors.toList());
     }
-
-    /*
-    @PostMapping
-    public void insert(@RequestBody DelitoDTO dto) {
-        ModelMapper mapper = new ModelMapper();
-        Delito n=mapper.map(dto, Delito.class);
-        dS.insert(n);
-    }
-
-     */
+    
 
     @PostMapping
     public ResponseEntity<String> insert(@RequestBody DelitoDTO dto) {
