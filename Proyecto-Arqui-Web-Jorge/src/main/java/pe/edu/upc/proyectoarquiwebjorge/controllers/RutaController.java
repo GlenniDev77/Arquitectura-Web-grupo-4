@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.*;
 import pe.edu.upc.proyectoarquiwebjorge.entities.Notificacion;
+import pe.edu.upc.proyectoarquiwebjorge.entities.Rol;
 import pe.edu.upc.proyectoarquiwebjorge.entities.Ruta;
 import pe.edu.upc.proyectoarquiwebjorge.entities.Usuario;
 import pe.edu.upc.proyectoarquiwebjorge.servicesinterfaces.IRutaService;
@@ -30,11 +31,24 @@ public class RutaController {
         }).collect(Collectors.toList());
     }
 
+    /*
     @PostMapping
     public void insert(@RequestBody RutaDTOInsert dto) {
         ModelMapper mapper = new ModelMapper();
         Ruta n=mapper.map(dto, Ruta.class);
         rS.insert(n);
+    }
+    */
+
+    @PostMapping
+    public ResponseEntity<String> insert(@RequestBody RutaDTOInsert dto) {
+        ModelMapper mapper = new ModelMapper();
+        Ruta d = mapper.map(dto, Ruta.class);
+        rS.insert(d);
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body("Ruta en [ " + dto.getMedio() + " ] con origen en [ " + dto.getOrigen() + " ] y " +
+                        "destino a [ " + dto.getDestino() + " ] registrado correctamente ");
     }
 
     @GetMapping("/{id}")

@@ -5,13 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.proyectoarquiwebjorge.dtos.ReseniaDTOInsert;
-import pe.edu.upc.proyectoarquiwebjorge.dtos.ReseniaDTOList;
-import pe.edu.upc.proyectoarquiwebjorge.dtos.RutaDTOInsert;
-import pe.edu.upc.proyectoarquiwebjorge.dtos.RutaDTOList;
-import pe.edu.upc.proyectoarquiwebjorge.entities.Resenia;
-import pe.edu.upc.proyectoarquiwebjorge.entities.Ruta;
+import pe.edu.upc.proyectoarquiwebjorge.dtos.*;
+import pe.edu.upc.proyectoarquiwebjorge.entities.*;
 import pe.edu.upc.proyectoarquiwebjorge.servicesinterfaces.IReseniaService;
+import pe.edu.upc.proyectoarquiwebjorge.servicesinterfaces.IUsuarioService;
+import pe.edu.upc.proyectoarquiwebjorge.servicesinterfaces.IZonaService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +20,9 @@ public class ReseniaController {
     @Autowired
     private IReseniaService rS;
 
+    @Autowired
+    private IUsuarioService uS;
+
     @GetMapping
     public List<ReseniaDTOList> list() {
         return this.rS.list().stream().map(y -> {
@@ -30,11 +31,28 @@ public class ReseniaController {
         }).collect(Collectors.toList());
     }
 
+    /*
+
     @PostMapping
     public void insert(@RequestBody ReseniaDTOInsert dto) {
         ModelMapper mapper = new ModelMapper();
         Resenia n=mapper.map(dto, Resenia.class);
         rS.insert(n);
+    }
+
+     */
+
+    @PostMapping
+    public ResponseEntity<String> insert(@RequestBody ReseniaDTOInsert dto) {
+        ModelMapper mapper = new ModelMapper();
+        Resenia d = mapper.map(dto, Resenia.class);
+        rS.insert(d);
+
+        Usuario us = uS.listIdUsuario(dto.getUsuario().getId_usuario());
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body("Reseña por [" + us.getNombre() + "] con valoracion de [ "
+                        + dto.getCalificacion() + " ] registrado correctamente ");
     }
 
     @GetMapping("/{id}")

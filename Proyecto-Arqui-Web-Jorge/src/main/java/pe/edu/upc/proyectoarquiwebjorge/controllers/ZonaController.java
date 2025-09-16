@@ -5,8 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.proyectoarquiwebjorge.dtos.RolDTO;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.UsuarioDTOInsert;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.ZonaDTO;
+import pe.edu.upc.proyectoarquiwebjorge.entities.Rol;
 import pe.edu.upc.proyectoarquiwebjorge.entities.Usuario;
 import pe.edu.upc.proyectoarquiwebjorge.entities.Zona;
 import pe.edu.upc.proyectoarquiwebjorge.servicesinterfaces.IZonaService;
@@ -27,12 +29,27 @@ public class ZonaController {
         }).collect(Collectors.toList());
     }
 
+    /*
+
     @PostMapping
     public void insertar(@RequestBody ZonaDTO dto)
     {
         ModelMapper m = new ModelMapper();
         Zona d=m.map(dto,Zona.class);
         zS.insert(d);
+    }
+
+     */
+
+    @PostMapping
+    public ResponseEntity<String> insert(@RequestBody ZonaDTO dto) {
+        ModelMapper mapper = new ModelMapper();
+        Zona d = mapper.map(dto, Zona.class);
+        zS.insert(d);
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body("Zona [ " + dto.getNombre()+ " ] en el distrito de [" +
+                        dto.getDistrito() + "] registrado correctamente ");
     }
 
     @GetMapping("/{id}")

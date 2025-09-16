@@ -5,8 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.proyectoarquiwebjorge.dtos.RolDTO;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.UsuarioDTOInsert;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.UsuarioDTOList;
+import pe.edu.upc.proyectoarquiwebjorge.entities.Rol;
 import pe.edu.upc.proyectoarquiwebjorge.entities.Usuario;
 import pe.edu.upc.proyectoarquiwebjorge.servicesinterfaces.IUsuarioService;
 
@@ -28,11 +30,24 @@ public class UsuarioController {
         }).collect(Collectors.toList());
     }
 
+    /*
     @PostMapping
     public void insert(@RequestBody UsuarioDTOInsert dto) {
         ModelMapper mapper = new ModelMapper();
         Usuario u=mapper.map(dto, Usuario.class);
         uS.insert(u);
+    }
+
+     */
+
+    @PostMapping
+    public ResponseEntity<String> insert(@RequestBody UsuarioDTOInsert dto) {
+        ModelMapper mapper = new ModelMapper();
+        Usuario d = mapper.map(dto, Usuario.class);
+        uS.insert(d);
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body("Usuario [ " + dto.getNombre()+ " ] registrado correctamente ");
     }
 
     @GetMapping("/{id}")
@@ -63,12 +78,6 @@ public class UsuarioController {
     public ResponseEntity<String> modificar(@RequestBody UsuarioDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         Usuario usuario = m.map(dto, Usuario.class);
-
-        // Validación de presupuesto
-        /* if (dev.getPriceDevice() < 0) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("No se permite ingresar un precio negativo. Valor recibido: " + dev.getPriceDevice());
-        } */
 
         // Validación de existencia
         Usuario existente = uS.listIdUsuario(usuario.getId_usuario());

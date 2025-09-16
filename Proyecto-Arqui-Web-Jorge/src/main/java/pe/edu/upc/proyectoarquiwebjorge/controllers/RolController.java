@@ -26,12 +26,25 @@ public class RolController {
             return (RolDTO)mapper.map(y, RolDTO.class);
         }).collect(Collectors.toList());
     }
+
+     /*
     @PostMapping
     public void insert(@RequestBody RolDTO dto) {
         ModelMapper mapper = new ModelMapper();
         Rol d=mapper.map(dto,Rol.class);
         rS.insert(d);
     }
+    */
+
+     @PostMapping
+     public ResponseEntity<String> insert(@RequestBody RolDTO dto) {
+         ModelMapper mapper = new ModelMapper();
+         Rol d = mapper.map(dto, Rol.class);
+         rS.insert(d);
+
+         return ResponseEntity.status(HttpStatus.CREATED)
+                 .body("Rol [ " + dto.getNombre_rol()+ " ] registrado correctamente ");
+     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> listarRolPorId(@PathVariable("id") Integer id) {
@@ -61,12 +74,6 @@ public class RolController {
     public ResponseEntity<String> modificar(@RequestBody RolDTO dto) {
         ModelMapper m = new ModelMapper();
         Rol rol = m.map(dto, Rol.class);
-
-        // Validación de presupuesto
-        /* if (dev.getPriceDevice() < 0) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("No se permite ingresar un precio negativo. Valor recibido: " + dev.getPriceDevice());
-        } */
 
         // Validación de existencia
         Rol existente = rS.listIdRol(rol.getId_rol());

@@ -7,9 +7,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.DelitoDTO;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.ReseniaDTOList;
+import pe.edu.upc.proyectoarquiwebjorge.dtos.RolDTO;
 import pe.edu.upc.proyectoarquiwebjorge.entities.Delito;
 import pe.edu.upc.proyectoarquiwebjorge.entities.Resenia;
+import pe.edu.upc.proyectoarquiwebjorge.entities.Rol;
+import pe.edu.upc.proyectoarquiwebjorge.entities.Zona;
 import pe.edu.upc.proyectoarquiwebjorge.servicesinterfaces.IDelitoService;
+import pe.edu.upc.proyectoarquiwebjorge.servicesinterfaces.IZonaService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +24,9 @@ public class DelitoController {
     @Autowired
     private IDelitoService dS;
 
+    @Autowired
+    private IZonaService zS;
+
     @GetMapping
     public List<DelitoDTO> list() {
         return this.dS.list().stream().map(y -> {
@@ -28,11 +35,26 @@ public class DelitoController {
         }).collect(Collectors.toList());
     }
 
+    /*
     @PostMapping
     public void insert(@RequestBody DelitoDTO dto) {
         ModelMapper mapper = new ModelMapper();
         Delito n=mapper.map(dto, Delito.class);
         dS.insert(n);
+    }
+
+     */
+
+    @PostMapping
+    public ResponseEntity<String> insert(@RequestBody DelitoDTO dto) {
+        ModelMapper mapper = new ModelMapper();
+        Delito d = mapper.map(dto, Delito.class);
+        dS.insert(d);
+
+        Zona z = zS.listById(dto.getZona().getIdZona());
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body("Delito de tipo [ " + dto.getTipo_delito() + " ] situado en [ "
+                        + z.getNombre() +  " ] registrado correctamente ");
     }
 
     @GetMapping("/{id}")

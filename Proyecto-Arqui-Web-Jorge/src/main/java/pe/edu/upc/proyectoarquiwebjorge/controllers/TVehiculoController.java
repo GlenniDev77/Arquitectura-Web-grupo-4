@@ -28,11 +28,23 @@ public class TVehiculoController {
             return (TVehiculoDTO)mapper.map(y, TVehiculoDTO.class);
         }).collect(Collectors.toList());
     }
+    /*
     @PostMapping
     public void insert(@RequestBody TVehiculoDTO dto) {
         ModelMapper mapper = new ModelMapper();
         TipoVehiculo d=mapper.map(dto,TipoVehiculo.class);
         vS.insert(d);
+    }
+     */
+
+    @PostMapping
+    public ResponseEntity<String> insert(@RequestBody TVehiculoDTO dto) {
+        ModelMapper mapper = new ModelMapper();
+        TipoVehiculo d = mapper.map(dto, TipoVehiculo.class);
+        vS.insert(d);
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body("Vehiculo de tipo [ " + dto.getNombre_vehiculo()+ " ] registrado correctamente ");
     }
 
     @GetMapping("/{id}")
@@ -63,12 +75,6 @@ public class TVehiculoController {
     public ResponseEntity<String> modificar(@RequestBody TVehiculoDTO dto) {
         ModelMapper m = new ModelMapper();
         TipoVehiculo vehiculo = m.map(dto, TipoVehiculo.class);
-
-        // Validación de presupuesto
-        /* if (dev.getPriceDevice() < 0) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("No se permite ingresar un precio negativo. Valor recibido: " + dev.getPriceDevice());
-        } */
 
         // Validación de existencia
         TipoVehiculo existente = vS.listIdVehiculo(vehiculo.getId_tipovehiculo());
