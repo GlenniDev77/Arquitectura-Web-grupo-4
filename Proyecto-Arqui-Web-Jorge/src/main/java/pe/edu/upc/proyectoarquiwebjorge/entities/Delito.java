@@ -33,6 +33,7 @@ public class Delito {
     @JoinColumn(name = "id_zona")
     private Zona zona;
 
+
     public Delito() {
     }
 

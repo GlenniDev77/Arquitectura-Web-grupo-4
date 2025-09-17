@@ -34,7 +34,7 @@ public class DelitoController {
             return (DelitoDTO)mapper.map(y, DelitoDTO.class);
         }).collect(Collectors.toList());
     }
-    
+
 
     @PostMapping
     public ResponseEntity<String> insert(@RequestBody DelitoDTO dto) {
