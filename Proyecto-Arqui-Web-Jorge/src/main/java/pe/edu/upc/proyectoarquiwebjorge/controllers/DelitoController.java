@@ -5,9 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.proyectoarquiwebjorge.dtos.DelitoDTO;
-import pe.edu.upc.proyectoarquiwebjorge.dtos.ReseniaDTOList;
-import pe.edu.upc.proyectoarquiwebjorge.dtos.RolDTO;
+import pe.edu.upc.proyectoarquiwebjorge.dtos.*;
 import pe.edu.upc.proyectoarquiwebjorge.entities.Delito;
 import pe.edu.upc.proyectoarquiwebjorge.entities.Resenia;
 import pe.edu.upc.proyectoarquiwebjorge.entities.Rol;
@@ -15,6 +13,7 @@ import pe.edu.upc.proyectoarquiwebjorge.entities.Zona;
 import pe.edu.upc.proyectoarquiwebjorge.servicesinterfaces.IDelitoService;
 import pe.edu.upc.proyectoarquiwebjorge.servicesinterfaces.IZonaService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -70,6 +69,51 @@ public class DelitoController {
         }
         dS.deleteDelito(id);
         return ResponseEntity.ok("Delito con ID " + id + " eliminado correctamente.");
+    }
+
+    @GetMapping("/MasDelitosPorZD")
+    public ResponseEntity<?> obtenerMayorDelitosPorZonaYDistrito() {
+
+        List<QuantityDelitoZonaDistritoDTO> listaDTO = new ArrayList<>();
+        List<String[]> fila = dS.quantityDelitoPorZonaYDistrito();
+
+        if (fila.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron delitos");
+        }
+
+        for (String[] x : fila) {
+            QuantityDelitoZonaDistritoDTO dto = new QuantityDelitoZonaDistritoDTO();
+            dto.setDistrito(x[0]);
+            dto.setZona(x[1]);
+            dto.setTipo_delito(x[2]);
+            dto.setQuantity(Integer.parseInt(x[3]));
+            listaDTO.add(dto);
+        }
+
+        return ResponseEntity.ok(listaDTO);
+    }
+
+    @GetMapping("/MasDelitosPorHZ")
+    public ResponseEntity<?> obtenerMayorDelitosPorHoraYZona() {
+
+        List<QuantityDelitosHoraZonaDTO> listaDTO = new ArrayList<>();
+        List<String[]> fila = dS.quantityMasDelitosPorHoraYZona();
+
+        if (fila.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron delitos");
+        }
+
+        for (String[] x : fila) {
+            QuantityDelitosHoraZonaDTO dto = new QuantityDelitosHoraZonaDTO();
+            dto.setZona(x[0]);
+            dto.setHora(x[1]);
+            dto.setQuantity(Integer.parseInt(x[2]));
+            listaDTO.add(dto);
+        }
+
+        return ResponseEntity.ok(listaDTO);
     }
 
 }

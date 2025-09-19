@@ -26,8 +26,7 @@ public class RolController {
             return (RolDTO)mapper.map(y, RolDTO.class);
         }).collect(Collectors.toList());
     }
-
-     /*
+    /*
     @PostMapping
     public void insert(@RequestBody RolDTO dto) {
         ModelMapper mapper = new ModelMapper();

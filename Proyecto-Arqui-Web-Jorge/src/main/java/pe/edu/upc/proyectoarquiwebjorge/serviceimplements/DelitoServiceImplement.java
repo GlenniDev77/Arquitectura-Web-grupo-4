@@ -33,4 +33,14 @@ public class DelitoServiceImplement implements IDelitoService {
     public void deleteDelito(int id_delito) {
         rR.deleteById(id_delito);
     }
+
+    @Override
+    public List<String[]> quantityDelitoPorZonaYDistrito() {
+        return rR.quantityDelitoPorZonaYDistrito();
+    }
+
+    @Override
+    public List<String[]> quantityMasDelitosPorHoraYZona() {
+        return rR.quantityMasDelitosPorHoraYZona();
+    }
 }

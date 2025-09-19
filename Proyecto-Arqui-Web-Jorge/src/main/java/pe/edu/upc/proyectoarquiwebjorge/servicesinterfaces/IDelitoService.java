@@ -10,4 +10,7 @@ public interface IDelitoService {
     public void insert(Delito delito);
     public Delito listIdDelito(int id_delito);
     public void deleteDelito(int id_delito);
+    public List<String[]> quantityDelitoPorZonaYDistrito();
+    public List<String[]> quantityMasDelitosPorHoraYZona();
+
 }
