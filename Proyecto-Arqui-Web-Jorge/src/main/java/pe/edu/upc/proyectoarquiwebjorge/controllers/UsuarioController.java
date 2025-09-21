@@ -97,7 +97,7 @@ public class UsuarioController {
 
         if (usuarios.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se encontraron usuarios del tipo: " + t);
+                    .body("No se encontraron usuarios con nombre: " + t);
         }
 
         List<UsuarioDTOList> listaDTO = usuarios.stream().map(x -> {

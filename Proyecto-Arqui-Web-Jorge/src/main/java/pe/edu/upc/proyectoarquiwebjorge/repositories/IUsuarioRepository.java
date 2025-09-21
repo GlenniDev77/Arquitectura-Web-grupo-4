@@ -13,4 +13,8 @@ import java.util.List;
 public interface IUsuarioRepository extends JpaRepository<Usuario,Integer> {
     @Query("Select usa from Usuario usa where usa.nombre like %:nombre%")
     public List<Usuario> buscarPorNombreUs(@Param("nombre")String nombre);
+
+    Usuario findOneByCorreo(String correo);
+
+    String correo(String correo);
 }

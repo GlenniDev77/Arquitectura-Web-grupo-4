@@ -12,13 +12,17 @@ public class Rol {
     @Column(name = "nombre_rol",length = 50,nullable = false)
     private String nombre_rol;
 
-    public Rol() {
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private Usuario user;
 
+    public Rol() {
     }
 
-    public Rol(int id_rol, String nombre_rol) {
+    public Rol(int id_rol, String nombre_rol, Usuario user) {
         this.id_rol = id_rol;
         this.nombre_rol = nombre_rol;
+        this.user = user;
     }
 
     public int getId_rol() {
@@ -35,5 +39,13 @@ public class Rol {
 
     public void setNombre_rol(String nombre_rol) {
         this.nombre_rol = nombre_rol;
+    }
+
+    public Usuario getUser() {
+        return user;
+    }
+
+    public void setUser(Usuario user) {
+        this.user = user;
     }
 }

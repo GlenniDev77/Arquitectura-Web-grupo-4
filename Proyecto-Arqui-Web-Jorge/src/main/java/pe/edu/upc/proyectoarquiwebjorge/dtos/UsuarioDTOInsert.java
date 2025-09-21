@@ -1,6 +1,9 @@
 package pe.edu.upc.proyectoarquiwebjorge.dtos;
 
+import pe.edu.upc.proyectoarquiwebjorge.entities.Rol;
+
 import java.time.LocalDate;
+import java.util.List;
 
 public class UsuarioDTOInsert {
     private int id_usuario;
@@ -8,7 +11,18 @@ public class UsuarioDTOInsert {
     private String correo;
     private String contraseña;
     private int telefono;
+    private Boolean enabled;
     private LocalDate fecha;
+    private List<Integer> rolesIds;
+
+
+    public List<Integer> getRolesIds() { return rolesIds; }
+
+    public void setRolesIds(List<Integer> rolesIds) { this.rolesIds = rolesIds; }
+
+    public Boolean getEnabled() { return enabled; }
+
+    public void setEnabled(Boolean enabled) { this.enabled = enabled; }
 
     public int getId_usuario() {
         return id_usuario;
