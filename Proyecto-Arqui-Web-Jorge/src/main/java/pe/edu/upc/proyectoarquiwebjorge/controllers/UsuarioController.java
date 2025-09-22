@@ -6,12 +6,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.RolDTO;
+import pe.edu.upc.proyectoarquiwebjorge.dtos.U_registradosvsActivosDTO;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.UsuarioDTOInsert;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.UsuarioDTOList;
 import pe.edu.upc.proyectoarquiwebjorge.entities.Rol;
 import pe.edu.upc.proyectoarquiwebjorge.entities.Usuario;
 import pe.edu.upc.proyectoarquiwebjorge.servicesinterfaces.IUsuarioService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -104,6 +106,27 @@ public class UsuarioController {
             ModelMapper m = new ModelMapper();
             return m.map(x, UsuarioDTOList.class);
         }).collect(Collectors.toList());
+
+        return ResponseEntity.ok(listaDTO);
+    }
+
+    @GetMapping("/URvsActivos")
+    public ResponseEntity<?> TotalUsuRvsAct() {
+        List<int[]> Total = uS.TotalUsuarioActivos();
+
+        if (Total.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron usuarios ");
+        }
+
+        List<U_registradosvsActivosDTO> listaDTO = new ArrayList<>();
+
+        for (int[] u : Total) {
+            U_registradosvsActivosDTO Udto = new U_registradosvsActivosDTO();
+            Udto.setRegistrados(u[0]);
+            Udto.setTotal_activos(u[1]);
+            listaDTO.add(Udto);
+        }
 
         return ResponseEntity.ok(listaDTO);
     }
