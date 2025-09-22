@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.proyectoarquiwebjorge.dtos.RolDTO;
-import pe.edu.upc.proyectoarquiwebjorge.dtos.U_registradosvsActivosDTO;
-import pe.edu.upc.proyectoarquiwebjorge.dtos.UsuarioDTOInsert;
-import pe.edu.upc.proyectoarquiwebjorge.dtos.UsuarioDTOList;
+import pe.edu.upc.proyectoarquiwebjorge.dtos.*;
 import pe.edu.upc.proyectoarquiwebjorge.entities.Rol;
 import pe.edu.upc.proyectoarquiwebjorge.entities.Usuario;
 import pe.edu.upc.proyectoarquiwebjorge.servicesinterfaces.IUsuarioService;
@@ -112,7 +109,7 @@ public class UsuarioController {
 
     @GetMapping("/URvsActivos")
     public ResponseEntity<?> TotalUsuRvsAct() {
-        List<int[]> Total = uS.TotalUsuarioActivos();
+        List<int[]> Total = uS.TtlUsuRegyActivos();
 
         if (Total.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -126,6 +123,27 @@ public class UsuarioController {
             Udto.setRegistrados(u[0]);
             Udto.setTotal_activos(u[1]);
             listaDTO.add(Udto);
+        }
+
+        return ResponseEntity.ok(listaDTO);
+    }
+
+    @GetMapping("/tlUsuXzona")
+    public ResponseEntity<?> TotalUsubyzona() {
+        List<QuantityUsersbyZonaDTO> listaDTO = new ArrayList<>();
+        List<String[]> fila = uS.TotalUsuXzona();
+
+
+        if (fila.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron registros de usuarios con reporte en alguna zona");
+        }
+
+        for (String[] s : fila) {
+            QuantityUsersbyZonaDTO dto = new QuantityUsersbyZonaDTO();
+            dto.setCantidad_Usuarios(Integer.parseInt(s[1]));
+            dto.setZona(s[0]);
+            listaDTO.add(dto);
         }
 
         return ResponseEntity.ok(listaDTO);

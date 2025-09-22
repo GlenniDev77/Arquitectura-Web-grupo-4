@@ -10,5 +10,6 @@ public interface IUsuarioService {
     public void deleteUsuario(int id_usuario);
     public void updateUsuario(Usuario usuario);
     public List<Usuario> buscarPorNombreUsuario(String nombreUsuario);
-    public List<int[]> TotalUsuarioActivos();
+    public List<int[]> TtlUsuRegyActivos();
+    public List<String[]> TotalUsuXzona();
 }

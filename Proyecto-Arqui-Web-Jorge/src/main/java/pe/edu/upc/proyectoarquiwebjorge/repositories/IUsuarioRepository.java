@@ -4,7 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import pe.edu.upc.proyectoarquiwebjorge.entities.Rol;
 import pe.edu.upc.proyectoarquiwebjorge.entities.Usuario;
 
 import java.util.List;
@@ -23,5 +22,13 @@ public interface IUsuarioRepository extends JpaRepository<Usuario,Integer> {
             "        OR r.id_ruta IS NOT NULL \n" +
             "        OR re.id_resenia IS NOT NULL\n" +
             "    ) AS total_activos;",nativeQuery = true)
-    public List<int[]> TotalUsuarioActivos();
+    public List<int[]> TotalUsuarioActivos(); // Cantidad de usuarios registrados vs activos
+
+    @Query(value = "SELECT z.nombre AS zona,\n" +
+            "COUNT(DISTINCT d.id_usuario) AS cantidad_usuarios\n" +
+            "FROM zona z\n" +
+            "JOIN delito d ON z.id_zona = d.id_zona\n" +
+            "GROUP BY z.nombre\n" +
+            "ORDER BY cantidad_usuarios DESC;",nativeQuery = true)
+    public List<String[]> TotalUsuXzona(); //Distribución de usuarios por zona donde reportaron delitos
 }

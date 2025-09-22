@@ -46,7 +46,12 @@ public class UsuarioServiceImplement implements IUsuarioService {
     }
 
     @Override
-    public List<int[]> TotalUsuarioActivos() {
+    public List<int[]> TtlUsuRegyActivos() {
         return uS.TotalUsuarioActivos();
+    }
+
+    @Override
+    public List<String[]> TotalUsuXzona() {
+        return uS.TotalUsuXzona();
     }
 }
