@@ -21,7 +21,7 @@ public class NotificacionesController {
     {
         ModelMapper m = new ModelMapper();
         Notificaciones d=m.map(dto, Notificaciones.class);
-        nS.insert(d);
+        nS.insert(d); // MENSAJE DE PRUEBA
 
     }
     @GetMapping("/mensaje")
