@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.*;
 import pe.edu.upc.proyectoarquiwebjorge.entities.Notificacion;
@@ -31,6 +32,7 @@ public class NotificacionController {
     private IZonaService zS;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('AUTORIDAD') or hasAuthority('MODERADOR')")
     public List<NotificacionDTOList> list() {
         return this.nS.list().stream().map(y -> {
             ModelMapper mapper = new ModelMapper();
@@ -38,18 +40,9 @@ public class NotificacionController {
         }).collect(Collectors.toList());
     }
 
-    /*
 
     @PostMapping
-    public void insert(@RequestBody NotificacionDTOInsert dto) {
-        ModelMapper mapper = new ModelMapper();
-        Notificacion n=mapper.map(dto, Notificacion.class);
-        nS.insert(n);
-    }
-
-     */
-
-    @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> insert(@RequestBody NotificacionDTOInsert dto) {
         ModelMapper mapper = new ModelMapper();
         Notificacion d = mapper.map(dto, Notificacion.class);

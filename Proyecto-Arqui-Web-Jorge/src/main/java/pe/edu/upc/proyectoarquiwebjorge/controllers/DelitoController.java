@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.*;
 import pe.edu.upc.proyectoarquiwebjorge.entities.Delito;
@@ -27,6 +28,7 @@ public class DelitoController {
     private IZonaService zS;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR') or hasAnyAuthority('AUTORIDAD')")
     public List<DelitoDTO> list() {
         return this.dS.list().stream().map(y -> {
             ModelMapper mapper = new ModelMapper();
@@ -36,6 +38,7 @@ public class DelitoController {
 
 
     @PostMapping
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<String> insert(@RequestBody DelitoDTO dto) {
         ModelMapper mapper = new ModelMapper();
         Delito d = mapper.map(dto, Delito.class);
@@ -48,6 +51,7 @@ public class DelitoController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR') or hasAnyAuthority('AUTORIDAD')")
     public ResponseEntity<?> listarDelitoPorId(@PathVariable("id") Integer id) {
         Delito res = dS.listIdDelito(id);
         if (res == null) {
@@ -61,6 +65,7 @@ public class DelitoController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR')")
     public ResponseEntity<String> eliminarDelito(@PathVariable("id") Integer id) {
         Delito u = dS.listIdDelito(id);
         if (u == null) {
@@ -72,6 +77,7 @@ public class DelitoController {
     }
 
     @GetMapping("/MasDelitosPorZD")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('AUTORIDAD') or hasAuthority('USER')")
     public ResponseEntity<?> obtenerMayorDelitosPorZonaYDistrito() {
 
         List<QuantityDelitoZonaDistritoDTO> listaDTO = new ArrayList<>();
@@ -95,6 +101,7 @@ public class DelitoController {
     }
 
     @GetMapping("/MasDelitosPorHZ")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('AUTORIDAD') or hasAuthority('USER')")
     public ResponseEntity<?> obtenerMayorDelitosPorHoraYZona() {
 
         List<QuantityDelitosHoraZonaDTO> listaDTO = new ArrayList<>();
@@ -117,6 +124,7 @@ public class DelitoController {
     }
 
     @GetMapping("/CantidadDelitosPorMes")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('AUTORIDAD') or hasAuthority('USER')")
     public ResponseEntity<?> quantityDelitosPorMes() {
 
         List<QuantityDelitosPorMesDTO> listaDTO = new ArrayList<>();

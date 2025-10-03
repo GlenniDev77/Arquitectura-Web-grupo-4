@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.RolDTO;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.TVehiculoDTO;
@@ -22,22 +23,16 @@ public class TVehiculoController {
     private ITipoVehiculoService vS;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR')")
     public List<TVehiculoDTO> list() {
         return this.vS.list().stream().map(y -> {
             ModelMapper mapper = new ModelMapper();
             return (TVehiculoDTO)mapper.map(y, TVehiculoDTO.class);
         }).collect(Collectors.toList());
     }
-    /*
-    @PostMapping
-    public void insert(@RequestBody TVehiculoDTO dto) {
-        ModelMapper mapper = new ModelMapper();
-        TipoVehiculo d=mapper.map(dto,TipoVehiculo.class);
-        vS.insert(d);
-    }
-     */
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> insert(@RequestBody TVehiculoDTO dto) {
         ModelMapper mapper = new ModelMapper();
         TipoVehiculo d = mapper.map(dto, TipoVehiculo.class);
@@ -48,6 +43,7 @@ public class TVehiculoController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR')")
     public ResponseEntity<?> listarVehiculoPorId(@PathVariable("id") Integer id) {
         TipoVehiculo dev = vS.listIdVehiculo(id);
         if (dev == null) {
@@ -61,6 +57,8 @@ public class TVehiculoController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+
     public ResponseEntity<String> eliminarVehiculo(@PathVariable("id") Integer id) {
         TipoVehiculo d = vS.listIdVehiculo(id);
         if (d == null) {
@@ -72,6 +70,7 @@ public class TVehiculoController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> modificar(@RequestBody TVehiculoDTO dto) {
         ModelMapper m = new ModelMapper();
         TipoVehiculo vehiculo = m.map(dto, TipoVehiculo.class);
@@ -89,6 +88,7 @@ public class TVehiculoController {
     }
 
     @GetMapping("/busquedas")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR')")
     public ResponseEntity<?> buscar(@RequestParam String t) {
         List<TipoVehiculo> vehiculos = vS.buscarPorVehiculo(t);
 

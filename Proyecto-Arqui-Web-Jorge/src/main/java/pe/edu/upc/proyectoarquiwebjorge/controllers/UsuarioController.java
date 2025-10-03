@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.*;
@@ -26,6 +27,7 @@ public class UsuarioController {
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("/users")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<UsuarioDTOList> list() {
         return this.uS.list().stream().map(y -> {
             ModelMapper mapper = new ModelMapper();
@@ -44,6 +46,7 @@ public class UsuarioController {
      */
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> insert(@RequestBody UsuarioDTOInsert dto) {
         ModelMapper mapper = new ModelMapper();
         Usuario d = mapper.map(dto, Usuario.class);
@@ -60,6 +63,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> listarUsuarioPorId(@PathVariable("id") Integer id) {
         Usuario usa = uS.listIdUsuario(id);
         if (usa == null) {
@@ -73,6 +77,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminarUsuario(@PathVariable("id") Integer id) {
         Usuario u = uS.listIdUsuario(id);
         if (u == null) {
@@ -84,6 +89,7 @@ public class UsuarioController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> modificar(@RequestBody UsuarioDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         Usuario usuario = m.map(dto, Usuario.class);
@@ -101,6 +107,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/busquedas")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('AUTORIDAD')")
     public ResponseEntity<?> buscar(@RequestParam String t) {
         List<Usuario> usuarios = uS.buscarPorNombreUsuario(t);
 
@@ -118,6 +125,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/tlUsuXzona")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> TotalUsubyzona() {
         List<QuantityUsersbyZonaDTO> listaDTO = new ArrayList<>();
         List<String[]> fila = uS.TotalUsuXzona();
@@ -139,6 +147,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/URvsActivos")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> TotalUsuRvsAct() {
         List<int[]> Total = uS.TotalUsuarioActivos();
 
@@ -160,6 +169,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/UsuariosConMasReportes")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> UsuariosConMasReporte() {
         List<UsuariosConMasReportesDTO> listaDTO = new ArrayList<>();
         List<String[]> fila = uS.UsuariosConMasReportes();

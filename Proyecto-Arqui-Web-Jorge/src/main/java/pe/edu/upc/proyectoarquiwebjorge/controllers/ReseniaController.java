@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.*;
 import pe.edu.upc.proyectoarquiwebjorge.entities.*;
@@ -24,6 +25,7 @@ public class ReseniaController {
     private IUsuarioService uS;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('AUTORIDAD') or hasAuthority('MODERADOR')")
     public List<ReseniaDTOList> list() {
         return this.rS.list().stream().map(y -> {
             ModelMapper mapper = new ModelMapper();
@@ -31,18 +33,9 @@ public class ReseniaController {
         }).collect(Collectors.toList());
     }
 
-    /*
 
     @PostMapping
-    public void insert(@RequestBody ReseniaDTOInsert dto) {
-        ModelMapper mapper = new ModelMapper();
-        Resenia n=mapper.map(dto, Resenia.class);
-        rS.insert(n);
-    }
-
-     */
-
-    @PostMapping
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<String> insert(@RequestBody ReseniaDTOInsert dto) {
         ModelMapper mapper = new ModelMapper();
         Resenia d = mapper.map(dto, Resenia.class);
@@ -56,6 +49,7 @@ public class ReseniaController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('AUTORIDAD') or hasAuthority('MODERADOR')")
     public ResponseEntity<?> listarReseniaPorId(@PathVariable("id") Integer id) {
         Resenia res = rS.listIdResenia(id);
         if (res == null) {
@@ -69,6 +63,7 @@ public class ReseniaController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR')")
     public ResponseEntity<String> eliminarResenia(@PathVariable("id") Integer id) {
         Resenia u = rS.listIdResenia(id);
         if (u == null) {

@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.RolDTO;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.UsuarioDTOInsert;
@@ -21,7 +22,10 @@ import java.util.stream.Collectors;
 public class ZonaController {
     @Autowired
     private IZonaService zS;
+
+    
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR')")
     public List<ZonaDTO> listar(){
         return zS.list().stream().map(y->{
             ModelMapper m = new ModelMapper();
@@ -29,19 +33,9 @@ public class ZonaController {
         }).collect(Collectors.toList());
     }
 
-    /*
 
     @PostMapping
-    public void insertar(@RequestBody ZonaDTO dto)
-    {
-        ModelMapper m = new ModelMapper();
-        Zona d=m.map(dto,Zona.class);
-        zS.insert(d);
-    }
-
-     */
-
-    @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> insert(@RequestBody ZonaDTO dto) {
         ModelMapper mapper = new ModelMapper();
         Zona d = mapper.map(dto, Zona.class);
@@ -53,6 +47,7 @@ public class ZonaController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR')")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
         Zona zon = zS.listById(id);
         if (zon == null) {
@@ -66,6 +61,7 @@ public class ZonaController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
         Zona d = zS.listById(id);
         if (d == null) {
@@ -77,6 +73,7 @@ public class ZonaController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> modificar(@RequestBody ZonaDTO dto) {
         ModelMapper m = new ModelMapper();
         Zona zon = m.map(dto, Zona.class);
@@ -94,6 +91,7 @@ public class ZonaController {
     }
 
     @GetMapping("/busquedas")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> buscar(@RequestParam String t) {
         List<Zona> zonas = zS.buscarPorNombreZona(t);
 

@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.RolDTO;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.RolDTOInsert;
@@ -22,6 +23,7 @@ public class RolController {
     private IRolService rS;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<RolDTO> list() {
         return this.rS.list().stream().map(y -> {
             ModelMapper mapper = new ModelMapper();
@@ -38,6 +40,7 @@ public class RolController {
     */
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> insert(@RequestBody RolDTOInsert dto) {
         Rol rol = new Rol();
         rol.setNombre_rol(dto.getNombre_rol());
@@ -55,6 +58,7 @@ public class RolController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> listarRolPorId(@PathVariable("id") Integer id) {
         Rol dev = rS.listIdRol(id);
         if (dev == null) {
@@ -68,6 +72,7 @@ public class RolController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminarRol(@PathVariable("id") Integer id) {
         Rol d = rS.listIdRol(id);
         if (d == null) {
@@ -79,6 +84,7 @@ public class RolController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> modificar(@RequestBody RolDTO dto) {
         ModelMapper m = new ModelMapper();
         Rol rol = m.map(dto, Rol.class);
@@ -96,6 +102,7 @@ public class RolController {
     }
 
     @GetMapping("/busquedas")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> buscar(@RequestParam String t) {
         List<Rol> roles = rS.buscarPorRol(t);
 

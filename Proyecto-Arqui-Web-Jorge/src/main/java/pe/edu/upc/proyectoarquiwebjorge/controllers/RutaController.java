@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.*;
@@ -25,6 +26,7 @@ public class RutaController {
     private IRutaService rS;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('AUTORIDAD') or hasAuthority('MODERADOR')")
     public List<RutaDTOList> list() {
         return this.rS.list().stream().map(y -> {
             ModelMapper mapper = new ModelMapper();
@@ -32,16 +34,9 @@ public class RutaController {
         }).collect(Collectors.toList());
     }
 
-    /*
-    @PostMapping
-    public void insert(@RequestBody RutaDTOInsert dto) {
-        ModelMapper mapper = new ModelMapper();
-        Ruta n=mapper.map(dto, Ruta.class);
-        rS.insert(n);
-    }
-    */
 
     @PostMapping
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<String> insert(@RequestBody RutaDTOInsert dto) {
         ModelMapper mapper = new ModelMapper();
         Ruta d = mapper.map(dto, Ruta.class);
@@ -53,6 +48,7 @@ public class RutaController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('AUTORIDAD') or hasAuthority('MODERADOR')")
     public ResponseEntity<?> listarRutaPorId(@PathVariable("id") Integer id) {
         Ruta rut = rS.listIdRuta(id);
         if (rut == null) {
@@ -66,7 +62,8 @@ public class RutaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminarUsuario(@PathVariable("id") Integer id) {
+    @PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('USER')")
+    public ResponseEntity<String> eliminarRuta(@PathVariable("id") Integer id) {
         Ruta u = rS.listIdRuta(id);
         if (u == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -77,6 +74,7 @@ public class RutaController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<String> modificar(@RequestBody RutaDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         Ruta ruta = m.map(dto, Ruta.class);
@@ -94,6 +92,7 @@ public class RutaController {
     }
 
     @GetMapping("/destino")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('AUTORIDAD') or hasAuthority('USER')")
     public ResponseEntity<?> buscarDestino(@RequestParam String t) {
         List<Ruta> rutas = rS.buscarRutaDestino(t);
 
@@ -111,6 +110,7 @@ public class RutaController {
     }
 
     @GetMapping("/origen")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('AUTORIDAD') or hasAuthority('USER')")
     public ResponseEntity<?> buscarOrigen(@RequestParam String t) {
         List<Ruta> rutas = rS.buscarRutaOrigen(t);
 
@@ -128,6 +128,7 @@ public class RutaController {
     }
 
     @GetMapping("/CantRutasPorVehiculo")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR')")
     public ResponseEntity<?> CantidadRutasPorVehiculo() {
         List<String[]> fila = rS.CantRutasPorTipoDeVehiculo();
 
