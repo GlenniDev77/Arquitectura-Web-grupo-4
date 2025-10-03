@@ -26,7 +26,7 @@ public class UsuarioController {
     public List<UsuarioDTOList> list() {
         return this.uS.list().stream().map(y -> {
             ModelMapper mapper = new ModelMapper();
-            return (UsuarioDTOList)mapper.map(y, UsuarioDTOList.class);
+            return mapper.map(y, UsuarioDTOList.class);
         }).collect(Collectors.toList());
     }
 
