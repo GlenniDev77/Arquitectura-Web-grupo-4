@@ -53,7 +53,6 @@ public class UsuarioController {
         }
         d.setContraseña(passwordEncoder.encode(dto.getContraseña()));
 
-
         uS.insert(d);
 
         return ResponseEntity.status(HttpStatus.CREATED)

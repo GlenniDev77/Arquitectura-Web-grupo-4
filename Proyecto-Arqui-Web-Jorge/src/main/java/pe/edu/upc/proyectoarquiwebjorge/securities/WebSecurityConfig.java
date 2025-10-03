@@ -65,7 +65,8 @@ public class WebSecurityConfig {
                                 "/swagger-ui.html",
                                 "/webjars/**",
                                 "/login",
-                                "/usuarios"
+                                "/usuarios/users",
+                                "/roles"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )

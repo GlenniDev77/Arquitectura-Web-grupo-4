@@ -32,7 +32,7 @@ public class Usuario {
     private Boolean enabled;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "user_id")
     private List<Rol> roles;
 
     public Usuario() {}

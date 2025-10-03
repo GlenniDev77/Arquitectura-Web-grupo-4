@@ -6,7 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.RolDTO;
+import pe.edu.upc.proyectoarquiwebjorge.dtos.RolDTOInsert;
 import pe.edu.upc.proyectoarquiwebjorge.entities.Rol;
+import pe.edu.upc.proyectoarquiwebjorge.entities.Usuario;
 import pe.edu.upc.proyectoarquiwebjorge.servicesinterfaces.IRolService;
 
 import java.util.List;
@@ -35,15 +37,22 @@ public class RolController {
     }
     */
 
-     @PostMapping
-     public ResponseEntity<String> insert(@RequestBody RolDTO dto) {
-         ModelMapper mapper = new ModelMapper();
-         Rol d = mapper.map(dto, Rol.class);
-         rS.insert(d);
+    @PostMapping
+    public ResponseEntity<String> insert(@RequestBody RolDTOInsert dto) {
+        Rol rol = new Rol();
+        rol.setNombre_rol(dto.getNombre_rol());
 
-         return ResponseEntity.status(HttpStatus.CREATED)
-                 .body("Rol [ " + dto.getNombre_rol()+ " ] registrado correctamente ");
-     }
+        // Construyes el usuario con solo el id
+        Usuario usuario = new Usuario();
+        usuario.setId_usuario(dto.getUserId());
+
+        rol.setUser(usuario);
+
+        rS.insert(rol);
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body("Rol [ " + dto.getNombre_rol() + " ] registrado correctamente ");
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> listarRolPorId(@PathVariable("id") Integer id) {
