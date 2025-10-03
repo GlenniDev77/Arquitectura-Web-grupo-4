@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.*;
 import pe.edu.upc.proyectoarquiwebjorge.entities.Rol;
@@ -20,6 +21,9 @@ public class UsuarioController {
 
     @Autowired
     private IUsuarioService uS;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/users")
     public List<UsuarioDTOList> list() {
@@ -43,6 +47,13 @@ public class UsuarioController {
     public ResponseEntity<String> insert(@RequestBody UsuarioDTOInsert dto) {
         ModelMapper mapper = new ModelMapper();
         Usuario d = mapper.map(dto, Usuario.class);
+        if (d == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Error al crear usuario");
+        }
+        d.setContraseña(passwordEncoder.encode(dto.getContraseña()));
+
+
         uS.insert(d);
 
         return ResponseEntity.status(HttpStatus.CREATED)
