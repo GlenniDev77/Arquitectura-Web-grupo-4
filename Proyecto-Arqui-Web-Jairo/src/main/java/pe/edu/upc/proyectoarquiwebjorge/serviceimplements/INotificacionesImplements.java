@@ -19,4 +19,9 @@ public class INotificacionesImplements implements INotificacionesService {
 
     @Override
     public void insert(Notificaciones notificaciones) {nS.save(notificaciones);}
+
+    @Override
+    public List<String[]> zonaMasNotis() {
+        return nS.zonaMasNotis();
+    }
 }

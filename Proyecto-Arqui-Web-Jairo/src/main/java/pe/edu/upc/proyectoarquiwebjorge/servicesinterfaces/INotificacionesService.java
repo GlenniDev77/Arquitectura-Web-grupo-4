@@ -7,4 +7,5 @@ import java.util.List;
 public interface INotificacionesService {
     public List<Notificaciones> list();
     public void insert(Notificaciones notificaciones);
+    public List<String[]> zonaMasNotis();
 }
