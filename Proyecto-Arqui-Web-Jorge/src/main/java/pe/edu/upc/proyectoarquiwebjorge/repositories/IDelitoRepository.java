@@ -33,4 +33,16 @@ public interface IDelitoRepository extends JpaRepository<Delito, Integer> {
             "ORDER BY z.nombre, total DESC;", nativeQuery = true)
     public List<String[]> quantityMasDelitosPorHoraYZona();
 
+    @Query(value = "SELECT\n" +
+            "    EXTRACT(YEAR FROM fecha_hora) AS año,\n" +
+            "    TO_CHAR(fecha_hora, 'Month') AS mes,\n" +
+            "    COUNT(*) AS numero_delitos\n" +
+            "FROM delito\n" +
+            "WHERE fecha_hora IS NOT NULL\n" +
+            "GROUP BY EXTRACT(YEAR FROM fecha_hora),\n" +
+            "         EXTRACT(MONTH FROM fecha_hora),\n" +
+            "         TO_CHAR(fecha_hora, 'Month')\n" +
+            "ORDER BY año, EXTRACT(MONTH FROM fecha_hora);", nativeQuery = true)
+    public List<String[]> quantityDelitosPorMes();
+
 }

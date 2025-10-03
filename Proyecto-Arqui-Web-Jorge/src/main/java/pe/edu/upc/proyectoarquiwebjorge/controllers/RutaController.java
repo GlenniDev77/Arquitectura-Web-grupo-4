@@ -13,6 +13,7 @@ import pe.edu.upc.proyectoarquiwebjorge.entities.Ruta;
 import pe.edu.upc.proyectoarquiwebjorge.entities.Usuario;
 import pe.edu.upc.proyectoarquiwebjorge.servicesinterfaces.IRutaService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -122,6 +123,27 @@ public class RutaController {
             ModelMapper m = new ModelMapper();
             return m.map(x, RutaDTOList.class);
         }).collect(Collectors.toList());
+
+        return ResponseEntity.ok(listaDTO);
+    }
+
+    @GetMapping("/CantRutasPorVehiculo")
+    public ResponseEntity<?> CantidadRutasPorVehiculo() {
+        List<String[]> fila = rS.CantRutasPorTipoDeVehiculo();
+
+        if (fila.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron rutas");
+        }
+
+        List<CantRutasporTipoVehiDTO> listaDTO = new ArrayList<>();
+
+        for (String[] u : fila) {
+            CantRutasporTipoVehiDTO dto = new CantRutasporTipoVehiDTO();
+            dto.setTipoVehi(u[0]);
+            dto.setCantidad_rutas(Integer.parseInt(u[1]));
+            listaDTO.add(dto);
+        }
 
         return ResponseEntity.ok(listaDTO);
     }

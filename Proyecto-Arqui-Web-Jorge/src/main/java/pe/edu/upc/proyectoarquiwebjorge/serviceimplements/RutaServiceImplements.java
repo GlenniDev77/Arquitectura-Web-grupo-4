@@ -50,5 +50,10 @@ public class RutaServiceImplements implements IRutaService {
         return iR.buscaRutaPorOrigen(origen);
     }
 
+    @Override
+    public List<String[]> CantRutasPorTipoDeVehiculo() {
+        return iR.CantRutasPorTipoDeVehiculo();
+    }
+
 
 }

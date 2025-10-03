@@ -13,4 +13,6 @@ public interface IRutaService {
     public void updateRuta(Ruta ruta);
     public List<Ruta> buscarRutaDestino(String destino);
     public List<Ruta> buscarRutaOrigen(String origen);
+    public List<String[]> CantRutasPorTipoDeVehiculo();
+
 }

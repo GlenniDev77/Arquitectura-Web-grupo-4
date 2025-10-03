@@ -43,4 +43,9 @@ public class DelitoServiceImplement implements IDelitoService {
     public List<String[]> quantityMasDelitosPorHoraYZona() {
         return rR.quantityMasDelitosPorHoraYZona();
     }
+
+    @Override
+    public List<String[]> quantityDelitosPorMes() {
+        return rR.quantityDelitosPorMes();
+    }
 }

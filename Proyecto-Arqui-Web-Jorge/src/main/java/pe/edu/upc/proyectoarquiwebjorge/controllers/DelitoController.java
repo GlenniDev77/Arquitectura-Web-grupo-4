@@ -116,4 +116,26 @@ public class DelitoController {
         return ResponseEntity.ok(listaDTO);
     }
 
+    @GetMapping("/CantidadDelitosPorMes")
+    public ResponseEntity<?> quantityDelitosPorMes() {
+
+        List<QuantityDelitosPorMesDTO> listaDTO = new ArrayList<>();
+        List<String[]> fila = dS.quantityDelitosPorMes();
+
+        if (fila.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron delitos");
+        }
+
+        for (String[] x : fila) {
+            QuantityDelitosPorMesDTO dto = new QuantityDelitosPorMesDTO();
+            dto.setAnio(Integer.parseInt(x[0]));
+            dto.setMes(x[1]);
+            dto.setNumero_delitos(Integer.parseInt(x[2]));
+            listaDTO.add(dto);
+        }
+
+        return ResponseEntity.ok(listaDTO);
+    }
+
 }
