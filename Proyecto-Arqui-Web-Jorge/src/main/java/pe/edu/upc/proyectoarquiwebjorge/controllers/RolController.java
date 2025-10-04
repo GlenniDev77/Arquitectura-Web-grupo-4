@@ -30,14 +30,6 @@ public class RolController {
             return (RolDTO)mapper.map(y, RolDTO.class);
         }).collect(Collectors.toList());
     }
-    /*
-    @PostMapping
-    public void insert(@RequestBody RolDTO dto) {
-        ModelMapper mapper = new ModelMapper();
-        Rol d=mapper.map(dto,Rol.class);
-        rS.insert(d);
-    }
-    */
 
     @PostMapping
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -45,7 +37,6 @@ public class RolController {
         Rol rol = new Rol();
         rol.setNombre_rol(dto.getNombre_rol());
 
-        // Construyes el usuario con solo el id
         Usuario usuario = new Usuario();
         usuario.setId_usuario(dto.getUserId());
 
@@ -86,20 +77,22 @@ public class RolController {
     @PutMapping
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> modificar(@RequestBody RolDTO dto) {
-        ModelMapper m = new ModelMapper();
-        Rol rol = m.map(dto, Rol.class);
-
-        // Validación de existencia
-        Rol existente = rS.listIdRol(rol.getId_rol());
+        // buscar el rol existente
+        Rol existente = rS.listIdRol(dto.getId_rol());
         if (existente == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se puede modificar. No existe un rol con el ID: " + rol.getId_rol());
+                    .body("No se puede modificar. No existe un rol con el ID: " + dto.getId_rol());
         }
 
-        // Actualización si pasa validaciones
-        rS.updateRol(rol);
-        return ResponseEntity.ok("Rol con ID " + rol.getId_rol() + " modificado correctamente.");
+        // actualizar solo el nombre
+        existente.setNombre_rol(dto.getNombre_rol());
+
+        // guardar cambios
+        rS.updateRol(existente);
+
+        return ResponseEntity.ok("Rol con ID " + dto.getId_rol() + " modificado correctamente.");
     }
+
 
     @GetMapping("/busquedas")
     @PreAuthorize("hasAuthority('ADMIN')")

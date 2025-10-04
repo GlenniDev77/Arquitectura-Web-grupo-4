@@ -13,6 +13,7 @@ public interface IDelitoService {
     public List<String[]> quantityDelitoPorZonaYDistrito();
     public List<String[]> quantityMasDelitosPorHoraYZona();
     public List<String[]> quantityDelitosPorMes();
+    List<Object[]> antiguedadUltimoDelitoPorZona();
 
 
 }

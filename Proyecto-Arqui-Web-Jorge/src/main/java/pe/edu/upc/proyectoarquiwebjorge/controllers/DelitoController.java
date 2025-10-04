@@ -14,6 +14,8 @@ import pe.edu.upc.proyectoarquiwebjorge.entities.Zona;
 import pe.edu.upc.proyectoarquiwebjorge.servicesinterfaces.IDelitoService;
 import pe.edu.upc.proyectoarquiwebjorge.servicesinterfaces.IZonaService;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -143,6 +145,33 @@ public class DelitoController {
             listaDTO.add(dto);
         }
 
+        return ResponseEntity.ok(listaDTO);
+    }
+
+    @GetMapping("/antiguedad-ultimo-por-zona")
+    @PreAuthorize("hasAnyAuthority('ADMIN','AUTORIDAD','USER')")
+    public ResponseEntity<List<AntiguedadUltimoDelitoDTO>> antiguedadUltimoDelitoPorZona() {
+
+        List<AntiguedadUltimoDelitoDTO> listaDTO = new ArrayList<>();
+        List<Object[]> filas = dS.antiguedadUltimoDelitoPorZona();
+
+        if (filas == null || filas.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(listaDTO);
+        }
+
+        for (Object[] x : filas) {
+            AntiguedadUltimoDelitoDTO dto = new AntiguedadUltimoDelitoDTO();
+
+            dto.setZona((String) x[0]);
+
+            if (x[1] != null) {
+                dto.setUltimoDelito(((java.sql.Timestamp) x[1]).toLocalDateTime());
+            }
+
+            dto.setDiasDesdeUltimo(((Number) x[2]).intValue());
+
+            listaDTO.add(dto);
+        }
         return ResponseEntity.ok(listaDTO);
     }
 

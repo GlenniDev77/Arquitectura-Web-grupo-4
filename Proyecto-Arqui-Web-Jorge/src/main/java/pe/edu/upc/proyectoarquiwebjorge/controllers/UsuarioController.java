@@ -35,16 +35,6 @@ public class UsuarioController {
         }).collect(Collectors.toList());
     }
 
-    /*
-    @PostMapping
-    public void insert(@RequestBody UsuarioDTOInsert dto) {
-        ModelMapper mapper = new ModelMapper();
-        Usuario u=mapper.map(dto, Usuario.class);
-        uS.insert(u);
-    }
-
-     */
-
     @PostMapping
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> insert(@RequestBody UsuarioDTOInsert dto) {
@@ -182,11 +172,12 @@ public class UsuarioController {
 
         for (String[] s : fila) {
             UsuariosConMasReportesDTO dto = new UsuariosConMasReportesDTO();
-            dto.setIdUsuario(Integer.parseInt(s[0]));
+            dto.setId_usuario(Integer.parseInt(s[0]));
             dto.setNombre(s[1]);
-            dto.setReportes_Realizados(Integer.parseInt(s[1]));
+            dto.setReportes_Realizados(Integer.parseInt(s[2]));
             listaDTO.add(dto);
         }
+
 
         return ResponseEntity.ok(listaDTO);
     }

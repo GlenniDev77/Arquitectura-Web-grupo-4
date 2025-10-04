@@ -32,5 +32,10 @@ public class NotificacionServiceImplements implements INotificacionService {
         return nR.usuarioMasNotis();
     }
 
+    @Override
+    public List<String[]> zonaMasNotis() {
+        return nR.zonaMasNotis();
+    }
+
 
 }

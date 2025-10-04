@@ -9,7 +9,7 @@ import pe.edu.upc.proyectoarquiwebjorge.servicesinterfaces.IRolService;
 import java.util.List;
 
 @Service
-public class RolServiceImplement implements IRolService {
+public class    RolServiceImplement implements IRolService {
 
     @Autowired
     private IRolRepository rS;

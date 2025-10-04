@@ -36,14 +36,14 @@ public class RutaController {
 
 
     @PostMapping
-    @PreAuthorize("hasAuthority('USER')")
+    //@PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<String> insert(@RequestBody RutaDTOInsert dto) {
         ModelMapper mapper = new ModelMapper();
         Ruta d = mapper.map(dto, Ruta.class);
         rS.insert(d);
 
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body("Ruta en [ " + dto.getMedio() + " ] con origen en [ " + dto.getOrigen() + " ] y " +
+                .body("Ruta con origen en [ " + dto.getOrigen() + " ] y " +
                         "destino a [ " + dto.getDestino() + " ] registrado correctamente ");
     }
 
@@ -62,7 +62,7 @@ public class RutaController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminarRuta(@PathVariable("id") Integer id) {
         Ruta u = rS.listIdRuta(id);
         if (u == null) {

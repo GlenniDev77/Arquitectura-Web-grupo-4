@@ -6,7 +6,7 @@ import pe.edu.upc.proyectoarquiwebjorge.entities.Usuario;
 public class RutaDTOList {
     private String origen;
     private String destino;
-    private String medio;
+    private TipoVehiculo tipoVehiculo;
 
 
 
@@ -26,12 +26,11 @@ public class RutaDTOList {
         this.destino = destino;
     }
 
-    public String getMedio() {
-        return medio;
+    public TipoVehiculo getTipoVehiculo() {
+        return tipoVehiculo;
     }
 
-    public void setMedio(String medio) {
-        this.medio = medio;
+    public void setTipoVehiculo(TipoVehiculo tipoVehiculo) {
+        this.tipoVehiculo = tipoVehiculo;
     }
-
 }
