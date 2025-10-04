@@ -23,7 +23,7 @@ public class ZonaController {
     @Autowired
     private IZonaService zS;
 
-    
+
     @GetMapping
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR')")
     public List<ZonaDTO> listar(){

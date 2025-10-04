@@ -27,5 +27,10 @@ public class NotificacionServiceImplements implements INotificacionService {
         nR.save(notificacion);
     }
 
+    @Override
+    public List<Object[]> usuarioMasNotis() {
+        return nR.usuarioMasNotis();
+    }
+
 
 }

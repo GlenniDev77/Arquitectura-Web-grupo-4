@@ -15,6 +15,7 @@ import pe.edu.upc.proyectoarquiwebjorge.servicesinterfaces.INotificacionService;
 import pe.edu.upc.proyectoarquiwebjorge.servicesinterfaces.IUsuarioService;
 import pe.edu.upc.proyectoarquiwebjorge.servicesinterfaces.IZonaService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,5 +57,17 @@ public class NotificacionController {
                         " ] en la zona [" + zo.getNombre() + "] registrado correctamente ");
     }
 
+    @GetMapping("/usuarios-mas-notis")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public List<MasNotisXUsuarioDTO> obtenerUsuariosMasNotificaciones() {
+        List<Object[]> resultados = nS.usuarioMasNotis();
+
+        return resultados.stream().map(obj -> {
+            MasNotisXUsuarioDTO dto = new MasNotisXUsuarioDTO();
+            dto.setNombre_usuario((String) obj[0]);
+            dto.setTotalNotificaciones(((Number) obj[1]).intValue());
+            return dto;
+        }).collect(Collectors.toList());
+    }
 
 }

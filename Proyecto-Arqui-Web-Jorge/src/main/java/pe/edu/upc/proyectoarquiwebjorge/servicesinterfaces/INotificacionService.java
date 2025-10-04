@@ -8,6 +8,7 @@ import java.util.List;
 public interface INotificacionService {
     public List<Notificacion> list();
     public void insert(Notificacion notificacion);
+    public List<Object[]> usuarioMasNotis();
 
 
 }
