@@ -19,4 +19,12 @@ public interface INotificacionesRepository extends JpaRepository<Notificaciones,
             "ORDER BY total_notificaciones DESC",
             nativeQuery = true)
     public List<String[]> zonaMasNotis();
+
+    @Query(value = "SELECT u.nombre_usuario, COUNT(n.id_notificacion)\n" +
+            "FROM notificaciones n\n" +
+            "INNER JOIN usuario u ON n.id_usuario = u.id_usuario\n" +
+            "GROUP BY u.nombre_usuario\n" +
+            "ORDER BY COUNT(n.id_notificacion) DESC",
+            nativeQuery = true)
+    public List<Object[]> usuarioMasNotis();
 }

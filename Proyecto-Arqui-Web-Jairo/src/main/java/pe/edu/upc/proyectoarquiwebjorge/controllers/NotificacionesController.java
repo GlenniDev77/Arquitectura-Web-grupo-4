@@ -3,6 +3,7 @@ package pe.edu.upc.proyectoarquiwebjorge.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.proyectoarquiwebjorge.dtos.MasNotisXUsuarioDTO;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.MasNotisXZonaDTO;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.NotificacionesDTOInsert;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.NotificacionesDTOList;
@@ -45,4 +46,17 @@ public class NotificacionesController {
             return dto;
         }).collect(Collectors.toList());
     }
+
+    @GetMapping("/usuarios-mas-notis")
+    public List<MasNotisXUsuarioDTO> obtenerUsuariosMasNotificaciones() {
+        List<Object[]> resultados = nS.usuarioMasNotis();
+
+        return resultados.stream().map(obj -> {
+            MasNotisXUsuarioDTO dto = new MasNotisXUsuarioDTO();
+            dto.setNombre_usuario((String) obj[0]);
+            dto.setTotalNotificaciones(((Number) obj[1]).intValue());
+            return dto;
+        }).collect(Collectors.toList());
+    }
+
 }

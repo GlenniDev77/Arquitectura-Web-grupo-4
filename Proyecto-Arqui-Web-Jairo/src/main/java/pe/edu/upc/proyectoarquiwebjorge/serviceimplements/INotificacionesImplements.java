@@ -24,4 +24,9 @@ public class INotificacionesImplements implements INotificacionesService {
     public List<String[]> zonaMasNotis() {
         return nS.zonaMasNotis();
     }
+
+    @Override
+    public List<Object[]> usuarioMasNotis() {
+        return nS.usuarioMasNotis();
+    }
 }
