@@ -36,7 +36,7 @@ public class RutaController {
 
 
     @PostMapping
-    //@PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<String> insert(@RequestBody RutaDTOInsert dto) {
         ModelMapper mapper = new ModelMapper();
         Ruta d = mapper.map(dto, Ruta.class);

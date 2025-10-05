@@ -58,7 +58,6 @@ public class TVehiculoController {
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-
     public ResponseEntity<String> eliminarVehiculo(@PathVariable("id") Integer id) {
         TipoVehiculo d = vS.listIdVehiculo(id);
         if (d == null) {
