@@ -1,16 +1,7 @@
-# Etapa 1: Construcción
-FROM maven:3.9.8-amazoncorretto-17 AS build
+FROM amazoncorretto:17-alpine-jdk
 WORKDIR /app
 
-# Copiar solo el subproyecto que contiene el pom.xml
-COPY Proyecto-Arqui-Web-Jorge /app
+COPY target/Proyecto-Arqui-Web-Jorge-0.0.1-SNAPSHOT.jar app.jar
 
-# Construir el .jar sin ejecutar los tests
-RUN mvn -f /app/pom.xml clean package -DskipTests
-
-# Etapa 2: Ejecución
-FROM amazoncorretto:17-alpine
-WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
