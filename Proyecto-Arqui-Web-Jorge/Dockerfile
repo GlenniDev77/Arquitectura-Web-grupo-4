@@ -1,7 +1,11 @@
-FROM amazoncorretto:17-alpine-jdk
-WORKDIR /app
+FROM ubuntu:latest AS build
+RUN apt-get update
+RUN apt-get install openjdk-24-jdk -y
+COPY . .
+RUN ./gradlew bootJar --no-daemon
 
-COPY target/Proyecto-Arqui-Web-Jorge-0.0.1-SNAPSHOT.jar app.jar
-
+FROM openjdk:24-jdk-slim
+EXPOSE 8080
+COPY --from=build /build/libs/how-much-pay-api-0.0.1.jar app.jar
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
