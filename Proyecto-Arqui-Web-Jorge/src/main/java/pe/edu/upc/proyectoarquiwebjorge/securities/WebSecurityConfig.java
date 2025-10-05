@@ -57,7 +57,6 @@ public class WebSecurityConfig {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> req
-                                //.anyRequest().permitAll()  //Para quitar temporalmente security - se comenta lo de abajo
                         .requestMatchers(
                                 "/v3/api-docs/**",
                                 "/v2/api-docs/**",

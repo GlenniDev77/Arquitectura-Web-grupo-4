@@ -14,6 +14,7 @@ public class RutaDTOInsert {
     private String destino;
     private float destino_longitud;
     private float destino_latitud;
+    private String medio;
     private Usuario usuario;
     private TipoVehiculo tipoVehiculo;
 
@@ -71,6 +72,14 @@ public class RutaDTOInsert {
 
     public void setDestino_longitud(float destino_longitud) {
         this.destino_longitud = destino_longitud;
+    }
+
+    public String getMedio() {
+        return medio;
+    }
+
+    public void setMedio(String medio) {
+        this.medio = medio;
     }
 
     public Usuario getUsuario() {

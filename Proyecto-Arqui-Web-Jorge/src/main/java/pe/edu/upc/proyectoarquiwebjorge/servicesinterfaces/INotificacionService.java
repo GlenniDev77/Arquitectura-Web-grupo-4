@@ -9,8 +9,6 @@ public interface INotificacionService {
     public List<Notificacion> list();
     public void insert(Notificacion notificacion);
     public List<Object[]> usuarioMasNotis();
-    public List<String[]> zonaMasNotis();
-
 
 
 }

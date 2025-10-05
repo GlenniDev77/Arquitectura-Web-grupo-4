@@ -1,16 +1,16 @@
 package pe.edu.upc.proyectoarquiwebjorge.dtos;
 
 public class UsuariosConMasReportesDTO {
-    private int id_usuario;
+    private int idUsuario;
     private String nombre;
     private int reportes_Realizados;
 
-    public int getId_usuario() {
-        return id_usuario;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNombre() {

@@ -27,6 +27,9 @@ public class Ruta {
     @Column(name="destino_latitud",length = 50, nullable = false)
     private float destino_latitud;
 
+    @Column(name = "medio", length = 50, nullable = false)
+    private String medio;
+
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
@@ -38,7 +41,7 @@ public class Ruta {
     public Ruta() {
     }
 
-    public Ruta(int id_ruta, String origen, float origen_longitud, float origen_latitud, String destino, float destino_longitud, float destino_latitud, Usuario usuario, TipoVehiculo tipoVehiculo) {
+    public Ruta(int id_ruta, String origen, float origen_longitud, float origen_latitud, String destino, float destino_longitud, float destino_latitud, String medio, Usuario usuario, TipoVehiculo tipoVehiculo) {
         this.id_ruta = id_ruta;
         this.origen = origen;
         this.origen_longitud = origen_longitud;
@@ -46,6 +49,7 @@ public class Ruta {
         this.destino = destino;
         this.destino_longitud = destino_longitud;
         this.destino_latitud = destino_latitud;
+        this.medio = medio;
         this.usuario = usuario;
         this.tipoVehiculo = tipoVehiculo;
     }
@@ -104,6 +108,14 @@ public class Ruta {
 
     public void setDestino_longitud(float destino_longitud) {
         this.destino_longitud = destino_longitud;
+    }
+
+    public String getMedio() {
+        return medio;
+    }
+
+    public void setMedio(String medio) {
+        this.medio = medio;
     }
 
     public Usuario getUsuario() {

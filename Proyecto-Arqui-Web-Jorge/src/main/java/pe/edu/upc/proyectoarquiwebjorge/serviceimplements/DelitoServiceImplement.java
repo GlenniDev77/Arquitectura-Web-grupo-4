@@ -48,9 +48,4 @@ public class DelitoServiceImplement implements IDelitoService {
     public List<String[]> quantityDelitosPorMes() {
         return rR.quantityDelitosPorMes();
     }
-
-    @Override
-    public List<Object[]> antiguedadUltimoDelitoPorZona() {
-        return rR.antiguedadUltimoDelitoPorZona();
-    }
 }

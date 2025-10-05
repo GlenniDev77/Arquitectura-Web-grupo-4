@@ -45,14 +45,4 @@ public interface IDelitoRepository extends JpaRepository<Delito, Integer> {
             "ORDER BY año, EXTRACT(MONTH FROM fecha_hora);", nativeQuery = true)
     public List<String[]> quantityDelitosPorMes();
 
-    @Query(value = "SELECT \n" +
-            "    z.nombre AS zona,\n" +
-            "    MAX(d.fecha_hora) AS ultimo_delito,\n" +
-            "    EXTRACT(DAY FROM (CURRENT_DATE - MAX(d.fecha_hora)))::int AS dias_desde_ultimo\n" +
-            "FROM Delito d\n" +
-            "JOIN Zona z ON d.id_zona = z.id_zona \n" +
-            "GROUP BY z.nombre\n" +
-            "ORDER BY dias_desde_ultimo DESC;",
-            nativeQuery = true)
-    List<Object[]> antiguedadUltimoDelitoPorZona();
 }

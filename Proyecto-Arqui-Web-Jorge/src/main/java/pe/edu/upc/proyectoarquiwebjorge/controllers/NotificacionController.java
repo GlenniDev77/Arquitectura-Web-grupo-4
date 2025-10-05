@@ -70,25 +70,4 @@ public class NotificacionController {
         }).collect(Collectors.toList());
     }
 
-    @GetMapping("/zonas-mas-notis")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<List<MasNotisxZonaDTO>> obtenerZonasMasNotificaciones() {
-        List<String[]> fila = nS.zonaMasNotis();
-
-        if (fila.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ArrayList<>());
-        }
-
-        List<MasNotisxZonaDTO> listaDTO = new ArrayList<>();
-
-        for (String[] s : fila) {
-            MasNotisxZonaDTO dto = new MasNotisxZonaDTO();
-            dto.setTotalNotificaciones(Integer.parseInt(s[1]));
-            dto.setNombre_zona(s[0]);
-            listaDTO.add(dto);
-        }
-
-        return ResponseEntity.ok(listaDTO);
-    }
-
 }
