@@ -115,7 +115,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/tlUsuXzona")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR')" )
     public ResponseEntity<?> TotalUsubyzona() {
         List<QuantityUsersbyZonaDTO> listaDTO = new ArrayList<>();
         List<String[]> fila = uS.TotalUsuXzona();
