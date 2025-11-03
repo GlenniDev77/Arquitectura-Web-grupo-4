@@ -25,7 +25,7 @@ public class ZonaController {
 
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR')")
+    //@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR')")
     public List<ZonaDTO> listar(){
         return zS.list().stream().map(y->{
             ModelMapper m = new ModelMapper();
