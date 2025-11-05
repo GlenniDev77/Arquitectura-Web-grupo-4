@@ -23,7 +23,7 @@ public class TVehiculoController {
     private ITipoVehiculoService vS;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR')")
+    //@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR')")
     public List<TVehiculoDTO> list() {
         return this.vS.list().stream().map(y -> {
             ModelMapper mapper = new ModelMapper();
