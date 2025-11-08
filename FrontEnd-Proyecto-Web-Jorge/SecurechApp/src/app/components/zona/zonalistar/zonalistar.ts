@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { Zona } from '../zona/zona';
-import { Zonaservice } from '../../services/zonaservice';
+import { Zona } from '../zona';
+import { Zonaservice } from '../../../services/zonaservice';
 
 @Component({
   selector: 'app-zonalistar',

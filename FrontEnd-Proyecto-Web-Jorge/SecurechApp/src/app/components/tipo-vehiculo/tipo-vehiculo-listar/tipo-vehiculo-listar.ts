@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { TipoVehiculo } from '../tipo-vehiculo/tipo-vehiculo';
-import { TipoVehiculoservice } from '../../services/tipo-vehiculoservice';
+import { TipoVehiculo } from '../tipo-vehiculo';
+import { TipoVehiculoservice } from '../../../services/tipo-vehiculoservice';
 
 @Component({
   selector: 'app-tipo-vehiculo-listar',

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
-import { TipoVehiculoListar } from '../tipo-vehiculo-listar/tipo-vehiculo-listar';
+import { TipoVehiculoListar } from './tipo-vehiculo-listar/tipo-vehiculo-listar';
+
 
 @Component({
   selector: 'app-tipo-vehiculo',
