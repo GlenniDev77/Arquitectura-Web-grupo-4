@@ -67,7 +67,7 @@ public class WebSecurityConfig {
                                 "/webjars/**",
                                 "/login",
                                 "/tipovehiculo/**",
-                                "/zonas"
+                                "/zonas/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )

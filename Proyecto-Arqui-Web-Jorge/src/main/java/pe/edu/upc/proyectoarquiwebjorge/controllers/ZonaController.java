@@ -35,7 +35,7 @@ public class ZonaController {
 
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> insert(@RequestBody ZonaDTO dto) {
         ModelMapper mapper = new ModelMapper();
         Zona d = mapper.map(dto, Zona.class);
@@ -47,7 +47,7 @@ public class ZonaController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR')")
+    //@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR')")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
         Zona zon = zS.listById(id);
         if (zon == null) {
@@ -61,7 +61,7 @@ public class ZonaController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
         Zona d = zS.listById(id);
         if (d == null) {
@@ -73,7 +73,7 @@ public class ZonaController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> modificar(@RequestBody ZonaDTO dto) {
         ModelMapper m = new ModelMapper();
         Zona zon = m.map(dto, Zona.class);
