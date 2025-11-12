@@ -1,6 +1,15 @@
 <div class="container">
   <mat-toolbar class="custom-toolbar">
     <button 
+      mat-button 
+      routerLink="/menu"
+      class="btn-rojo" 
+      aria-label="Inicio">
+      <mat-icon>home</mat-icon>
+      Inicio
+    </button>
+
+    <button 
     matButton 
     class="btn-rojo" 
     aria-label="Example icon-button with menu icon"
@@ -11,7 +20,6 @@
   <mat-menu #menuDevice="matMenu">
   <button mat-menu-item routerLink="/tipovehiculos">Listar</button>
   <button mat-menu-item routerLink="/tipovehiculos/nuevo">Registrar</button>
-  <button mat-menu-item routerLink="/menu">Menu</button>
   </mat-menu>
 </div>
 <div [hidden]="route.children.length!=0">
