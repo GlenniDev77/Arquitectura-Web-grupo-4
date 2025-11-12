@@ -1,0 +1,28 @@
+<div class="container">
+  <mat-toolbar class="custom-toolbar">
+    <button matButton class="btn-rojo"
+      aria-label="Example icon-button with menu icon"
+      [matMenuTriggerFor]="menuOpciones">
+      <mat-icon>menu</mat-icon>Opciones
+    </button>
+  </mat-toolbar>
+
+  <!-- Menú principal -->
+  <mat-menu #menuOpciones="matMenu">
+    <button mat-menu-item [matMenuTriggerFor]="menuVehiculos">Vehiculos</button>
+    <button mat-menu-item [matMenuTriggerFor]="menuZonas">Zonas</button>
+  </mat-menu>
+
+  <!-- Submenú Vehiculos -->
+  <mat-menu #menuVehiculos="matMenu">
+    <button mat-menu-item routerLink="/tipovehiculo">Listar Vehículos</button>
+    <button mat-menu-item routerLink="/tipovehiculo/nuevo">Registrar Vehículo</button>
+  </mat-menu>
+
+  <!-- Submenú Zonas -->
+  <mat-menu #menuZonas="matMenu">
+    <button mat-menu-item routerLink="/zona">Listar Zonas</button>
+    <button mat-menu-item routerLink="/zona/nuevo">Registrar Zona</button>
+  </mat-menu>
+</div>
+
