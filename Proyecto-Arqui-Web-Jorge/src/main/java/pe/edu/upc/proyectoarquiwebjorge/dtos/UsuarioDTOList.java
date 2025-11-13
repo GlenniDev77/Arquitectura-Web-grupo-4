@@ -1,8 +1,17 @@
 package pe.edu.upc.proyectoarquiwebjorge.dtos;
 
 public class UsuarioDTOList {
+    private int id_usuario;
     private String nombre;
     private String correo;
+
+    public int getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(int id_usuario) {
+        this.id_usuario = id_usuario;
+    }
 
     public String getCorreo() {
         return correo;

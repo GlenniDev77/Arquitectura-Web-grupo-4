@@ -51,6 +51,7 @@ public class WebSecurityConfig {
         auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
     }
 
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         //Desde Spring Boot 3.1+
@@ -67,9 +68,17 @@ public class WebSecurityConfig {
                                 "/webjars/**",
                                 "/login",
                                 "/tipovehiculo/**",
-                                "/zonas/**"
+                                "/zonas/**",
+                                "/roles/**",
+                                "/usuarios/**",
+                                "/delitos/**",
+                                "/notificaciones/**",
+                                "/resenias/**",
+                                "/rutas/**"
                         ).permitAll()
                         .anyRequest().authenticated()
+
+
                 )
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(AbstractHttpConfigurer::disable)

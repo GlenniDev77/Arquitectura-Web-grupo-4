@@ -26,17 +26,17 @@ public class UsuarioController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @GetMapping("/users")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public List<UsuarioDTOList> list() {
+    @GetMapping
+    //@PreAuthorize("hasAuthority('ADMIN')")
+    public List<UsuarioDTO> list() {
         return this.uS.list().stream().map(y -> {
             ModelMapper mapper = new ModelMapper();
-            return mapper.map(y, UsuarioDTOList.class);
+            return mapper.map(y, UsuarioDTO.class);
         }).collect(Collectors.toList());
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> insert(@RequestBody UsuarioDTOInsert dto) {
         ModelMapper mapper = new ModelMapper();
         Usuario d = mapper.map(dto, Usuario.class);
@@ -53,7 +53,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> listarUsuarioPorId(@PathVariable("id") Integer id) {
         Usuario usa = uS.listIdUsuario(id);
         if (usa == null) {
@@ -62,12 +62,12 @@ public class UsuarioController {
                     .body("No existe un usuario con el ID: " + id);
         }
         ModelMapper m = new ModelMapper();
-        UsuarioDTOList dto = m.map(usa, UsuarioDTOList.class);
+        UsuarioDTO dto = m.map(usa, UsuarioDTO.class);
         return ResponseEntity.ok(dto);
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminarUsuario(@PathVariable("id") Integer id) {
         Usuario u = uS.listIdUsuario(id);
         if (u == null) {
@@ -79,21 +79,28 @@ public class UsuarioController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<String> modificar(@RequestBody UsuarioDTOInsert dto) {
-        ModelMapper m = new ModelMapper();
-        Usuario usuario = m.map(dto, Usuario.class);
+    //@PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<String> modificar(@RequestBody UsuarioDTO dto) {
+        Usuario existente = uS.listIdUsuario(dto.getId_usuario());
 
-        // Validación de existencia
-        Usuario existente = uS.listIdUsuario(usuario.getId_usuario());
         if (existente == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se puede modificar. No existe un usuario con el ID: " + usuario.getId_usuario());
+                    .body("No se puede modificar. No existe un usuario con el ID: " + dto.getId_usuario());
         }
 
-        // Actualización si pasa validaciones
-        uS.updateUsuario(usuario);
-        return ResponseEntity.ok("Usuario con ID " + usuario.getId_usuario() + " modificado correctamente.");
+        // Actualizar SOLO los campos editables
+        existente.setNombre(dto.getNombre());
+        existente.setCorreo(dto.getCorreo());
+        existente.setTelefono(dto.getTelefono());
+        existente.setFecha(dto.getFecha());
+        existente.setEnabled(dto.getEnabled());
+
+        // ❗IMPORTANTE: NO modificar contraseña en edición
+        // ❗IMPORTANTE: NO modificar roles aquí
+
+        uS.updateUsuario(existente);
+
+        return ResponseEntity.ok("Usuario con ID " + dto.getId_usuario() + " modificado correctamente.");
     }
 
     @GetMapping("/busquedas")

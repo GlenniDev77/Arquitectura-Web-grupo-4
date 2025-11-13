@@ -6,7 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.proyectoarquiwebjorge.dtos.RolDTO;
+import pe.edu.upc.proyectoarquiwebjorge.dtos.RolDTOComplete;
+import pe.edu.upc.proyectoarquiwebjorge.dtos.RolDTOList;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.RolDTOInsert;
 import pe.edu.upc.proyectoarquiwebjorge.entities.Rol;
 import pe.edu.upc.proyectoarquiwebjorge.entities.Usuario;
@@ -23,22 +24,22 @@ public class RolController {
     private IRolService rS;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public List<RolDTO> list() {
+    //@PreAuthorize("hasAuthority('ADMIN')")
+    public List<RolDTOComplete> list() {
         return this.rS.list().stream().map(y -> {
             ModelMapper mapper = new ModelMapper();
-            return (RolDTO)mapper.map(y, RolDTO.class);
+            return (RolDTOComplete)mapper.map(y, RolDTOComplete.class);
         }).collect(Collectors.toList());
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<String> insert(@RequestBody RolDTOInsert dto) {
+    //@PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<String> insert(@RequestBody RolDTOComplete dto) {
         Rol rol = new Rol();
         rol.setNombre_rol(dto.getNombre_rol());
 
         Usuario usuario = new Usuario();
-        usuario.setId_usuario(dto.getUserId());
+        usuario.setId_usuario(dto.getUser().getId_usuario());
 
         rol.setUser(usuario);
 
@@ -49,7 +50,7 @@ public class RolController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> listarRolPorId(@PathVariable("id") Integer id) {
         Rol dev = rS.listIdRol(id);
         if (dev == null) {
@@ -58,12 +59,12 @@ public class RolController {
                     .body("No existe un rol con el ID: " + id);
         }
         ModelMapper m = new ModelMapper();
-        RolDTO dto = m.map(dev, RolDTO.class);
+        RolDTOList dto = m.map(dev, RolDTOList.class);
         return ResponseEntity.ok(dto);
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminarRol(@PathVariable("id") Integer id) {
         Rol d = rS.listIdRol(id);
         if (d == null) {
@@ -75,8 +76,8 @@ public class RolController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<String> modificar(@RequestBody RolDTO dto) {
+    //@PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<String> modificar(@RequestBody RolDTOList dto) {
         // buscar el rol existente
         Rol existente = rS.listIdRol(dto.getId_rol());
         if (existente == null) {
@@ -95,7 +96,7 @@ public class RolController {
 
 
     @GetMapping("/busquedas")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> buscar(@RequestParam String t) {
         List<Rol> roles = rS.buscarPorRol(t);
 
@@ -104,9 +105,9 @@ public class RolController {
                     .body("No se encontraron roles del tipo: " + t);
         }
 
-        List<RolDTO> listaDTO = roles.stream().map(x -> {
+        List<RolDTOList> listaDTO = roles.stream().map(x -> {
             ModelMapper m = new ModelMapper();
-            return m.map(x, RolDTO.class);
+            return m.map(x, RolDTOList.class);
         }).collect(Collectors.toList());
 
         return ResponseEntity.ok(listaDTO);

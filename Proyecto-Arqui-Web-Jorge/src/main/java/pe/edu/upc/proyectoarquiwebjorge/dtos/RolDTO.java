@@ -1,7 +1,5 @@
 package pe.edu.upc.proyectoarquiwebjorge.dtos;
 
-import jakarta.persistence.Column;
-
 public class RolDTO {
     private int id_rol;
     private String nombre_rol;
@@ -22,5 +20,3 @@ public class RolDTO {
         this.nombre_rol = nombre_rol;
     }
 }
-
-

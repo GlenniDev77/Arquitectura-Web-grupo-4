@@ -1,6 +1,7 @@
 package pe.edu.upc.proyectoarquiwebjorge.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -31,9 +32,18 @@ public class Usuario {
     @Column(name = "Activo", nullable = false)
     private Boolean enabled;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Rol> roles;
+
+
+    /*
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    @JsonManagedReference
+    private List<Rol> roles;
+
+     */
 
     public Usuario() {}
 

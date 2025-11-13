@@ -6,11 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.proyectoarquiwebjorge.dtos.RolDTO;
-import pe.edu.upc.proyectoarquiwebjorge.dtos.UsuarioDTOInsert;
 import pe.edu.upc.proyectoarquiwebjorge.dtos.ZonaDTO;
-import pe.edu.upc.proyectoarquiwebjorge.entities.Rol;
-import pe.edu.upc.proyectoarquiwebjorge.entities.Usuario;
 import pe.edu.upc.proyectoarquiwebjorge.entities.Zona;
 import pe.edu.upc.proyectoarquiwebjorge.servicesinterfaces.IZonaService;
 

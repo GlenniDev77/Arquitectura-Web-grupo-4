@@ -13,12 +13,8 @@ public class UsuarioDTOInsert {
     private int telefono;
     private Boolean enabled;
     private LocalDate fecha;
-    private List<Integer> rolesIds;
 
 
-    public List<Integer> getRolesIds() { return rolesIds; }
-
-    public void setRolesIds(List<Integer> rolesIds) { this.rolesIds = rolesIds; }
 
     public Boolean getEnabled() { return enabled; }
 

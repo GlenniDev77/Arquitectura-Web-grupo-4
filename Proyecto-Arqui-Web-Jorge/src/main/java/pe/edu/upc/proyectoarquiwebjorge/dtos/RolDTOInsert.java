@@ -1,8 +1,11 @@
 package pe.edu.upc.proyectoarquiwebjorge.dtos;
 
 public class RolDTOInsert {
+
     private String nombre_rol;
     private int userId;
+
+
 
     public String getNombre_rol() {
         return nombre_rol;
