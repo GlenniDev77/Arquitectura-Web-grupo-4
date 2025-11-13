@@ -71,12 +71,18 @@ export class DelitoInsertar implements OnInit{
       this.listaZonas=data
     })
 
+    const ahora = new Date();
+    const horas = ahora.getHours().toString().padStart(2, '0');      // hora local
+    const minutos = ahora.getMinutes().toString().padStart(2, '0');  // minutos locales
+    const horaActual = `${horas}:${minutos}`;                        // "HH:mm"
+
+
     this.form = this.formBuilder.group({
       codigo: [''],
       tipo: ['', Validators.required],
       desc: ['', Validators.required],
-      fecha: ['', Validators.required],
-      hora: ['', Validators.required],
+      fecha: [ahora, Validators.required],
+      hora: [horaActual, Validators.required],
       nombre: ['', Validators.required],
       FK: [false, Validators.required],
       FK2: ['', Validators.required]
