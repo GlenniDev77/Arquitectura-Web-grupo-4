@@ -1,0 +1,328 @@
+/* ===== Sidebar ===== */
+.sidebar {
+  width: 260px;                  /* ancho fijo del sidebar */
+  height: 100vh;                 /* altura completa de la ventana */
+  background: #ffffff;           /* fondo blanco */
+  border-right: 1px solid #e5e7eb; /* borde suave a la derecha */
+  padding: 20px;                 /* espacio interno */
+  display: flex;
+  flex-direction: column;
+  font-family: "Inter", sans-serif; /* tipografía moderna */
+  position: fixed;               /* fijo en la pantalla */
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  z-index: 1000;
+}
+
+.main-content {
+  margin-left: 260px; /* espacio del sidebar */
+  padding: 10px;
+}
+
+
+button[mat-button] {
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: 6px;
+  padding: 4px 12px;
+  color: #fff;
+  background-color: #f25e23;
+  text-transform: none;
+  transition: all 0.25s ease;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.15);
+}
+
+button[mat-button]:hover {
+  background-color: #d94c1a;
+}
+
+.main-content {
+  margin-left: 160px; /* espacio del sidebar */
+  padding: 10px;
+}
+
+
+
+.custom-toolbar {
+  background-color: rgb(242, 63, 35);
+  display: flex;
+  align-items: center;
+
+  position: fixed;
+  top: 0;
+  left: 260px; /* sidebar ocupa 260px */
+  width: calc(100% - 260px); /* resto de la pantalla */
+
+  height: 64px;
+  padding: 0 20px;
+  z-index: 900;
+}
+
+
+/* ===== Logo ===== */
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.logo-text {
+  margin-left: 10px;
+}
+
+/* ===== Menú ===== */
+.menu {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.menu li {
+  padding: 12px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  color: #4b5563; /* gris oscuro */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: 0.2s;
+}
+
+.menu li:hover {
+  background: #f3f4f6; /* gris claro al pasar el mouse */
+}
+
+.menu li.active {
+  background: #000; /* fondo negro para item activo */
+  color: white;
+}
+
+/* ===== Botón modo oscuro ===== */
+.dark-mode {
+  margin-top: auto;
+  padding: 12px;
+  border-radius: 10px;
+  background: #f3f4f6;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.2s ease;
+}
+
+.dark-mode:hover {
+  background: #e5e7eb;
+}
+
+/* ===== Separadores o secciones opcionales ===== */
+.sidebar hr {
+  border: 0;
+  border-top: 1px solid #e5e7eb;
+  margin: 15px 0;
+}
+
+/* ===== Iconos dentro del sidebar ===== */
+.menu li mat-icon,
+.menu li .material-symbols-outlined {
+  font-size: 1.2rem;
+  color: #4b5563;
+  transition: color 0.2s ease;
+}
+
+.menu li.active mat-icon,
+.menu li.active .material-symbols-outlined {
+  color: white;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+}
+/* ===== Toolbar ===== */
+.custom-toolbar {
+  background-color: rgb(242, 63, 35); /* rojo principal */
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  position: fixed;
+  top: 0;
+  left: 260px;       /* espacio para la sidebar */
+  right: 0;
+  height: 60px;
+  z-index: 1000;
+  width: auto;
+  color: white;
+}
+
+/* ===== Botón rojo toolbar ===== */
+.btn-rojo {
+  background-color: rgb(242, 63, 35);
+  border: none;
+  font-size: smaller;
+  border-radius: 4px;
+  margin: 4px;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-rojo:hover {
+  background-color: rgb(113, 118, 115);
+}
+
+/* Iconos dentro del botón */
+.btn-rojo mat-icon,
+.btn-rojo .material-symbols-outlined {
+  font-size: 1.3rem;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+/* ===== Menú translúcido (opcional) ===== */
+.mat-mdc-menu-panel {
+  background-color: rgba(144, 238, 144, 0.3) !important;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(46, 158, 46, 0.3);
+  border-radius: 8px;
+  padding: 4px 0;
+}
+
+.mat-mdc-menu-item {
+  color: #064d06 !important;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.mat-mdc-menu-item:hover {
+  background-color: rgba(46, 158, 46, 0.2) !important;
+}
+
+/* ===== Contenido a la derecha de la sidebar ===== */
+.content {
+  margin-left: 260px; /* ancho sidebar */
+  padding: 70px 20px 20px 20px; /* espacio para toolbar */
+  background-color: #f5f5f5;
+  min-height: calc(100vh - 60px);
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+/* ===== Vehículo Registro ===== */
+.vehiculo-registro-container {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  max-width: 700px;
+  margin: auto;
+}
+
+.vehiculo-registro-container h2 {
+  color: rgb(242, 63, 35);
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Formulario */
+.vehiculo-registro-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.vehiculo-registro-form label {
+  font-weight: 500;
+  margin-bottom: 4px;
+  color: #333;
+}
+
+.vehiculo-registro-form input,
+.vehiculo-registro-form select {
+  padding: 8px 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.vehiculo-registro-form input:focus,
+.vehiculo-registro-form select:focus {
+  border-color: rgb(242, 63, 35);
+}
+
+.vehiculo-registro-form button {
+  align-self: flex-start;
+  background-color: rgb(242, 63, 35);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.vehiculo-registro-form button:hover {
+  background-color: rgb(113, 118, 115);
+}
+
+.vehiculo-registro-form .error {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 2px;
+}
+
+/* ===== Tabla ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.mat-header-cell, .mat-cell {
+  text-align: center;
+}
+
+button[mat-button] {
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: 6px;
+  padding: 4px 12px;
+  color: #fff;
+  background-color: #f25e23;
+  text-transform: none;
+  transition: all 0.25s ease;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.15);
+}
+
+button[mat-button]:hover {
+  background-color: #d94c1a;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .content {
+    margin-left: 0;
+    padding: 20px 10px;
+  }
+  .custom-toolbar {
+    left: 0;
+  }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+}
