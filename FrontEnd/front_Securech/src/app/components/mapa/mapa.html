@@ -1,0 +1,49 @@
+<div class="contenedor">
+
+  <!-- FORMULARIO -->
+  <div class="panel">
+
+    <h3>Buscar Ruta</h3>
+
+    <!-- ORIGEN -->
+    <label>Origen</label>
+    <input
+      type="text"
+      [(ngModel)]="origenTexto"
+      (input)="buscarSugerencias('origen', $event)"
+      placeholder="Ingresa un lugar..."
+    />
+
+    <!-- Sugerencias de origen -->
+    <ul *ngIf="sugerenciasOrigen.length > 0" class="sugerencias">
+      <li *ngFor="let sug of sugerenciasOrigen"
+          (click)="seleccionarSugerencia('origen', sug)">
+        {{ sug.properties.formatted }}
+      </li>
+    </ul>
+
+    <!-- DESTINO -->
+    <label>Destino</label>
+    <input
+      type="text"
+      [(ngModel)]="destinoTexto"
+      (input)="buscarSugerencias('destino', $event)"
+      placeholder="Ingresa un lugar..."
+    />
+
+    <!-- Sugerencias de destino -->
+    <ul *ngIf="sugerenciasDestino.length > 0" class="sugerencias">
+      <li *ngFor="let sug of sugerenciasDestino"
+          (click)="seleccionarSugerencia('destino', sug)">
+        {{ sug.properties.formatted }}
+      </li>
+    </ul>
+
+    <!-- BOTÓN -->
+    <button class="btn" (click)="trazarRuta()">Trazar Ruta</button>
+  </div>
+
+  <!-- MAPA -->
+  <div id="mapa"></div>
+
+</div>
