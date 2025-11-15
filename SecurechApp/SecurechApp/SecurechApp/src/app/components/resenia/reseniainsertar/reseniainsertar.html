@@ -1,0 +1,88 @@
+<div class="container">
+  <div style="text-align: center; margin: 5%">
+    <h2>Registrar Reseña</h2>
+  </div>
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+      @if (edicion) {
+      <mat-form-field class="example-full-width">
+        <mat-label>ID:</mat-label>
+        <input matInput formControlName="id_resenia" readonly="true" />
+        <mat-error> @if (form.get('id_resenia')?.hasError('required')) { Ingrese ID!! } </mat-error>
+      </mat-form-field>
+      }
+      <br />
+      
+      <mat-form-field>
+        <mat-label>Comentario</mat-label>
+        <input matInput formControlName="comentario" />
+        <mat-error>
+          @if (form.get('comentario')?.hasError('required')) { Ingrese Comentario! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <!-- Calificación con Estrellas -->
+      <div style="margin: 20px 0;">
+        <label style="display: block; margin-bottom: 10px; font-weight: 500;">Calificación</label>
+        <div style="display: flex; justify-content: center; gap: 5px;">
+          @for (star of [1,2,3,4,5]; track star) {
+            <button type="button" 
+                    (click)="seleccionarCalificacion(star)"
+                    [style.background]="'none'"
+                    [style.border]="'none'"
+                    [style.cursor]="'pointer'"
+                    [style.fontSize]="'24px'">
+              @if (star <= form.get('calificacion')?.value) {
+                <span style="color: #ffc107;">★</span>
+              } @else {
+                <span style="color: #e0e0e0;">☆</span>
+              }
+            </button>
+          }
+        </div>
+        <div style="margin-top: 5px; color: #666; font-size: 14px;">
+          {{ form.get('calificacion')?.value || 0 }}/5 estrellas
+        </div>
+        <mat-error style="text-align: center;">
+        </mat-error>
+      </div>
+
+      <!-- Fecha con Datepicker -->
+      <mat-form-field>
+        <mat-label>Fecha</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fecha">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error>
+          @if (form.get('fecha')?.hasError('required')) { Seleccione Fecha! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="FK">
+          @for (dev of listaUsuarios; track dev) {
+          <mat-option [value]="dev.id_usuario">{{ dev.nombre }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field>
+        <mat-label>Ruta</mat-label>
+        <mat-select formControlName="FK2">
+          @for (dev of listaRutas; track dev) {
+          <mat-option [value]="dev.id_ruta">{{ dev.origen }} - {{ dev.destino }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <div>
+        <button matButton="elevated">Registrar</button>
+      </div>
+    </form>
+  </div>
+</div>
