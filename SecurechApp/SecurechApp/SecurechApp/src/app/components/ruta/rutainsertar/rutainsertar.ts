@@ -36,6 +36,10 @@ export class Rutainsertar implements OnInit {
   listaUsuarios: Usuario[] = [];
   listaTipovehiculos: tipovehiculo[] = [];
 
+  // Variables para mostrar nombres en lugar de IDs
+  usuarioSeleccionado: Usuario = new Usuario();
+  tipoVehiculoSeleccionado: tipovehiculo = new tipovehiculo();
+
   constructor(
     private rS: Rutaservice,
     private router: Router,
@@ -68,8 +72,19 @@ export class Rutainsertar implements OnInit {
       destino: ['', Validators.required],
       destino_longitud: ['', Validators.required],
       destino_latitud: ['', Validators.required],
-      FK: ['', Validators.required],
-      FK2: ['', Validators.required]
+      FK: ['', Validators.required],  // Aquí se guarda el ID del usuario
+      FK2: ['', Validators.required]  // Aquí se guarda el ID del tipo de vehículo
+    });
+
+    // Suscribirse a cambios para mostrar nombres
+    this.form.get('FK')?.valueChanges.subscribe(id => {
+      const usuario = this.listaUsuarios.find(u => u.id_usuario === id);
+      this.usuarioSeleccionado = usuario || new Usuario();
+    });
+
+    this.form.get('FK2')?.valueChanges.subscribe(id => {
+      const tipoVehiculo = this.listaTipovehiculos.find(t => t.id_tipovehiculo === id);
+      this.tipoVehiculoSeleccionado = tipoVehiculo || new tipovehiculo();
     });
   }
 
@@ -82,8 +97,10 @@ export class Rutainsertar implements OnInit {
       this.ruta.destino = this.form.value.destino;
       this.ruta.destino_longitud = this.form.value.destino_longitud;
       this.ruta.destino_latitud = this.form.value.destino_latitud;
-      this.ruta.usuario.id_usuario = this.form.value.FK;
-      this.ruta.tipovehiculo.id_tipovehiculo = this.form.value.FK2;
+      
+      // Asignar los objetos completos (no solo los IDs)
+      this.ruta.usuario = this.usuarioSeleccionado;
+      this.ruta.tipovehiculo = this.tipoVehiculoSeleccionado;
 
       if (this.edicion) {
         this.rS.update(this.ruta).subscribe(() => {
@@ -105,18 +122,36 @@ export class Rutainsertar implements OnInit {
   init() {
     if (this.edicion) {
       this.rS.listId(this.id).subscribe((data) => {
-        this.form = new FormGroup({
-          id_ruta: new FormControl(data.id_ruta),
-          origen: new FormControl(data.origen),
-          origen_longitud: new FormControl(data.origen_longitud),
-          origen_latitud: new FormControl(data.origen_latitud),
-          destino: new FormControl(data.destino),
-          destino_longitud: new FormControl(data.destino_longitud),
-          destino_latitud: new FormControl(data.destino_latitud),
-          FK: new FormControl(data.usuario.nombre),
-          FK2: new FormControl(data.tipovehiculo.nombre_vehiculo)
+        // Buscar el usuario y tipo de vehículo correspondientes para mostrar sus nombres
+        const usuarioEncontrado = this.listaUsuarios.find(u => u.id_usuario === data.usuario.id_usuario);
+        const tipoVehiculoEncontrado = this.listaTipovehiculos.find(t => t.id_tipovehiculo === data.tipovehiculo.id_tipovehiculo);
+
+        this.form.patchValue({
+          id_ruta: data.id_ruta,
+          origen: data.origen,
+          origen_longitud: data.origen_longitud,
+          origen_latitud: data.origen_latitud,
+          destino: data.destino,
+          destino_longitud: data.destino_longitud,
+          destino_latitud: data.destino_latitud,
+          FK: data.usuario.id_usuario,  // Guardar el ID
+          FK2: data.tipovehiculo.id_tipovehiculo  // Guardar el ID
         });
+
+        // Actualizar los objetos seleccionados para mostrar nombres
+        this.usuarioSeleccionado = usuarioEncontrado || new Usuario();
+        this.tipoVehiculoSeleccionado = tipoVehiculoEncontrado || new tipovehiculo();
       });
     }
+  }
+
+  // Método para mostrar información del usuario seleccionado
+  getUsuarioDisplay(): string {
+    return this.usuarioSeleccionado.nombre || 'Seleccione un usuario';
+  }
+
+  // Método para mostrar información del tipo de vehículo seleccionado
+  getTipoVehiculoDisplay(): string {
+    return this.tipoVehiculoSeleccionado.nombre_vehiculo || 'Seleccione un tipo de vehículo';
   }
 }

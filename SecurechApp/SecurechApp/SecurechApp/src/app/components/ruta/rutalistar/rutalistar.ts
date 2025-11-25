@@ -16,9 +16,10 @@ import { RouterLink } from "@angular/router";
 export class Rutalistar {
   dataSource: MatTableDataSource<Ruta> = new MatTableDataSource();
 
-  displayedColumns: string[] = ['a', 'b', 'c', 'd', 'e','FK', 'FK2','f','g'];
+  displayedColumns: string[] = ['a', 'b', 'd', 'FK2', 'f', 'g'];
 
   constructor(private sS: Rutaservice) {}
+  
   ngOnInit(): void {
     this.sS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
@@ -27,6 +28,7 @@ export class Rutalistar {
       this.dataSource = new MatTableDataSource(data);
     });
   }
+  
   eliminar(id: number) {
     this.sS.delete(id).subscribe((data) => {
       this.sS.list().subscribe((data) => {

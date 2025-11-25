@@ -10,10 +10,19 @@ import java.time.LocalDate;
 
 public class ReseniaDTOList {
 
+    private int id_resenia;
     private String comentario;
     private float calificacion;
     private LocalDate fecha;
     private Usuario usuario;
+
+    public int getId_resenia() {
+        return id_resenia;
+    }
+
+    public void setId_resenia(int id_resenia) {
+        this.id_resenia = id_resenia;
+    }
 
     public String getComentario() {
         return comentario;

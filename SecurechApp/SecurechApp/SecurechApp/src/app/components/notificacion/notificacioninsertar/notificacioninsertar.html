@@ -8,7 +8,7 @@
       <mat-form-field class="example-full-width">
         <mat-label>ID:</mat-label>
         <input matInput formControlName="codigo" readonly="true" />
-        <mat-error> @if (form.get('id')?.hasError('required')) { Ingrese ID!! } </mat-error>
+        <mat-error> @if (form.get('codigo')?.hasError('required')) { Ingrese ID!! } </mat-error>
       </mat-form-field>
       }
       <br />
@@ -35,7 +35,7 @@
         <mat-label>Zona</mat-label>
         <mat-select formControlName="FK2">
           @for (dev of listaZonas; track dev) {
-          <mat-option [value]="dev.idZona">{{ dev.nombre }}</mat-option>
+          <mat-option [value]="dev.idZona">{{ dev.nombre}}</mat-option>
           }
         </mat-select>
       </mat-form-field>

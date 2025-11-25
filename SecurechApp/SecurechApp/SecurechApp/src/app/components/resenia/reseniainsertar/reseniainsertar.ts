@@ -17,14 +17,16 @@ import { Rutaservice } from '../../../services/rutaservice';
 
 @Component({
   selector: 'app-reseniainsertar',
-  imports: [ MatSelectModule,
-      MatInputModule,
-      MatRadioModule,
-      MatDatepickerModule,
-      MatButtonModule,
-      ReactiveFormsModule,
-      MatNativeDateModule,
-      MatIconModule],
+  imports: [ 
+    MatSelectModule,
+    MatInputModule,
+    MatRadioModule,
+    MatDatepickerModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    MatNativeDateModule,
+    MatIconModule
+  ],
   templateUrl: './reseniainsertar.html',
   styleUrl: './reseniainsertar.css',
 })
@@ -38,6 +40,10 @@ export class Reseniainsertar implements OnInit {
   listaUsuarios: Usuario[] = [];
   listaRutas: Ruta[] = [];
 
+  // Variables para mostrar nombres seleccionados
+  usuarioSeleccionado: Usuario = new Usuario();
+  rutaSeleccionada: Ruta = new Ruta();
+
   constructor(
     private rS: Reseniaservice,
     private router: Router,
@@ -48,6 +54,10 @@ export class Reseniainsertar implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Inicializar objetos anidados
+    this.resenia.usuario = new Usuario();
+    this.resenia.ruta = new Ruta();
+
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
       this.edicion = data['id'] != null;
@@ -73,6 +83,17 @@ export class Reseniainsertar implements OnInit {
       FK: ['', Validators.required],
       FK2: ['', Validators.required]
     });
+
+    // Suscribirse a cambios en los selects
+    this.form.get('FK')?.valueChanges.subscribe(id => {
+      const usuario = this.listaUsuarios.find(u => u.id_usuario === id);
+      this.usuarioSeleccionado = usuario || new Usuario();
+    });
+
+    this.form.get('FK2')?.valueChanges.subscribe(id => {
+      const ruta = this.listaRutas.find(r => r.id_ruta === id);
+      this.rutaSeleccionada = ruta || new Ruta();
+    });
   }
 
   aceptar(): void {
@@ -81,44 +102,112 @@ export class Reseniainsertar implements OnInit {
       this.resenia.comentario = this.form.value.comentario;
       this.resenia.calificacion = this.form.value.calificacion;
       this.resenia.fecha = this.form.value.fecha;
-      this.resenia.usuario.id_usuario = this.form.value.FK;
-      this.resenia.ruta.id_ruta = this.form.value.FK2;
+      
+      // Asignar objetos completos, no solo IDs
+      const usuarioSeleccionado = this.listaUsuarios.find(u => u.id_usuario === this.form.value.FK);
+      const rutaSeleccionada = this.listaRutas.find(r => r.id_ruta === this.form.value.FK2);
+      
+      if (usuarioSeleccionado) {
+        this.resenia.usuario = usuarioSeleccionado;
+      }
+      
+      if (rutaSeleccionada) {
+        this.resenia.ruta = rutaSeleccionada;
+      }
 
       if (this.edicion) {
         this.rS.update(this.resenia).subscribe(() => {
           this.rS.list().subscribe((data) => {
             this.rS.setList(data);
+            this.router.navigate(['resenias']);
           });
         });
       } else {
-        this.rS.insert(this.resenia).subscribe((data) => {
+        this.rS.insert(this.resenia).subscribe(() => {
           this.rS.list().subscribe((data) => {
             this.rS.setList(data);
+            this.router.navigate(['resenias']);
           });
         });
       }
-      this.router.navigate(['resenias']);
+    } else {
+      // Marcar todos los campos como touched para mostrar errores
+      this.marcarCamposComoTouched();
     }
   }
 
   init() {
     if (this.edicion) {
       this.rS.listId(this.id).subscribe((data) => {
-        this.form = new FormGroup({
-          id_resenia: new FormControl(data.id_resenia),
-          comentario: new FormControl(data.comentario),
-          calificacion: new FormControl(data.calificacion),
-          fecha: new FormControl(data.fecha),
-          FK: new FormControl(data.usuario.id_usuario),
-          FK2: new FormControl(data.ruta.id_ruta)
+        // Buscar el usuario y ruta correspondientes para mostrar sus nombres
+        const usuarioEncontrado = this.listaUsuarios.find(u => u.id_usuario === data.usuario.id_usuario);
+        const rutaEncontrada = this.listaRutas.find(r => r.id_ruta === data.ruta.id_ruta);
+
+        this.form.patchValue({
+          id_resenia: data.id_resenia,
+          comentario: data.comentario,
+          calificacion: data.calificacion,
+          fecha: data.fecha,
+          FK: data.usuario.id_usuario,  // Guardar el ID
+          FK2: data.ruta.id_ruta        // Guardar el ID
         });
+
+        // Actualizar los objetos seleccionados para mostrar nombres
+        this.usuarioSeleccionado = usuarioEncontrado || new Usuario();
+        this.rutaSeleccionada = rutaEncontrada || new Ruta();
       });
     }
   }
 
   seleccionarCalificacion(calificacion: number): void {
-  this.form.patchValue({
-    calificacion: calificacion
-  });
-}
+    this.form.patchValue({
+      calificacion: calificacion
+    });
+  }
+
+  // Método para mostrar información del usuario seleccionado
+  getUsuarioDisplay(): string {
+    return this.usuarioSeleccionado.nombre || 'Seleccione un usuario';
+  }
+
+  // Método para mostrar información de la ruta seleccionada
+  getRutaDisplay(): string {
+    if (this.rutaSeleccionada.origen && this.rutaSeleccionada.destino) {
+      return `${this.rutaSeleccionada.origen} - ${this.rutaSeleccionada.destino}`;
+    }
+    return 'Seleccione una ruta';
+  }
+
+  // Método para marcar todos los campos como touched
+  private marcarCamposComoTouched(): void {
+    Object.keys(this.form.controls).forEach(key => {
+      const control = this.form.get(key);
+      if (control) {
+        control.markAsTouched();
+      }
+    });
+  }
+
+  // Método para verificar si un campo es válido
+  esCampoInvalido(campo: string): boolean {
+    const formControl = this.form.get(campo);
+    return formControl ? formControl.invalid && formControl.touched : false;
+  }
+
+  // Método para obtener mensaje de error
+  obtenerMensajeError(campo: string): string {
+    const formControl = this.form.get(campo);
+    if (formControl?.errors) {
+      if (formControl.errors['required']) {
+        return 'Este campo es requerido';
+      }
+      if (formControl.errors['min']) {
+        return `El valor mínimo es ${formControl.errors['min'].min}`;
+      }
+      if (formControl.errors['max']) {
+        return `El valor máximo es ${formControl.errors['max'].max}`;
+      }
+    }
+    return '';
+  }
 }

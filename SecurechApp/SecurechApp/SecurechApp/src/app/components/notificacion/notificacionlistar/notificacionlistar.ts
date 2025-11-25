@@ -14,7 +14,7 @@ import { Notificacionservice } from '../../../services/notificacionservice';
 })
 export class Notificacionlistar {
 dataSource: MatTableDataSource<Notificacion> = new MatTableDataSource();
-  displayedColumns: string[] = ['a', 'b','FK','FK2'];
+  displayedColumns: string[] = ['a', 'b'];
 
   constructor(private sS: Notificacionservice) {}
   ngOnInit(): void {

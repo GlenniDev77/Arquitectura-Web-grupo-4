@@ -15,7 +15,7 @@ import { Reseniaservice } from '../../../services/reseniaservice';
 export class Resenialistar {
 dataSource: MatTableDataSource<Resenia> = new MatTableDataSource();
 
-  displayedColumns: string[] = ['a', 'b', 'c', 'd', 'FK', 'FK2','e'];
+  displayedColumns: string[] = ['a', 'b', 'c', 'd', 'FK','e'];
 
   constructor(private sS: Reseniaservice) {}
   ngOnInit(): void {

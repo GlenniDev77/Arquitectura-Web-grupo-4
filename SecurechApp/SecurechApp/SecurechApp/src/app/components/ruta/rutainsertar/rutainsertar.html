@@ -73,12 +73,17 @@
       </mat-form-field>
       <br />
 
-      <!-- Usuario -->
+      <!-- Usuario con visualización del nombre -->
+      <div style="margin: 10px 0;">
+        <strong>Usuario seleccionado:</strong> {{ getUsuarioDisplay() }}
+      </div>
       <mat-form-field>
-        <mat-label>Usuario</mat-label>
+        <mat-label>Seleccionar Usuario</mat-label>
         <mat-select formControlName="FK">
-          @for (dev of listaUsuarios; track dev) {
-          <mat-option [value]="dev.id_usuario">{{ dev.nombre }}</mat-option>
+          @for (usuario of listaUsuarios; track usuario.id_usuario) {
+          <mat-option [value]="usuario.id_usuario">
+            {{ usuario.nombre }}
+          </mat-option>
           }
         </mat-select>
         <mat-error>
@@ -87,12 +92,17 @@
       </mat-form-field>
       <br />
 
-      <!-- Tipo de Vehículo -->
+      <!-- Tipo de Vehículo con visualización del nombre -->
+      <div style="margin: 10px 0;">
+        <strong>Tipo de Vehículo seleccionado:</strong> {{ getTipoVehiculoDisplay() }}
+      </div>
       <mat-form-field>
-        <mat-label>Tipo de Vehículo</mat-label>
+        <mat-label>Seleccionar Tipo de Vehículo</mat-label>
         <mat-select formControlName="FK2">
-          @for (dev of listaTipovehiculos; track dev) {
-          <mat-option [value]="dev.id_tipovehiculo">{{ dev.nombre_vehiculo }}</mat-option>
+          @for (tipoVehiculo of listaTipovehiculos; track tipoVehiculo.id_tipovehiculo) {
+          <mat-option [value]="tipoVehiculo.id_tipovehiculo">
+            {{ tipoVehiculo.nombre_vehiculo }}
+          </mat-option>
           }
         </mat-select>
         <mat-error>
