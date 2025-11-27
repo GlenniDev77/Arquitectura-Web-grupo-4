@@ -97,13 +97,9 @@
       <div>
         <mat-form-field>
           <mat-label>Fecha</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="fecha" />
-          <mat-hint>DD/MM/YYYY</mat-hint>
-          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <input matInput [matDatepicker]="picker" formControlName="fecha" readonly="true"/>
+          <!-- <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle> -->
           <mat-datepicker #picker></mat-datepicker>
-          <mat-error>
-            @if (form.get('fecha')?.hasError('required')) { La fecha es obligatoria. }
-          </mat-error>
         </mat-form-field>
       </div>
       }

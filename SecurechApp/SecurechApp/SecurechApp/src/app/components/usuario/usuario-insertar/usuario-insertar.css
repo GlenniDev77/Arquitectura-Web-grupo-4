@@ -71,3 +71,13 @@ button[matButton="elevated"] {
 button[matButton="elevated"]:hover {
   background-color: #00ff95;
 }
+
+.success-snackbar {
+  background: #00d26a !important;
+  color: #000 !important;
+  font-weight: bold;
+  font-size: 15px;
+  border-radius: 8px;
+  border: 1px solid #00ff80;
+}
+
