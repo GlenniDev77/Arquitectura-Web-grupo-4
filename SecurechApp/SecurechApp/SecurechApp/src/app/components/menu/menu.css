@@ -1,103 +1,107 @@
-/* ===== Sidebar estilo oscuro ===== */
-.sidebar {
-  width: 260px;
-  height: 100vh;
-  background: linear-gradient(180deg, #111418, #1c1f24);
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  font-family: "Inter", sans-serif;
-  position: fixed;
-  top: 0;
-  left: 0;
-  box-sizing: border-box;
-  border-right: 1px solid rgba(255,255,255,0.1);
-}
-
-/* ===== Logo ===== */
-.logo-text {
-  color: #fff;
-  font-size: 22px;
-  font-weight: 700;
-}
-
-/* ===== Botón de búsqueda ===== */
-button[mat-button] {
+/* ============================
+   TOOLBAR PRINCIPAL (MENÚ)
+   ============================ */
+.custom-toolbar {
   width: 100%;
-  background: #ffffff10;
-  color: white;
-  border-radius: 10px;
-  padding: 10px;
-  font-size: 1rem;
-  transition: 0.3s;
-}
-
-button[mat-button]:hover {
-  background: #00d26a20;
-}
-
-/* ===== Menú ===== */
-.menu {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  padding: 0;
-  margin-top: 20px;
-}
-
-/* Ajuste igual que en Delitos */
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding-top: 50px;
-}
-
-.menu li {
-  padding: 22px 16px;
-  margin-bottom: 6px;
-  border-radius: 12px;
-  cursor: pointer;
-  font-size: 17px;
-  color: #d1d5db;
+  height: 70px;
+  background: #0f1115; /* Fondo oscuro sólido */
+  border-bottom: 1px solid rgba(0, 255, 128, 0.22);
   display: flex;
   align-items: center;
-  gap: 10px;
-  transition: 0.25s ease;
+  padding: 0 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-sizing: border-box;
 }
 
-/* Hover */
-.menu li:hover {
-  background: #00d26a30;
+/* ============================
+   BOTONES DEL MENÚ
+   ============================ */
+.btn-menu {
+  background: transparent;
+  color: #00ff80; /* Verde neón */
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 8px 14px;
+  margin-right: 8px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: 0.2s ease;
+}
+
+.btn-menu:hover {
+  background: rgba(0, 255, 128, 0.12);
+  color: #00ff95; /* Verde más claro */
+}
+
+/* ÍCONO DE BOTONES */
+.btn-menu mat-icon {
+  font-size: 20px;
+  color: inherit !important;
+}
+
+/* ============================
+   BOTÓN DE USUARIO (DERECHA)
+   ============================ */
+.btn-user {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: 0.2s ease;
+}
+
+.btn-user:hover {
+  background: rgba(0, 255, 128, 0.18);
   color: #00ff95;
 }
 
-/* Activo */
-.menu li.active {
-  background: #00b341;
-  color: #ffffff;
-  font-weight: 600;
-  border: 1px solid #00ff80;
-  transition: 0.2s ease-in-out;
+/* ============================
+   SEPARADOR FLEXIBLE
+   ============================ */
+.spacer {
+  flex: 1 1 auto;
 }
 
-.menu li.active mat-icon,
-.menu li.active .material-symbols-outlined {
-  color: white !important;
+/* ============================
+   MENÚ DESPLEGABLE (GLASS)
+   ============================ */
+.mat-mdc-menu-panel {
+  background-color: rgba(17, 20, 24, 0.92) !important; /* Negro glass */
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 255, 128, 0.25);
+  border-radius: 12px !important;
 }
 
-/* Iconos */
-.menu li mat-icon,
-.menu li .material-symbols-outlined {
-  font-size: 1.4rem;
-  color: inherit;
+.mat-mdc-menu-item {
+  color: #0f0101 !important; /* Verde muy claro */
+  font-size: 15px;
+  font-weight: 500;
 }
 
-/* ===== Contenido principal ===== */
-.main-content {
-  margin-left: 260px;
-  padding: 20px;
-  background: linear-gradient(90deg, #0f1115, #1c1f24);
-  min-height: 100vh;
-  color: white;
+.mat-mdc-menu-item:hover {
+  background-color: rgba(0, 255, 128, 0.20) !important;
 }
+
+/* ============================
+   ICONOS DE MENÚ DESPLEGABLE
+   ============================ */
+.mat-mdc-menu-item mat-icon {
+  color: #00ff80 !important;
+}
+
+/* ============================
+   TEXTO DEL TOOLBAR
+   ============================ */
+.custom-toolbar button,
+.custom-toolbar mat-icon {
+  color: #00ff80 !important;
+}
+
+/* El botón User se pinta distinto arriba */

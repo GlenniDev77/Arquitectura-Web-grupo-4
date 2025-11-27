@@ -24,7 +24,7 @@ public class RolController {
     private IRolService rS;
 
     @GetMapping
-    //@PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<RolDTOComplete> list() {
         return this.rS.list().stream().map(y -> {
             ModelMapper mapper = new ModelMapper();
@@ -33,7 +33,7 @@ public class RolController {
     }
 
     @PostMapping
-    //@PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> insert(@RequestBody RolDTOComplete dto) {
         Rol rol = new Rol();
         rol.setNombre_rol(dto.getNombre_rol());
@@ -50,7 +50,7 @@ public class RolController {
     }
 
     @GetMapping("/{id}")
-    //@PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> listarRolPorId(@PathVariable("id") Integer id) {
         Rol dev = rS.listIdRol(id);
         if (dev == null) {
@@ -64,7 +64,7 @@ public class RolController {
     }
 
     @DeleteMapping("/{id}")
-    //@PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminarRol(@PathVariable("id") Integer id) {
         Rol d = rS.listIdRol(id);
         if (d == null) {
@@ -76,7 +76,7 @@ public class RolController {
     }
 
     @PutMapping
-    //@PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> modificar(@RequestBody RolDTOList dto) {
         // buscar el rol existente
         Rol existente = rS.listIdRol(dto.getId_rol());
@@ -96,7 +96,7 @@ public class RolController {
 
 
     @GetMapping("/busquedas")
-    //@PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> buscar(@RequestParam String t) {
         List<Rol> roles = rS.buscarPorRol(t);
 

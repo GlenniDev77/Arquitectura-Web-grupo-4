@@ -37,41 +37,4 @@ h2 {
   margin-bottom: 20px;
 }
 
-.zona-card {
-  background: #1a1d21 !important;
-  color: #e8e8e8 !important;
-  border-radius: 16px !important;
-  padding: 20px;
-  width: 350px;
-}
-
-.zona-card .mat-card-title {
-  color: #00ff80 !important;
-  font-size: 24px;
-  font-weight: 700;
-}
-
-.zona-card .mat-card-subtitle {
-  color: #f2f2f2 !important;
-  font-size: 16px;
-}
-
-.zona-card p {
-  color: #c7c7c7;
-  margin: 4px 0;
-  font-size: 15px;
-}
-
-.zona-card p strong {
-  color: #ffffff;
-}
-
-.zona-card .mat-card-actions button {
-  color: #00d26a !important;
-}
-
-.zona-card .mat-card-actions button:hover {
-  color: #00ff95 !important;
-}
-
 

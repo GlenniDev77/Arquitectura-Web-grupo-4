@@ -6,13 +6,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
+import { Menu } from '../menu/menu';
 
 
 @Component({
   selector: 'app-zona',
   imports: [RouterOutlet,Zonalistar,MatTableModule,
     MatIconModule, MatButtonModule, RouterLink, 
-    MatToolbarModule,MatMenuModule
+    MatToolbarModule,MatMenuModule, Menu
   ],
   templateUrl: './zona.html',
   styleUrl: './zona.css',

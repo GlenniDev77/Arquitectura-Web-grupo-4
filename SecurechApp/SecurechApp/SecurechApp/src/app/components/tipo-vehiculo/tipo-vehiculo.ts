@@ -6,13 +6,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
+import { Menu } from '../menu/menu';
 
 
 @Component({
   selector: 'app-tipo-vehiculo',
   imports: [RouterOutlet,TipoVehiculoListar,MatTableModule,
     MatIconModule, MatButtonModule, RouterLink, MatToolbarModule,
-    MatMenuModule
+    MatMenuModule, Menu
   ],
   templateUrl: './tipo-vehiculo.html',
   styleUrl: './tipo-vehiculo.css',

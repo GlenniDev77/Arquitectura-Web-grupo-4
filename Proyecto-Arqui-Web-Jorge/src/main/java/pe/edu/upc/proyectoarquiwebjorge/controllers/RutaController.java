@@ -26,7 +26,7 @@ public class RutaController {
     private IRutaService rS;
 
     @GetMapping
-    //@PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('AUTORIDAD') or hasAuthority('MODERADOR')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('AUTORIDAD') or hasAuthority('MODERADOR') or hasAuthority('USER')")
     public List<RutaDTOList> list() {
         return this.rS.list().stream().map(y -> {
             ModelMapper mapper = new ModelMapper();
@@ -36,7 +36,7 @@ public class RutaController {
 
 
     @PostMapping
-    //@PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<String> insert(@RequestBody RutaDTOInsert dto) {
         ModelMapper mapper = new ModelMapper();
         Ruta d = mapper.map(dto, Ruta.class);
@@ -48,7 +48,7 @@ public class RutaController {
     }
 
     @GetMapping("/{id}")
-    //@PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('AUTORIDAD') or hasAuthority('MODERADOR')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('AUTORIDAD') or hasAuthority('MODERADOR')")
     public ResponseEntity<?> listarRutaPorId(@PathVariable("id") Integer id) {
         Ruta rut = rS.listIdRuta(id);
         if (rut == null) {
@@ -62,7 +62,7 @@ public class RutaController {
     }
 
     @DeleteMapping("/{id}")
-    //@PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminarRuta(@PathVariable("id") Integer id) {
         Ruta u = rS.listIdRuta(id);
         if (u == null) {
@@ -74,7 +74,7 @@ public class RutaController {
     }
 
     @PutMapping
-    //@PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<String> modificar(@RequestBody RutaDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         Ruta ruta = m.map(dto, Ruta.class);
@@ -92,7 +92,7 @@ public class RutaController {
     }
 
     @GetMapping("/destino")
-    //@PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('AUTORIDAD') or hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('AUTORIDAD') or hasAuthority('USER')")
     public ResponseEntity<?> buscarDestino(@RequestParam String t) {
         List<Ruta> rutas = rS.buscarRutaDestino(t);
 
@@ -110,7 +110,7 @@ public class RutaController {
     }
 
     @GetMapping("/origen")
-    //@PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('AUTORIDAD') or hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('AUTORIDAD') or hasAuthority('USER')")
     public ResponseEntity<?> buscarOrigen(@RequestParam String t) {
         List<Ruta> rutas = rS.buscarRutaOrigen(t);
 
@@ -128,7 +128,7 @@ public class RutaController {
     }
 
     @GetMapping("/CantRutasPorVehiculo")
-    //@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR')")
     public ResponseEntity<?> CantidadRutasPorVehiculo() {
         List<String[]> fila = rS.CantRutasPorTipoDeVehiculo();
 

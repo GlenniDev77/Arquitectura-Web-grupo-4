@@ -66,19 +66,9 @@ public class WebSecurityConfig {
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
                                 "/webjars/**",
-                                "/login",
-                                "/tipovehiculo/**",
-                                "/zonas/**",
-                                "/roles/**",
-                                "/usuarios/**",
-                                "/delitos/**",
-                                "/notificaciones/**",
-                                "/resenias/**",
-                                "/rutas/**"
+                                "/login"
                         ).permitAll()
                         .anyRequest().authenticated()
-
-
                 )
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(AbstractHttpConfigurer::disable)

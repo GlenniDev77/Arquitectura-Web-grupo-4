@@ -44,7 +44,7 @@
         </div>
       
         <mat-error>
-          @if (form.get('correoUsuario')?.hasError('required')) { Falta correo }
+          @if (form.get('correoUsuario')?.hasError('required')) { Falta usuario }
           @if (form.get('correoDominio')?.hasError('required')) { Seleccione dominio }
         </mat-error>
       </mat-form-field>
@@ -97,7 +97,7 @@
       <div>
         <mat-form-field>
           <mat-label>Fecha</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="fecha" readonly/>
+          <input matInput [matDatepicker]="picker" formControlName="fecha" />
           <mat-hint>DD/MM/YYYY</mat-hint>
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>

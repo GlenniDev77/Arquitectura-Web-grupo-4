@@ -21,7 +21,7 @@ public class TVehiculoController {
     private ITipoVehiculoService vS;
 
     @GetMapping
-    //@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR')")
     public List<TVehiculoDTO> list() {
         return this.vS.list().stream().map(y -> {
             ModelMapper mapper = new ModelMapper();
@@ -30,7 +30,7 @@ public class TVehiculoController {
     }
 
     @PostMapping
-    //@PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> insert(@RequestBody TVehiculoDTO dto) {
         ModelMapper mapper = new ModelMapper();
         TipoVehiculo d = mapper.map(dto, TipoVehiculo.class);
@@ -41,7 +41,7 @@ public class TVehiculoController {
     }
 
     @GetMapping("/{id}")
-    //@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR')")
     public ResponseEntity<?> listarVehiculoPorId(@PathVariable("id") Integer id) {
         TipoVehiculo dev = vS.listIdVehiculo(id);
         if (dev == null) {
@@ -55,7 +55,7 @@ public class TVehiculoController {
     }
 
     @DeleteMapping("/{id}")
-    //@PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminarVehiculo(@PathVariable("id") Integer id) {
         TipoVehiculo d = vS.listIdVehiculo(id);
         if (d == null) {
@@ -67,7 +67,7 @@ public class TVehiculoController {
     }
 
     @PutMapping
-    //@PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> modificar(@RequestBody TVehiculoDTO dto) {
         ModelMapper m = new ModelMapper();
         TipoVehiculo vehiculo = m.map(dto, TipoVehiculo.class);

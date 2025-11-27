@@ -27,7 +27,7 @@ public class UsuarioController {
     private PasswordEncoder passwordEncoder;
 
     @GetMapping
-    //@PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')" )
     public List<UsuarioDTO> list() {
         return this.uS.list().stream().map(y -> {
             ModelMapper mapper = new ModelMapper();
@@ -36,7 +36,7 @@ public class UsuarioController {
     }
 
     @PostMapping
-    //@PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> insert(@RequestBody UsuarioDTOInsert dto) {
         ModelMapper mapper = new ModelMapper();
         Usuario d = mapper.map(dto, Usuario.class);
@@ -53,7 +53,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    //@PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> listarUsuarioPorId(@PathVariable("id") Integer id) {
         Usuario usa = uS.listIdUsuario(id);
         if (usa == null) {
@@ -67,7 +67,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
-    //@PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminarUsuario(@PathVariable("id") Integer id) {
         Usuario u = uS.listIdUsuario(id);
         if (u == null) {
@@ -79,7 +79,7 @@ public class UsuarioController {
     }
 
     @PutMapping
-    //@PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> modificar(@RequestBody UsuarioDTO dto) {
         Usuario existente = uS.listIdUsuario(dto.getId_usuario());
 

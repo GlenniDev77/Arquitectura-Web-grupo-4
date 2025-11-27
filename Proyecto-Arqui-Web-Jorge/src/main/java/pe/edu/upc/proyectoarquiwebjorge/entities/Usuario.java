@@ -32,7 +32,7 @@ public class Usuario {
     @Column(name = "Activo", nullable = false)
     private Boolean enabled;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<Rol> roles;
 

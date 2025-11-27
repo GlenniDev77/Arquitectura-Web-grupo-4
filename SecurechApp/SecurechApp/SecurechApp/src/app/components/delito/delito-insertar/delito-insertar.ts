@@ -14,6 +14,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Usuarioservice } from '../../../services/usuarioservice';
 import { Zonaservice } from '../../../services/zonaservice';
 import { Usuario } from '../../../models/Usuario';
+import { Autenticador } from '../../autenticador/autenticador';
 
 @Component({
   selector: 'app-delito-insertar',
