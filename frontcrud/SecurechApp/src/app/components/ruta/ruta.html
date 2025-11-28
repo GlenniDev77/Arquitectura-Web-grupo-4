@@ -1,0 +1,47 @@
+<div class="container">
+            <!-- ⭐ TU SIDEBAR PEGADO AQUÍ ⭐ -->
+  <div class="sidebar">
+    <div class="logo">
+      <a href="#Inicio"><span class="logo-text">SecurechApp</span></a>
+    </div>
+
+    <div class="search-btn">
+      <button mat-button>🔍 Buscar</button>
+    </div>
+
+    <ul class="menu">
+      <li routerLink="/tipovehiculos" routerLinkActive="active">🚗 Tipo Vehículos</li>
+
+      <li routerLink="/zonas" routerLinkActive="active">📍 Zonas</li>
+
+      <li routerLink="/usuarios" routerLinkActive="active">👤 Usuarios</li>
+
+      <li routerLink="/roles" routerLinkActive="active">🛡️ Roles</li>
+
+      <li routerLink="/delitos" routerLinkActive="active">⚠️ Delitos</li>
+
+      <li routerLink="/rutas" routerLinkActive="active">🗺️ Rutas</li>
+
+      <li routerLink="/resenias" routerLinkActive="active">⭐ Reseñas</li>
+
+      <li routerLink="/notificaciones" routerLinkActive="active">🔔 Notificaciones</li>
+    </ul>
+  </div>
+  <mat-toolbar class="custom-toolbar">
+    <button 
+    matButton 
+    class="btn-rojo" 
+    aria-label="Example icon-button with menu icon"
+    [matMenuTriggerFor]="menuDevice">
+      <mat-icon>menu</mat-icon>Rutas
+    </button>
+  </mat-toolbar>
+  <mat-menu #menuDevice="matMenu">
+  <button mat-menu-item routerLink="/rutas">Listar</button>
+  <button mat-menu-item routerLink="/rutas/nuevo">Registrar</button>
+  </mat-menu>
+</div>
+<div class="main-content" [hidden]="route.children.length!=0">
+    <app-rutalistar></app-rutalistar>
+</div>
+<router-outlet></router-outlet>

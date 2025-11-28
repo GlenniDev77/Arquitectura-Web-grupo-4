@@ -1,0 +1,81 @@
+table {
+  background: #111418;
+  color: white;
+}
+
+th {
+  background: #00d26a;
+  color: rgb(226, 217, 217) !important;
+  font-weight: 700;
+}
+
+td {
+  color: #e8e8e8;
+}
+
+button[matButton] {
+  background: #00d26a;
+  color: black;
+  border-radius: 8px;
+}
+
+th.mat-header-cell {
+  color: #d8fdd0 !important;  /* verde muy claro */
+  font-weight: 600;
+  font-size: 14px;
+}
+
+
+button[matButton]:hover {
+  background: #00ff95;
+}
+
+h2 {
+  color: #00ff80 !important;  
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.delito-card {
+  background: #1a1d21 !important; /* Fondo oscuro */
+  color: #e8e8e8 !important;       /* Texto claro */
+  border-radius: 12px;
+  padding: 15px;
+}
+
+.delito-card strong {
+  color: #00ff95; /* Verde neon */
+}
+
+mat-card-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #00ff80 !important;
+}
+
+mat-card-subtitle {
+  color: #bbbbbb !important;
+}
+
+button[mat-icon-button] {
+  background: #00d26a;
+  border-radius: 8px;
+}
+
+button[mat-icon-button]:hover {
+  background: #00ff95;
+}
+
+mat-icon {
+  color: #1a1d21; /* ícono oscuro dentro del botón verde */
+}
+
+

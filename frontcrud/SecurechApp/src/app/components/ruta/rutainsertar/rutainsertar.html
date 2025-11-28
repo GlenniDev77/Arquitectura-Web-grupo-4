@@ -1,0 +1,120 @@
+<div class="container">
+  <div style="text-align: center; margin: 5%">
+    <h2>Registrar Ruta</h2>
+  </div>
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+      @if (edicion) {
+      <mat-form-field class="example-full-width">
+        <mat-label>ID:</mat-label>
+        <input matInput formControlName="id_ruta" readonly="true" />
+        <mat-error> 
+          @if (form.get('id_ruta')?.hasError('required')) { Ingrese ID!! } 
+        </mat-error>
+      </mat-form-field>
+      }
+      <br />
+      
+      <!-- Origen -->
+      <mat-form-field>
+        <mat-label>Origen</mat-label>
+        <input matInput formControlName="origen" />
+        <mat-error>
+          @if (form.get('origen')?.hasError('required')) { Ingrese Origen! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <!-- Coordenadas Origen -->
+      <mat-form-field>
+        <mat-label>Latitud Origen</mat-label>
+        <input matInput type="number" formControlName="origen_latitud" />
+        <mat-error>
+          @if (form.get('origen_latitud')?.hasError('required')) { Ingrese Latitud! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Longitud Origen</mat-label>
+        <input matInput type="number" formControlName="origen_longitud" />
+        <mat-error>
+          @if (form.get('origen_longitud')?.hasError('required')) { Ingrese Longitud! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <!-- Destino -->
+      <mat-form-field>
+        <mat-label>Destino</mat-label>
+        <input matInput formControlName="destino" />
+        <mat-error>
+          @if (form.get('destino')?.hasError('required')) { Ingrese Destino! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <!-- Coordenadas Destino -->
+      <mat-form-field>
+        <mat-label>Latitud Destino</mat-label>
+        <input matInput type="number" formControlName="destino_latitud" />
+        <mat-error>
+          @if (form.get('destino_latitud')?.hasError('required')) { Ingrese Latitud! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Longitud Destino</mat-label>
+        <input matInput type="number" formControlName="destino_longitud" />
+        <mat-error>
+          @if (form.get('destino_longitud')?.hasError('required')) { Ingrese Longitud! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <!-- Usuario con visualización del nombre -->
+      <div style="margin: 10px 0;">
+        <strong>Usuario seleccionado:</strong> {{ getUsuarioDisplay() }}
+      </div>
+      <mat-form-field>
+        <mat-label>Seleccionar Usuario</mat-label>
+        <mat-select formControlName="FK">
+          @for (usuario of listaUsuarios; track usuario.id_usuario) {
+          <mat-option [value]="usuario.id_usuario">
+            {{ usuario.nombre }}
+          </mat-option>
+          }
+        </mat-select>
+        <mat-error>
+          @if (form.get('FK')?.hasError('required')) { Seleccione Usuario! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <!-- Tipo de Vehículo con visualización del nombre -->
+      <div style="margin: 10px 0;">
+        <strong>Tipo de Vehículo seleccionado:</strong> {{ getTipoVehiculoDisplay() }}
+      </div>
+      <mat-form-field>
+        <mat-label>Seleccionar Tipo de Vehículo</mat-label>
+        <mat-select formControlName="FK2">
+          @for (tipoVehiculo of listaTipovehiculos; track tipoVehiculo.id_tipovehiculo) {
+          <mat-option [value]="tipoVehiculo.id_tipovehiculo">
+            {{ tipoVehiculo.nombre_vehiculo }}
+          </mat-option>
+          }
+        </mat-select>
+        <mat-error>
+          @if (form.get('FK2')?.hasError('required')) { Seleccione Tipo de Vehículo! }
+        </mat-error>
+      </mat-form-field>
+
+      <div>
+        <button matButton="elevated" mat-raised-button color="primary" type="submit">
+          {{ edicion ? 'Actualizar' : 'Registrar' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
