@@ -1,0 +1,105 @@
+/* ============================
+   TOOLBAR PRINCIPAL (MENÚ)
+   ============================ */
+.custom-toolbar {
+  width: 100%;
+  height: 70px;
+  background: #0f1115;
+  border-bottom: 1px solid rgba(0, 255, 128, 0.22);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+/* ============================
+   BOTONES DEL MENÚ
+   ============================ */
+.btn-menu {
+  background: transparent;
+  color: #ffffff; /* Blanco */
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 8px 14px;
+  margin-right: 8px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: 0.2s ease;
+}
+
+.btn-menu:hover {
+  background: rgba(0, 255, 128, 0.12);
+  color: #00ff95;
+}
+
+.btn-menu mat-icon {
+  font-size: 20px;
+  color: inherit !important;
+}
+
+/* ============================
+   BOTÓN DE USUARIO
+   ============================ */
+.btn-user {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: 0.2s ease;
+}
+
+.btn-user:hover {
+  background: rgba(0, 255, 128, 0.18);
+  color: #00ff95;
+}
+
+/* ============================
+   SEPARADOR
+   ============================ */
+.spacer {
+  flex: 1 1 auto;
+}
+
+/* ============================
+   MENÚ DESPLEGABLE (GLASS)
+   ============================ */
+.mat-mdc-menu-panel {
+  background-color: rgba(17, 20, 24, 0.92) !important;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 255, 128, 0.25);
+  border-radius: 12px !important;
+}
+
+/* === LETRAS NEGRAS EN EL MENÚ DESPLEGABLE === */
+.mat-mdc-menu-item {
+  color: #000000 !important; /* Negro */
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* Hover */
+.mat-mdc-menu-item:hover {
+  background-color: rgba(0, 255, 128, 0.20) !important;
+}
+
+/* Iconos del menú desplegable */
+.mat-mdc-menu-item mat-icon {
+  color: #000000 !important; /* Negro también */
+}
+
+/* ============================
+   TEXTO DEL TOOLBAR
+   ============================ */
+.custom-toolbar button,
+.custom-toolbar mat-icon {
+  color: #ffffff !important;
+}
+  

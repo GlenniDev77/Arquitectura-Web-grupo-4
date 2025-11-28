@@ -1,0 +1,133 @@
+/* ============================
+   TÍTULO
+============================ */
+h2 {
+  color: #ffffff !important;   /* Registrar Ruta en blanco */
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* ============================
+   FORM FIELDS (mat-form-field)
+============================ */
+mat-form-field {
+  width: 100%;
+  max-width: 720px;
+  margin-bottom: 8px;
+}
+
+/* Label del mat-form-field (mat-label) */
+.mat-mdc-form-field-label {
+  color: #ffffff !important;   /* labels en blanco */
+}
+
+/* Caja del formulario */
+.mdc-text-field {
+  background: #ffffff !important;       /* input blanco */
+  color: #000000 !important;            /* texto negro */
+  border-radius: 8px !important;
+  border: 1px solid #2fb9a3 !important; /* borde verde petróleo */
+}
+
+/* Texto del input */
+.mat-mdc-input-element {
+  color: #000000 !important;            /* negro */
+}
+
+/* Placeholder */
+.mat-mdc-input-element::placeholder {
+  color: #444444 !important;            /* gris oscuro */
+}
+
+/* Borde al enfocar */
+.mdc-text-field--focused .mdc-notched-outline__leading,
+.mdc-text-field--focused .mdc-notched-outline__notch,
+.mdc-text-field--focused .mdc-notched-outline__trailing {
+  border-color: #4dd3be !important;     /* verde claro */
+}
+
+/* ============================
+   BOTÓN REGISTRAR / EDITAR
+============================ */
+button[mat-raised-button] {
+  min-width: 200px;
+  padding: 15px 220px;
+  font-size: 1rem;
+  border-radius: 13px;
+  font-weight: 600;
+  background-color: #2fb9a3;            /* verde petróleo */
+  color: #000000;                       /* texto negro */
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(47,185,163,0.35);
+  transition: background-color 0.25s ease, transform 0.15s ease;
+}
+
+button[mat-raised-button]:hover {
+  background-color: #4dd3be;            /* verde claro */
+  transform: translateY(-1px);
+}
+
+/* ============================
+   RESPONSIVE
+============================ */
+@media (max-width: 720px) {
+  mat-form-field {
+    width: 92%;
+  }
+}
+
+/* ============================
+   CENTRADO DEL FORMULARIO
+============================ */
+.form-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.form-container form {
+  width: 100%;
+  max-width: 500px;
+}
+
+/* ============================================
+   CORRECCIÓN REAL PARA mat-label EN ANGULAR MDC
+============================================ */
+
+/* mat-label principal */
+.mat-mdc-form-field-label,
+.mdc-floating-label,
+.mat-mdc-floating-label {
+  color: #ffffff !important;
+}
+
+/* Cuando el label está flotando */
+.mdc-text-field--focused .mdc-floating-label,
+.mdc-text-field--focused .mat-mdc-floating-label {
+  color: #ffffff !important;
+}
+
+/* Cuando el input está lleno (no flotante pero activo) */
+.mdc-text-field--label-floating .mdc-floating-label,
+.mdc-text-field--label-floating .mat-mdc-floating-label {
+  color: #ffffff !important;
+}
+
+/* Cuando está en error, lo dejamos blanco también */
+.mdc-text-field--invalid .mdc-floating-label {
+  color: #ffffff !important;
+}
+
+/* Textos "Usuario seleccionado:" y "Tipo de Vehículo seleccionado:" */
+.form-container strong {
+  color: #ffffff !important;
+  font-weight: 700;
+}
+
+/* Y el texto dinámico ({{ getUsuarioDisplay() }}) */
+.form-container div {
+  color: #ffffff !important;
+}

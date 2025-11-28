@@ -1,0 +1,56 @@
+<div class="container">
+  <div style="text-align: center; margin: 5%;">
+    <h2>Lista de Delitos</h2>
+  </div>
+
+  <div class="card-grid">
+
+    @for (delito of dataSource.data; track delito.id_reportedelito) {
+
+      <mat-card class="delito-card mat-elevation-z4" style="width: 350px;">
+
+        <mat-card-header>
+          <mat-card-title>{{ delito.tipo_delito }}</mat-card-title>
+          <mat-card-subtitle>ID: {{ delito.id_reportedelito }}</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+
+          <p>
+            <strong>Descripción:</strong><br>
+            {{ delito.descripcion }}
+          </p>
+
+          <p><strong>Fecha y hora:</strong> {{ delito.fecha_hora }}</p>
+
+          <p><strong>Nombre asociado:</strong> {{ delito.nombre }}</p>
+
+          <p><strong>Usuario que reportó:</strong>
+            {{ delito.usuario!.nombre }}
+          </p>
+          
+          <p><strong>Zona:</strong>
+            {{ delito.zona!.nombre }}
+          </p>
+
+
+        </mat-card-content>
+
+        <mat-card-actions style="display: flex; justify-content: flex-end;">
+
+          @if (rolUsuario === 'ADMIN') {
+          <button mat-icon-button color="warn"
+                  (click)="eliminar(delito.id_reportedelito)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          }
+          
+        </mat-card-actions>
+
+      </mat-card>
+
+    }
+
+  </div>
+
+</div>

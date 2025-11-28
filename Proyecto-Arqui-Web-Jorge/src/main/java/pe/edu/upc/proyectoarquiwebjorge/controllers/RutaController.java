@@ -36,7 +36,7 @@ public class RutaController {
 
 
     @PostMapping
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
     public ResponseEntity<String> insert(@RequestBody RutaDTOInsert dto) {
         ModelMapper mapper = new ModelMapper();
         Ruta d = mapper.map(dto, Ruta.class);
@@ -48,7 +48,7 @@ public class RutaController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('AUTORIDAD') or hasAuthority('MODERADOR')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('AUTORIDAD') or hasAuthority('MODERADOR') or hasAuthority('USER')")
     public ResponseEntity<?> listarRutaPorId(@PathVariable("id") Integer id) {
         Ruta rut = rS.listIdRuta(id);
         if (rut == null) {
@@ -62,7 +62,7 @@ public class RutaController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR')")
     public ResponseEntity<String> eliminarRuta(@PathVariable("id") Integer id) {
         Ruta u = rS.listIdRuta(id);
         if (u == null) {

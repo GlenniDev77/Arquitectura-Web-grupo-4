@@ -40,7 +40,7 @@ public class DelitoController {
 
 
     @PostMapping
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR') or hasAuthority('USER') or hasAnyAuthority('AUTORIDAD')")
     public ResponseEntity<String> insert(@RequestBody DelitoDTO dto) {
         ModelMapper mapper = new ModelMapper();
         Delito d = mapper.map(dto, Delito.class);
@@ -53,7 +53,7 @@ public class DelitoController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR') or hasAnyAuthority('AUTORIDAD')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR') or hasAnyAuthority('AUTORIDAD') or hasAuthority('USER')")
     public ResponseEntity<?> listarDelitoPorId(@PathVariable("id") Integer id) {
         Delito res = dS.listIdDelito(id);
         if (res == null) {
@@ -67,7 +67,7 @@ public class DelitoController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminarDelito(@PathVariable("id") Integer id) {
         Delito u = dS.listIdDelito(id);
         if (u == null) {
@@ -103,7 +103,7 @@ public class DelitoController {
     }
 
     @GetMapping("/MasDelitosPorHZ")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('AUTORIDAD') or hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('AUTORIDAD') or hasAuthority('USER') or hasAuthority('MODERADOR')")
     public ResponseEntity<?> obtenerMayorDelitosPorHoraYZona() {
 
         List<QuantityDelitosHoraZonaDTO> listaDTO = new ArrayList<>();
@@ -126,7 +126,7 @@ public class DelitoController {
     }
 
     @GetMapping("/CantidadDelitosPorMes")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('AUTORIDAD') or hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('AUTORIDAD') or hasAuthority('USER') or hasAnyAuthority('AUTORIDAD')")
     public ResponseEntity<?> quantityDelitosPorMes() {
 
         List<QuantityDelitosPorMesDTO> listaDTO = new ArrayList<>();

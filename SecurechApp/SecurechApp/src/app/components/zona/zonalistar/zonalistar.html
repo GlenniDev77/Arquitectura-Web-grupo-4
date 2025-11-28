@@ -1,0 +1,49 @@
+<div class="container">
+  <div style="text-align: center; margin: 5%;">
+    <h2>Zonas</h2>
+  </div>
+
+  <div class="card-grid">
+
+    @for (element of dataSource.data; track element.idZona) {
+
+    <mat-card class="zona-card mat-elevation-z4">
+
+      <mat-card-header>
+        <mat-card-title>{{ element.nombre }}</mat-card-title>
+        <mat-card-subtitle>ID: {{ element.idZona }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+
+        <p><strong>Distrito:</strong> {{ element.distrito }}</p>
+        <p><strong>Estado Zona:</strong> {{ element.estadoZona }}</p>
+        <p><strong>Latitud:</strong> {{ element.latitud }}</p>
+        <p><strong>Longitud:</strong> {{ element.longitud }}</p>
+
+      </mat-card-content>
+
+      <mat-card-actions style="display: flex; justify-content: space-between; margin-top: 10px;">
+
+        @if (rolUsuario === 'ADMIN') {
+        <!-- Editar -->
+        <button mat-icon-button [routerLink]="['edits', element.idZona]">
+          <mat-icon>edit</mat-icon>
+        </button>
+        }
+
+        @if (rolUsuario === 'ADMIN') {
+        <!-- Eliminar -->
+        <button mat-icon-button (click)="eliminar(element.idZona)">
+          <mat-icon>delete</mat-icon>
+        </button>
+        }
+
+      </mat-card-actions>
+
+    </mat-card>
+
+    }
+
+  </div>
+</div>

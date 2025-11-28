@@ -9,22 +9,22 @@ public class Ruta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_ruta;
 
-    @Column(name = "origen", length = 50, nullable = false)
+    @Column(name = "origen", length = 5000, nullable = false)
     private String origen;
 
-    @Column(name = "origen_longitud",length = 50, nullable = false)
+    @Column(name = "origen_longitud",length = 5000, nullable = false)
     private float origen_longitud;
 
-    @Column(name = "origen_latitud",length = 50, nullable = false)
+    @Column(name = "origen_latitud",length = 5000, nullable = false)
     private float origen_latitud;
 
-    @Column(name = "destino", length = 50, nullable = false)
+    @Column(name = "destino", length = 5000, nullable = false)
     private String destino;
 
-    @Column(name = "destino_longitud",length = 50, nullable = false)
+    @Column(name = "destino_longitud",length = 5000, nullable = false)
     private float destino_longitud;
 
-    @Column(name="destino_latitud",length = 50, nullable = false)
+    @Column(name="destino_latitud",length = 5000, nullable = false)
     private float destino_latitud;
 
     @ManyToOne

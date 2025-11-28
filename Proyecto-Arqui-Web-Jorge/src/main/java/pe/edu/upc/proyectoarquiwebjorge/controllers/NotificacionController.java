@@ -43,7 +43,7 @@ public class NotificacionController {
 
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR')")
     public ResponseEntity<String> insert(@RequestBody NotificacionDTOInsert dto) {
         ModelMapper mapper = new ModelMapper();
         Notificacion d = mapper.map(dto, Notificacion.class);
@@ -58,7 +58,7 @@ public class NotificacionController {
     }
 
     @GetMapping("/usuarios-mas-notis")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR')")
     public List<MasNotisXUsuarioDTO> obtenerUsuariosMasNotificaciones() {
         List<Object[]> resultados = nS.usuarioMasNotis();
 
@@ -71,7 +71,7 @@ public class NotificacionController {
     }
 
     @GetMapping("/zonas-mas-notis")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR')")
     public ResponseEntity<List<MasNotisxZonaDTO>> obtenerZonasMasNotificaciones() {
         List<String[]> fila = nS.zonaMasNotis();
 
