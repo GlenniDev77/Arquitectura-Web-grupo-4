@@ -41,11 +41,9 @@ export class Notificacionservice {
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
   }
-
   getMasNotisXUsuario(): Observable<MasNotisXUsuarioDTO[]> {
     return this.http.get<MasNotisXUsuarioDTO[]>(`${this.url}/usuarios-mas-notis`);
   }
-
   getMasNotisXZona(): Observable<MasNotisXZonaDTO[]> {
     return this.http.get<MasNotisXZonaDTO[]>(`${this.url}/zonas-mas-notis`);
   }
