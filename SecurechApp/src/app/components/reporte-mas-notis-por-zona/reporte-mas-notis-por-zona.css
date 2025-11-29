@@ -1,3 +1,7 @@
+.titulo-zona {
+    color: #fafafa; /* elige el color que quieras */
+}
+
 .container {
   display: flex;
   width: 100%;
