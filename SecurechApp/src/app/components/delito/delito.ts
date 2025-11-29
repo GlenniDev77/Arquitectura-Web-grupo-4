@@ -10,7 +10,7 @@ import { MatMenuModule } from '@angular/material/menu';
 @Component({
   selector: 'app-delito',
   imports: [RouterOutlet,DelitoListar,MatTableModule,
-    MatIconModule, MatButtonModule, RouterLink, 
+    MatIconModule, MatButtonModule, 
     MatToolbarModule,MatMenuModule],
   templateUrl: './delito.html',
   styleUrl: './delito.css',

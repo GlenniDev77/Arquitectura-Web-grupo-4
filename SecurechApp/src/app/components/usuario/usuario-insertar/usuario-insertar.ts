@@ -10,6 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { Usuario } from '../../../models/Usuario';
 import { Usuarioservice } from '../../../services/usuarioservice';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-usuario-insertar',
@@ -21,7 +22,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
     MatButtonModule,
     ReactiveFormsModule,
     MatNativeDateModule,
-    MatIconModule],
+    MatIconModule,
+    MatSnackBarModule],
   templateUrl: './usuario-insertar.html',
   styleUrl: './usuario-insertar.css',
 })
@@ -32,13 +34,16 @@ export class UsuarioInsertar implements OnInit{
   id: number = 0;
   sof: Usuario = new Usuario();
 
-  
+  soloNumeros(event: any) {
+  event.target.value = event.target.value.replace(/[^0-9]/g, '');
+  }
 
   constructor(
     private sS: Usuarioservice,
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
+    private snackBar: MatSnackBar
     
   ) {}
 
@@ -49,15 +54,17 @@ export class UsuarioInsertar implements OnInit{
       this.init();
     });
 
-
-
+  
+    const ahora = new Date();
+    
     this.form = this.formBuilder.group({
       codigo: [''],
       nombre: ['', Validators.required],
-      correo: ['', Validators.required],
+      correoUsuario: ['', Validators.required],
+      correoDominio: ['', Validators.required],
       contra: ['', Validators.required],
       telef: ['', Validators.required],
-      fecha: [false, Validators.required],
+      fecha: [ahora, Validators.required],
       estado: ['', Validators.required]
     });
   }
@@ -65,36 +72,89 @@ export class UsuarioInsertar implements OnInit{
     if (this.form.valid) {
       this.sof.id_usuario = this.form.value.codigo;
       this.sof.nombre = this.form.value.nombre;
-      this.sof.correo = this.form.value.correo;
+      this.sof.correo = this.form.value.correoUsuario + this.form.value.correoDominio;
       this.sof.contraseña = this.form.value.contra;
       this.sof.telefono = this.form.value.telef;
       this.sof.fecha = this.form.value.fecha;
       this.sof.enabled = this.form.value.estado;
       
 
-      if (this.edicion) {
-        this.sS.update(this.sof).subscribe(() => {
+    if (this.edicion) {
+      this.sS.update(this.sof).subscribe({
+        
+      
+        next: () => {
           this.sS.list().subscribe((data) => {
             this.sS.setList(data);
+
+            this.snackBar.open('Usuario actualizado correctamente.', 'Cerrar', {
+              duration: 3000,
+              horizontalPosition: 'right',
+              verticalPosition: 'top',
+              panelClass: ['success-snackbar']
+            });
+          });
+
+          this.router.navigate(['usuarios']);
+        },
+
+        
+        error: (err) => {
+          console.error('Error en la actualización:', err);
+
+          this.snackBar.open('No se pudo actualizar el usuario.', 'Cerrar', {
+            duration: 3500,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['error-snackbar']
+          });
+        }
+      });
+      return;
+    }
+
+    
+    this.sS.insert(this.sof).subscribe({
+      next: () => {
+        this.sS.list().subscribe((data) => {
+          this.sS.setList(data);
+
+          this.snackBar.open('Usuario registrado correctamente.', 'Cerrar', {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['success-snackbar']
           });
         });
-      } else {
-        this.sS.insert(this.sof).subscribe((data) => {
-          this.sS.list().subscribe((data) => {
-            this.sS.setList(data);
-          });
+
+        this.router.navigate(['usuarios']);
+      },
+
+      error: (err) => {
+        console.error('Error al registrar:', err);
+
+        this.snackBar.open('No se pudo registrar el usuario.', 'Cerrar', {
+          duration: 3500,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['error-snackbar']
         });
       }
-      this.router.navigate(['usuarios']);
-    }
+    });
+  }
   }
   init() {
     if (this.edicion) {
       this.sS.listId(this.id).subscribe((data) => {
+
+        const [usuario, dominio] = data.correo.split('@');
+        const dominioCompleto = '@' + dominio;
+
         this.form = new FormGroup({
           codigo: new FormControl(data.id_usuario),
           nombre: new FormControl(data.nombre),
-          correo: new FormControl(data.correo),
+          correoUsuario: new FormControl(usuario),
+          correoDominio: new FormControl(dominioCompleto),
           contra: new FormControl(data.contraseña),
           telef: new FormControl(data.telefono),
           fecha: new FormControl(data.fecha),

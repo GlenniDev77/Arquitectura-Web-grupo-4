@@ -1,58 +1,54 @@
-table {
-  background: #111418;
-  color: white;
+/* ============================
+   GRID DE CARDS
+   ============================ */
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 15px;
 }
-th {
-  background: #00d26a;
-  color: rgb(226, 217, 217) !important;
+
+/* ============================
+   CARD DE NOTIFICACIÓN
+   ============================ */
+.notif-card {
+  background: #1a1d21 !important;     /* Fondo oscuro */
+  color: #e8e8e8 !important;          /* Texto claro */
+  border-radius: 16px !important;
+  padding: 20px;
+  width: 340px;
+}
+
+/* TÍTULO */
+.notif-card .mat-mdc-card-title {
+  color: #2fb9a3 !important;          /* Verde petróleo */
+  font-size: 22px;
   font-weight: 700;
 }
 
-td {
-  color: #e8e8e8;
+/* SUBTÍTULO (mensaje resumen) */
+.notif-card .mat-mdc-card-subtitle {
+  color: #bcbcbc !important;          /* Gris claro */
+  font-size: 15px;
 }
 
-button[matButton] {
-  background: #00d26a;
-  color: black;
-  border-radius: 8px;
+/* CONTENIDO DEL CARD */
+.notif-card mat-card-content p {
+  color: #c7c7c7 !important;
+  margin: 4px 0;
+  font-size: 15px;
 }
 
-th.mat-header-cell {
-  color: #d8fdd0 !important;  /* verde muy claro */
-  font-weight: 600;
-  font-size: 14px;
+.notif-card mat-card-content strong {
+  color: #ffffff !important;          /* Blanco fuerte */
 }
 
-
-button[matButton]:hover {
-  background: #00ff95;
-}
-
+/* ============================
+   TÍTULO PRINCIPAL
+   ============================ */
 h2 {
-  color: #00ff80 !important;  
+  color: #ffffff !important;          /* Blanco */
   font-size: 28px;
   font-weight: 700;
-  margin-bottom: 20px;
-}
-button[matButton] {
-
- font-size: 0.8rem;
-
- font-weight: 500;
-
- border-radius: 6px;
-
- padding: 4px 12px;
-
- color: rgb(238, 244, 241);
-
- text-transform: none;
-
- transition: all 0.25s ease;
-
- box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
-
- background-color: rgb(242, 94, 35);
-
 }

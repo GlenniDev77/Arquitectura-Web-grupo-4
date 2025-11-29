@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { enviroment } from '../../enviroments/enviroments';
+import { Observable, Subject } from 'rxjs';
 import { Notificacion } from '../models/Notificacion';
 import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { MasNotisXUsuarioDTO } from '../models/MasNotisXUsuarioDTO';
+import { MasNotisXZonaDTO } from '../models/MasNotisxZonaDTO';
 
 const base_url = enviroment.base;
 
@@ -38,5 +40,13 @@ export class Notificacionservice {
   }
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
+  }
+
+  getMasNotisXUsuario(): Observable<MasNotisXUsuarioDTO[]> {
+    return this.http.get<MasNotisXUsuarioDTO[]>(`${this.url}/usuarios-mas-notis`);
+  }
+
+  getMasNotisXZona(): Observable<MasNotisXZonaDTO[]> {
+    return this.http.get<MasNotisXZonaDTO[]>(`${this.url}/zonas-mas-notis`);
   }
 }

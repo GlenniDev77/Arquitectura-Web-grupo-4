@@ -10,6 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { Zona } from '../../../models/Zona';
 import { Zonaservice } from '../../../services/zonaservice';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-zonaregistrar',
@@ -19,7 +20,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
     MatSelectModule,
     MatRadioModule,
     MatDatepickerModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSnackBarModule
   ],
   templateUrl: './zonaregistrar.html',
   providers: [provideNativeDateAdapter()],
@@ -32,6 +34,16 @@ export class Zonaregistrar implements OnInit {
   //Actualizar
   edicion:boolean=false
   id:number=0
+
+  mostrarMensaje(mensaje: string) {
+  this.snackBar.open(mensaje, 'Cerrar', {
+    duration: 3000,
+    horizontalPosition: 'center',
+    verticalPosition: 'top',
+    panelClass: ['mensaje-exito']
+  });
+  }
+
 
   distritosZonas: { value: string; viewValue: string }[] = [
     { value: 'Santiago de Surco', viewValue: 'Santiago de Surco' },
@@ -48,7 +60,8 @@ export class Zonaregistrar implements OnInit {
     private zS: Zonaservice,
     private router: Router,
     private formBuilder: FormBuilder,
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {}
   ngOnInit(): void {
 
@@ -83,12 +96,14 @@ export class Zonaregistrar implements OnInit {
         this.zS.list().subscribe(data=>{
           this.zS.setList(data)
         })
+        this.mostrarMensaje('Zona actualizada correctamente');
       })
       } else {
         this.zS.insert(this.zon).subscribe(data=>{
         this.zS.list().subscribe(data=>{
           this.zS.setList(data)
         })
+        this.mostrarMensaje('Zona registrada correctamente');
       })
       }
       this.router.navigate(['zonas'])

@@ -6,10 +6,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { tipovehiculo } from '../../../models/TipoVehiculo';
+import { MatCardModule } from '@angular/material/card';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { LoginService } from '../../../services/login-service';
 
 @Component({
   selector: 'app-tipo-vehiculo-listar',
-  imports: [MatTableModule, MatIconModule,MatButtonModule,RouterLink],
+  imports: [MatTableModule, MatIconModule,MatButtonModule,RouterLink, MatCardModule, MatSnackBarModule],
   templateUrl: './tipo-vehiculo-listar.html',
   styleUrl: './tipo-vehiculo-listar.css',
 })
@@ -17,20 +20,37 @@ export class TipoVehiculoListar implements OnInit{
   dataSource:MatTableDataSource<tipovehiculo>=new MatTableDataSource
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4'];
 
-  constructor(private tvS:TipoVehiculoservice){}
+  rolUsuario: string = ''; 
+
+  mostrarMensaje(mensaje: string) {
+  this.snackBar.open(mensaje, 'Cerrar', {
+    duration: 3000,
+    horizontalPosition: 'center',
+    verticalPosition: 'top',
+    panelClass: ['mensaje-exito']
+  });
+  }
+
+
+  constructor(private tvS:TipoVehiculoservice,private snackBar: MatSnackBar, private loginService: LoginService){}
   ngOnInit(): void {
+
+    this.rolUsuario = this.loginService.showRole() ?? '';
+
+
     this.tvS.list().subscribe(data => {
       this.dataSource=new MatTableDataSource(data)
     })
     this.tvS.getList().subscribe(data=>{
     this.dataSource=new MatTableDataSource(data)
-  })
+    })
   }
   eliminar(id:number){
   this.tvS.delete(id).subscribe(data =>{
     this.tvS.list().subscribe(data=>{
       this.tvS.setList(data)
     })
+    this.mostrarMensaje('Vehículo eliminado correctamente');
   })
 }
 }

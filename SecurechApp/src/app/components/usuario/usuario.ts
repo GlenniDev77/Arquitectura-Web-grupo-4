@@ -6,11 +6,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
+import { Menu } from '../menu/menu';
 
 @Component({
   selector: 'app-usuario',
   imports: [RouterOutlet,UsuarioListar,MatTableModule,
-    MatIconModule, MatButtonModule, RouterLink, 
+    MatIconModule, MatButtonModule, 
     MatToolbarModule,MatMenuModule],
   templateUrl: './usuario.html',
   styleUrl: './usuario.css',

@@ -10,7 +10,7 @@ import { MatMenuModule } from '@angular/material/menu';
 @Component({
   selector: 'app-ruta',
   imports: [RouterOutlet,Rutalistar,MatTableModule,
-    MatIconModule, MatButtonModule, RouterLink, 
+    MatIconModule, MatButtonModule, 
     MatToolbarModule,MatMenuModule],
   templateUrl: './ruta.html',
   styleUrl: './ruta.css',

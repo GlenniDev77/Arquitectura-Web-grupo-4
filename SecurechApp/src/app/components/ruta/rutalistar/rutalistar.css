@@ -1,40 +1,59 @@
+/* ============================
+   BOTONES (matButton)
+   ============================ */
 button[matButton] {
-
- font-size: 0.8rem;
-
- font-weight: 500;
-
- border-radius: 6px;
-
- padding: 4px 12px;
-
- color: rgb(238, 244, 241);
-
- text-transform: none;
-
- transition: all 0.25s ease;
-
- box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
-
- background-color: rgb(242, 94, 35);
-
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: 6px;
+  padding: 4px 12px;
+  color: #000000 !important;      /* Texto negro */
+  text-transform: none;
+  transition: all 0.25s ease;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+  background-color: #2fb9a3 !important;  /* Verde petróleo */
 }
 
-th {
-  background: #00d26a;
-  color: rgb(226, 217, 217) !important;
-  font-weight: 700;
+button[matButton]:hover {
+  background-color: #4dd3be !important;  /* Verde claro */
 }
 
+/* ============================
+   TABLA
+   ============================ */
 table {
-  background: #111418;
+  background: #111418;            /* Negro suave */
   color: white;
+  width: 100%;
+  border-collapse: collapse;
 }
 
+/* ============================
+   CABECERAS (TH)
+   ============================ */
+th {
+  background: #1e1e1e;            /* Gris oscuro */
+  color: #2fb9a3 !important;      /* Verde petróleo */
+  font-weight: 700;
+  padding: 12px;
+}
+
+/* ============================
+   FILAS (TD)
+   ============================ */
+td,
+.mat-cell,
+.mat-mdc-cell {
+  color: #e2e2e2 !important;      /* Gris claro */
+  font-weight: 500;
+  padding: 10px;
+}
+
+/* ============================
+   TÍTULO PRINCIPAL
+   ============================ */
 h2 {
-  color: #00ff80 !important;  
+  color: #ffffff !important;      /* Blanco */
   font-size: 28px;
   font-weight: 700;
   margin-bottom: 20px;
 }
-

@@ -4,7 +4,6 @@ import { Subject } from 'rxjs';
 import { Resenia } from '../models/Resenia';
 import { HttpClient } from '@angular/common/http';
 
-
 const base_url = enviroment.base;
 
 @Injectable({
@@ -13,7 +12,7 @@ const base_url = enviroment.base;
 export class Reseniaservice {
   private url = `${base_url}/resenias`;
   private listaCambio = new Subject<Resenia[]>();
-  
+
   constructor(private http: HttpClient) {}
 
   list() {
@@ -21,7 +20,7 @@ export class Reseniaservice {
   }
 
   insert(res: Resenia) {
-    return this.http.post(this.url, res);
+    return this.http.post(this.url, res, { responseType: 'text' });
   }
 
   setList(listaNueva: Resenia[]) {
@@ -37,10 +36,10 @@ export class Reseniaservice {
   }
 
   update(res: Resenia) {
-    return this.http.put(this.url, res);
+    return this.http.put(this.url, res, { responseType: 'text' });
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.url}/${id}`);
+    return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
   }
 }

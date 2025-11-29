@@ -32,7 +32,9 @@
 
       <mat-form-field>
         <mat-label>Descripcion</mat-label>
-        <input matInput formControlName="desc" />
+        <textarea  matInput formControlName="desc" rows="4"
+        maxlength="1000" >
+        </textarea>
         <mat-error>
           @if (form.get('desc')?.hasError('required')) { Ingrese Descripcion!! }
         </mat-error>
@@ -43,24 +45,26 @@
       <div>
         <mat-form-field>
           <mat-label>Fecha</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="fecha" />
-          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <input matInput [matDatepicker]="picker" formControlName="fecha" readonly="true"/>
+          <!-- <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle> -->
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Hora</mat-label>
-          <input matInput type="time" formControlName="hora" />
+          <input matInput type="time" formControlName="hora" readonly="true"/>
         </mat-form-field>
       </div>
 
       <br />
 
       <mat-form-field>
-        <mat-label>Nombre</mat-label>
-        <input matInput formControlName="nombre" />
+        <mat-label>Referencia</mat-label>
+        <input matInput formControlName="nombre" 
+        placeholder="ejem: Por la Av. Brasil por polleria Norkys" 
+        maxlength="200"/>
         <mat-error>
-          @if (form.get('nombre')?.hasError('required')) { Ingrese nombre!! }
+          @if (form.get('nombre')?.hasError('required')) { Ingrese referencia!! }
         </mat-error>
       </mat-form-field>
 

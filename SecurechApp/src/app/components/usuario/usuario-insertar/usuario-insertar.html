@@ -8,35 +8,71 @@
       <mat-form-field class="example-full-width">
         <mat-label>ID:</mat-label>
         <input matInput formControlName="codigo" readonly="true" />
-        <mat-error> @if (form.get('id')?.hasError('required')) { Ingrese ID!! } </mat-error>
+        <mat-error> 
+          @if (form.get('id')?.hasError('required')) { Ingrese ID!! } 
+          @else if (form.get('nombre')?.hasError('maxlength')) { Máximo 30 caracteres }
+        </mat-error>
       </mat-form-field>
       }
+
       <br />
+
       <mat-form-field>
         <mat-label>Nombre</mat-label>
-        <input matInput formControlName="nombre" />
+        <input matInput formControlName="nombre" maxlength="30"/>
         <mat-error>
           @if (form.get('nombre')?.hasError('required')) { Ingrese Nombre !! }
         </mat-error>
       </mat-form-field>
+
       <br />
+
+
       <mat-form-field>
         <mat-label>Correo</mat-label>
-        <input matInput formControlName="correo" />
+            
+        <div style="display: flex; align-items: center;">
+          <input matInput
+                 formControlName="correoUsuario"
+                 placeholder="usuario"
+                 style="width: 60%;" />
+        
+          <mat-select formControlName="correoDominio" style="width: 40%;">
+            <mat-option value="@gmail.com">@gmail.com</mat-option>
+            <mat-option value="@hotmail.com">@hotmail.com</mat-option>
+          </mat-select>
+        </div>
+      
+        <mat-error>
+          @if (form.get('correoUsuario')?.hasError('required')) { Falta usuario }
+          @if (form.get('correoDominio')?.hasError('required')) { Seleccione dominio }
+        </mat-error>
+      </mat-form-field>
+
+
+      <!-- 
+
+      <mat-form-field>
+        <mat-label>Correo</mat-label>
+        <input matInput formControlName="correo" 
+              pattern="^[a-zA-Z0-9._%+-]+@(gmail\.com|hotmail\.com)$"
+              placeholder="usuario@gmail.com" />
         <mat-error>
           @if (form.get('correo')?.hasError('required')) { Ingrese Correo!! }
         </mat-error>
       </mat-form-field>
-      
+      -->
+
       
       <br />
 
       @if (!edicion) {
       <mat-form-field>
         <mat-label>Contraseña</mat-label>
-        <input matInput formControlName="contra" type="password" />
+        <input matInput formControlName="contra" type="password" minlength="8"/>
         <mat-error>
           @if (form.get('contra')?.hasError('required')) { Ingrese Contraseña !! }
+          @else if (form.get('contra')?.hasError('minlength')) { Mínimo 8 caracteres }
         </mat-error>
       </mat-form-field>
         }
@@ -45,15 +81,19 @@
 
       <mat-form-field>
         <mat-label>Telefono</mat-label>
-        <input matInput formControlName="telef" type="number"/>
+        <input matInput formControlName="telef" type="text" 
+               minlength="9" maxlength="9" (input)="soloNumeros($event)"/>
         <mat-error>
           @if (form.get('telef')?.hasError('required')) { Ingrese Telefono !! }
+          @else if (form.get('telef')?.hasError('minlength') || form.get('telef')?.hasError('maxlength')) {
+          Debe tener 9 dígitos
+          }
         </mat-error>
       </mat-form-field>
 
       <br />
 
-
+      @if (!edicion) {
       <div>
         <mat-form-field>
           <mat-label>Fecha</mat-label>
@@ -66,6 +106,7 @@
           </mat-error>
         </mat-form-field>
       </div>
+      }
 
 
       <br />

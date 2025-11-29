@@ -26,7 +26,7 @@
 
       <mat-form-field>
         <mat-label>Usuario</mat-label>
-        <mat-select formControlName="FK">
+        <mat-select formControlName="FK" >
           @for (dev of listaUsuarios; track dev) {
           <mat-option [value]="dev.id_usuario">{{ dev.nombre }}</mat-option>
           }

@@ -1,40 +1,63 @@
-table {
-  background: #111418;
-  color: white;
+/* ============================
+   USER CARD
+   ============================ */
+.user-card {
+  background: #1a1d21 !important;
+  border-radius: 16px !important;
+  padding: 20px;
+  width: 350px;
+  color: #e8e8e8 !important;
 }
 
-th {
-  background: #00d26a;
-  color: rgb(226, 217, 217) !important;
-  font-weight: 700;
+/* TÍTULO (nombre del usuario) */
+.user-card .mat-mdc-card-title {
+  color: #2fb9a3 !important;      /* Verde petróleo */
+  font-size: 22px !important;
+  font-weight: 700 !important;
 }
 
-td {
-  color: #e8e8e8;
+/* SUBTÍTULO (correo) */
+.user-card .mat-mdc-card-subtitle {
+  color: #bcbcbc !important;       /* Gris claro */
+  font-size: 16px !important;
 }
 
-button[matButton] {
-  background: #00d26a;
-  color: black;
-  border-radius: 8px;
+/* TEXTO DENTRO DEL CARD */
+.user-card .mat-mdc-card-content p {
+  color: #c7c7c7 !important;
+  margin: 4px 0;
+  font-size: 15px;
 }
 
-th.mat-header-cell {
-  color: #d8fdd0 !important;  /* verde muy claro */
-  font-weight: 600;
-  font-size: 14px;
+/* LABELS DENTRO DEL CARD */
+.user-card .mat-mdc-card-content strong {
+  color: #ffffff !important;        /* Blanco fuerte */
 }
 
-
-button[matButton]:hover {
-  background: #00ff95;
+/* ============================
+   BOTONES (EDITAR / ELIMINAR)
+   ============================ */
+.user-card button[mat-icon-button] {
+  background: #2fb9a3 !important;
+  border-radius: 8px !important;
+  padding: 8px;
+  transition: 0.25s ease !important;
 }
 
+.user-card button[mat-icon-button]:hover {
+  background: #4dd3be !important;
+}
+
+.user-card button[mat-icon-button] mat-icon {
+  color: #000000 !important;       /* Negro para buen contraste */
+}
+
+/* ============================
+   TÍTULO H2
+   ============================ */
 h2 {
-  color: #00ff80 !important;  
+  color: #ffffff !important;
   font-size: 28px;
   font-weight: 700;
   margin-bottom: 20px;
 }
-
-

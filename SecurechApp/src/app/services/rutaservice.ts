@@ -10,7 +10,7 @@ const base_url = enviroment.base;
   providedIn: 'root',
 })
 export class Rutaservice {
-  private url = `${base_url}/notificaciones`;
+  private url = `${base_url}/rutas`;
   
     private listaCambio = new Subject<Ruta[]>();
   
@@ -34,8 +34,8 @@ export class Rutaservice {
       return this.http.get<Ruta>(`${this.url}/${id}`);
     }
     update(ru: Ruta) {
-      return this.http.put(this.url, ru, { responseType: 'text' });
-    }
+    return this.http.put(this.url, ru, { responseType: 'text' });
+  }
     delete(id: number) {
       return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
     }
