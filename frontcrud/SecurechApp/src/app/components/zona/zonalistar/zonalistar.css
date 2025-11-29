@@ -1,40 +1,67 @@
-table {
-  background: #111418;
-  color: white;
+/* ============================
+   GRID DE CARDS
+   ============================ */
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 15px;
 }
 
-th {
-  background: #00d26a;
-  color: rgb(226, 217, 217) !important;
+/* ============================
+   CARD DE ZONA
+   ============================ */
+.zona-card {
+  background: #1a1d21 !important;   /* Fondo oscuro */
+  color: #e8e8e8 !important;        /* Texto claro */
+  border-radius: 16px !important;
+  padding: 20px;
+  width: 340px;
+}
+
+/* TÍTULO de la zona */
+.zona-card .mat-mdc-card-title {
+  color: #2fb9a3 !important;        /* Verde petróleo */
+  font-size: 22px;
   font-weight: 700;
 }
 
-td {
-  color: #e8e8e8;
+/* Subtítulo (ID) */
+.zona-card .mat-mdc-card-subtitle {
+  color: #bcbcbc !important;        /* Gris claro */
+  font-size: 15px;
 }
 
-button[matButton] {
-  background: #00d26a;
-  color: black;
+/* Contenido del card */
+.zona-card mat-card-content p {
+  color: #c7c7c7 !important;
+  margin: 4px 0;
+  font-size: 15px;
+}
+
+.zona-card mat-card-content strong {
+  color: #ffffff !important;        /* Blanco fuerte */
+}
+
+/* ============================
+   BOTONES DE ACCIÓN
+   ============================ */
+.zona-card button[mat-icon-button] {
+  background: #2fb9a3 !important;   /* Verde petróleo */
   border-radius: 8px;
+  padding: 8px;
+  transition: 0.25s ease;
 }
 
-th.mat-header-cell {
-  color: #d8fdd0 !important;  /* verde muy claro */
-  font-weight: 600;
-  font-size: 14px;
+.zona-card button[mat-icon-button]:hover {
+  background: #4dd3be !important;   /* Verde claro */
 }
 
-
-button[matButton]:hover {
-  background: #00ff95;
+.zona-card mat-icon {
+  color: #000000 !important;        /* Negro dentro del botón */
 }
 
-h2 {
-  color: #00ff80 !important;  
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
-
-
+/* ============================
+   TÍTULO PRINCIPAL
+   ============================ */

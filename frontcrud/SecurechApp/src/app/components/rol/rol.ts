@@ -6,11 +6,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { Menu } from '../menu/menu';
 
 @Component({
   selector: 'app-rol',
   imports: [RouterOutlet,RolListar,MatTableModule,
-    MatIconModule, MatButtonModule, RouterLink, 
+    MatIconModule, MatButtonModule, 
     MatToolbarModule,MatMenuModule],
   templateUrl: './rol.html',
   styleUrl: './rol.css',

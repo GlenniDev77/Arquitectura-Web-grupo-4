@@ -29,15 +29,6 @@
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="f">
-        <th mat-header-cell *matHeaderCellDef>Actualizar</th>
-        <td mat-cell *matCellDef="let element">
-          <button matButton [routerLink]="['edits', element.id_ruta]">
-            <mat-icon>edit</mat-icon>
-          </button>
-        </td>
-      </ng-container>
-
       <ng-container matColumnDef="g">
         <th mat-header-cell *matHeaderCellDef>Eliminar</th>
         <td mat-cell *matCellDef="let element">

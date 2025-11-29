@@ -1,0 +1,38 @@
+<div class="contenedor">
+  <div class="panel">
+    <h3 style="text-align: center;">Buscar</h3>
+
+    <label>Origen</label>
+    <input
+      type="text"
+      [(ngModel)]="origenTexto"
+      (input)="buscarSugerencias('origen', $event)"
+      placeholder="Ingresa un lugar..."
+    />
+
+    <ul *ngIf="sugerenciasOrigen.length > 0" class="sugerencias">
+      <li *ngFor="let sug of sugerenciasOrigen" (click)="seleccionarSugerencia('origen', sug)">
+        {{ sug.properties.formatted }}
+      </li>
+    </ul>
+
+    <label>Destino</label>
+    <input
+      type="text"
+      [(ngModel)]="destinoTexto"
+      (input)="buscarSugerencias('destino', $event)"
+      placeholder="Ingresa un lugar..."
+    />
+
+    <ul *ngIf="sugerenciasDestino.length > 0" class="sugerencias">
+      <li *ngFor="let sug of sugerenciasDestino" (click)="seleccionarSugerencia('destino', sug)">
+        {{ sug.properties.formatted }}
+      </li>
+    </ul>
+
+    <button class="btn" (click)="trazarRuta()">Trazar Ruta</button>
+  </div>
+
+  <!-- el id viene por Input mapId para evitar colisiones -->
+  <div [id]="mapId" class="mapa-caja"></div>
+</div>

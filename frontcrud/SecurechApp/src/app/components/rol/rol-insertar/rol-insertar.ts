@@ -12,6 +12,7 @@ import { Usuario } from '../../../models/Usuario';
 import { Rolservice } from '../../../services/rolservice';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Usuarioservice } from '../../../services/usuarioservice';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-rol-insertar',
@@ -21,7 +22,8 @@ import { Usuarioservice } from '../../../services/usuarioservice';
     MatSelectModule,
     MatRadioModule,
     MatDatepickerModule,
-    MatButtonModule],
+    MatButtonModule,
+    MatSnackBarModule],
   templateUrl: './rol-insertar.html',
   styleUrl: './rol-insertar.css',
 })
@@ -49,8 +51,8 @@ export class RolInsertar implements OnInit{
     private router: Router,
     private formBuilder: FormBuilder,
     private route:ActivatedRoute,
-    private uS:Usuarioservice
-
+    private uS:Usuarioservice,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -73,26 +75,67 @@ export class RolInsertar implements OnInit{
     });
   }
   aceptar(): void {
-    if(this.form.valid){
-      this.zon.id_rol = this.form.value.codigo
-      this.zon.nombre_rol=this.form.value.rol
-      this.zon.user.id_usuario=this.form.value.FK
+    if (this.form.valid) {
 
-      if (this.edicion) {
-        this.zS.update(this.zon).subscribe(() => {
-          this.zS.list().subscribe((data) => {
+    this.zon.id_rol = this.form.value.codigo;
+    this.zon.nombre_rol = this.form.value.rol;
+    this.zon.user.id_usuario = this.form.value.FK;
+
+    if (this.edicion) {
+      // --- MODO EDICIÓN ---
+      this.zS.update(this.zon).subscribe({
+        next: () => {
+          this.zS.list().subscribe(data => {
             this.zS.setList(data);
+
+            this.snackBar.open('Rol actualizado correctamente.', 'Cerrar', {
+              duration: 3000,
+              horizontalPosition: 'right',
+              verticalPosition: 'top',
+              panelClass: ['success-snackbar']
+            });
           });
-        });
-      } else {
-        this.zS.insert(this.zon).subscribe((data) => {
-          this.zS.list().subscribe((data) => {
+
+          this.router.navigate(['roles']);
+        },
+        error: () => {
+          this.snackBar.open('No se pudo actualizar el rol.', 'Cerrar', {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['error-snackbar']
+          });
+        }
+      });
+
+    } else {
+      // --- MODO REGISTRO ---
+      this.zS.insert(this.zon).subscribe({
+        next: () => {
+          this.zS.list().subscribe(data => {
             this.zS.setList(data);
+
+            this.snackBar.open('Rol registrado exitosamente.', 'Cerrar', {
+              duration: 3000,
+              horizontalPosition: 'right',
+              verticalPosition: 'top',
+              panelClass: ['success-snackbar']
+            });
           });
-        });
-      }
-      this.router.navigate(['roles']);
+
+          this.router.navigate(['roles']);
+        },
+        error: () => {
+          this.snackBar.open('No se pudo registrar el rol.', 'Cerrar', {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['error-snackbar']
+          });
+        }
+      });
     }
+  }
   }
   init(){
     if(this.edicion){

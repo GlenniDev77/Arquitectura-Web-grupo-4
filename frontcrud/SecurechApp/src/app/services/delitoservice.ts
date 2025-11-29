@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { enviroment } from '../../enviroments/enviroments';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Delito } from '../models/Delito';
 import { HttpClient } from '@angular/common/http';
+import { QuantityDelitosPorDistritoyZona } from '../models/QuantityDelitosPorZyD';
+import { QuantityDelitosPorHorayZona } from '../models/QuantityDelitoPorHorayZona';
+import { QuantityDelitoPorMesDTO } from '../models/QuantityDelitoPorMesDTO';
 
 const base_url=enviroment.base
 
@@ -39,5 +42,14 @@ private url=`${base_url}/delitos`
     }
     delete(id:number){
       return this.http.delete(`${this.url}/${id}`, {responseType:'text'})
-    }    
+    }   
+    getDelitosPorZyD(): Observable<QuantityDelitosPorDistritoyZona[]>{
+      return this.http.get<QuantityDelitosPorDistritoyZona[]>(`${this.url}/MasDelitosPorZD`)
+    }
+    getDelitosPorHyZ(): Observable<QuantityDelitosPorHorayZona[]>{
+      return this.http.get<QuantityDelitosPorHorayZona[]>(`${this.url}/MasDelitosPorHZ`)
+    }
+    getDelitosPorMes(): Observable<QuantityDelitoPorMesDTO[]>{
+      return this.http.get<QuantityDelitoPorMesDTO[]>(`${this.url}/CantidadDelitosPorMes`)
+    }
 }

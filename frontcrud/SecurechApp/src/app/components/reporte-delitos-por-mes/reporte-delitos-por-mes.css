@@ -1,0 +1,56 @@
+.titulo-delito {
+    color: #fafafa; /* elige el color que quieras */
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+}
+
+.grafico1,
+.grafico2 {
+  flex: 1;              /* Ambos toman el mismo espacio */
+  min-width: 0;         /* Evita que uno empuje al otro */
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Contenedor del gráfico */
+.chart-container {
+  width: 50%;
+}
+
+/* Para el componente del lado derecho */
+app-reporte2 {
+  width: 100%;
+  display: block;
+}
+
+/* Responsivo del canvas */
+canvas {
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* Estilos cuando no hay datos */
+.no-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+  text-align: center;
+  color: #777;
+}
+
+.no-data-icon {
+  font-size: 48px;
+  margin-bottom: 10px;
+  color: #888;
+}
+
+.no-data-message {
+  font-size: 16px;
+}

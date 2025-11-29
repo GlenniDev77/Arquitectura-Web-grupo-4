@@ -37,10 +37,14 @@
         </mat-card-content>
 
         <mat-card-actions style="display: flex; justify-content: flex-end;">
+
+          @if (rolUsuario === 'ADMIN') {
           <button mat-icon-button color="warn"
                   (click)="eliminar(delito.id_reportedelito)">
             <mat-icon>delete</mat-icon>
           </button>
+          }
+          
         </mat-card-actions>
 
       </mat-card>

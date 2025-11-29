@@ -50,14 +50,11 @@
 
       <!-- Fecha con Datepicker -->
       <mat-form-field>
-        <mat-label>Fecha</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="fecha">
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-        <mat-error>
-          @if (form.get('fecha')?.hasError('required')) { Seleccione Fecha! }
-        </mat-error>
-      </mat-form-field>
+          <mat-label>Fecha</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="fecha" readonly="true"/>
+          <!-- <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle> -->
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
       <br />
 
       <mat-form-field>

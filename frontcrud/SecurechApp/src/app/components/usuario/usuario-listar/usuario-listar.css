@@ -1,81 +1,63 @@
-table {
-  background: #111418;
-  color: white;
-}
-
-th {
-  background: #00d26a;
-  color: rgb(226, 217, 217) !important;
-  font-weight: 700;
-}
-
-td {
-  color: #e8e8e8;
-}
-
-button[matButton] {
-  background: #00d26a;
-  color: black;
-  border-radius: 8px;
-}
-
-th.mat-header-cell {
-  color: #d8fdd0 !important;  /* verde muy claro */
-  font-weight: 600;
-  font-size: 14px;
-}
-
-
-button[matButton]:hover {
-  background: #00ff95;
-}
-
-h2 {
-  color: #00ff80 !important;  
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
-
-
+/* ============================
+   USER CARD
+   ============================ */
 .user-card {
-  background: #1a1d21 !important;   /* Fondo oscuro elegante */
-  color: #e8e8e8 !important;        /* Texto claro */
-  border-radius: 16px !important;   /* Bordes redondeados */
+  background: #1a1d21 !important;
+  border-radius: 16px !important;
   padding: 20px;
   width: 350px;
+  color: #e8e8e8 !important;
 }
 
-/* Título del card */
-.user-card .mat-card-title {
-  color: #00ff80 !important;        /* Verde neon de tu tema */
-  font-size: 24px;
-  font-weight: 700;
+/* TÍTULO (nombre del usuario) */
+.user-card .mat-mdc-card-title {
+  color: #2fb9a3 !important;      /* Verde petróleo */
+  font-size: 22px !important;
+  font-weight: 700 !important;
 }
 
-/* Subtítulo (correo) */
-.user-card .mat-card-subtitle {
-  color: #f2f2f2 !important;
-  font-size: 16px;
+/* SUBTÍTULO (correo) */
+.user-card .mat-mdc-card-subtitle {
+  color: #bcbcbc !important;       /* Gris claro */
+  font-size: 16px !important;
 }
 
-/* Texto dentro del card */
-.user-card p {
-  color: #c7c7c7;                   /* Gris claro */
+/* TEXTO DENTRO DEL CARD */
+.user-card .mat-mdc-card-content p {
+  color: #c7c7c7 !important;
   margin: 4px 0;
   font-size: 15px;
 }
 
-/* Etiquetas (ID:, Teléfono:, etc.) */
-.user-card p strong {
-  color: #ffffff;                   /* Blanco puro */
+/* LABELS DENTRO DEL CARD */
+.user-card .mat-mdc-card-content strong {
+  color: #ffffff !important;        /* Blanco fuerte */
 }
 
-/* Acciones (botones editar/eliminar) */
-.user-card .mat-card-actions button {
-  color: #00d26a !important;        /* Verde corporativo */
+/* ============================
+   BOTONES (EDITAR / ELIMINAR)
+   ============================ */
+.user-card button[mat-icon-button] {
+  background: #2fb9a3 !important;
+  border-radius: 8px !important;
+  padding: 8px;
+  transition: 0.25s ease !important;
 }
 
-.user-card .mat-card-actions button:hover {
-  color: #00ff95 !important;
+.user-card button[mat-icon-button]:hover {
+  background: #4dd3be !important;
+}
+
+.user-card button[mat-icon-button] mat-icon {
+  color: #000000 !important;       /* Negro para buen contraste */
+}
+
+/* ============================
+   TÍTULO H2
+   ============================ */
+h2 {
+  color: #ffffff !important;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
 }

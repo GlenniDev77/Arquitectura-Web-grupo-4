@@ -10,7 +10,7 @@ import { MatMenuModule } from '@angular/material/menu';
 @Component({
   selector: 'app-notificacion',
   imports: [RouterOutlet,Notificacionlistar,MatTableModule,
-    MatIconModule, MatButtonModule, RouterLink, 
+    MatIconModule, MatButtonModule, 
     MatToolbarModule,MatMenuModule],
   templateUrl: './notificacion.html',
   styleUrl: './notificacion.css',

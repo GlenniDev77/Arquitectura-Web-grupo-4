@@ -1,11 +1,22 @@
-/* === FORM FIELDS === */
+/* ============================
+   FORM FIELDS (mat-form-field)
+============================ */
+
+h2 {
+  color: #2fb9a3 !important;     /* Verde petróleo */
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+
 mat-form-field {
   width: 60%;
 }
 
-/* Label del mat-form-field */
+/* Label del input */
 .mat-mdc-form-field-label {
-  color: #000000 !important; /* negro */
+  color: #ffffff !important; /* blanco */
 }
 
 /* Texto dentro del input */
@@ -15,48 +26,50 @@ mat-form-field {
 
 /* Caja del formulario */
 .mdc-text-field {
-  background: #ffffff !important; /* blanco */
-  color: black !important;
+  background: #1a1d21 !important;  /* fondo oscuro */
+  color: #000000 !important;       /* texto negro */
   border-radius: 8px !important;
-  border: 1px solid #00ff8055 !important;
+  border: 1px solid #2fb9a3 !important; /* borde verde petróleo */
+}
+
+/* Placeholder */
+.mat-mdc-input-element::placeholder {
+  color: #cccccc !important; /* gris claro */
 }
 
 /* Borde al enfocar */
 .mdc-text-field--focused .mdc-notched-outline__leading,
 .mdc-text-field--focused .mdc-notched-outline__notch,
 .mdc-text-field--focused .mdc-notched-outline__trailing {
-  border-color: #00d26a !important;
+  border-color: #4dd3be !important; /* verde claro */
 }
 
-/* Placeholder */
-.mat-mdc-input-element::placeholder {
-  color: #00000080;
-}
-
-
-/* === SELECT (mat-select) === */
-.mat-mdc-select-min-line {
-  color: #000000 !important;
-}
-
+/* ============================
+   SELECT (mat-select)
+============================ */
 .mat-mdc-select-trigger {
-  color: #000000 !important;
+  color: #ffffff !important; /* texto blanco */
+}
+
+.mat-mdc-select-min-line {
+  color: #e8e8e8 !important; /* blanco suave */
 }
 
 .mat-mdc-option {
-  background: #ffffff !important;
-  color: #000000 !important;
+  background: #1a1d21 !important; /* menú oscuro */
+  color: #ffffff !important;
 }
 
 .mat-mdc-option:hover {
-  background: #00ff9520 !important;
+  background: rgba(47,185,163,0.25) !important;
 }
 
-
-/* === BOTÓN REGISTRAR / EDITAR === */
+/* ============================
+   BOTÓN REGISTRAR / EDITAR
+============================ */
 button[matButton="elevated"] {
-  background-color: #00d26a;  /* verde */
-  color: #000000;             /* texto negro */
+  background-color: #2fb9a3;  /* verde petróleo */
+  color: #000000;             /* negro */
   border: none;
   padding: 0.5rem 1.25rem;
   font-size: 1.1rem;
@@ -65,9 +78,9 @@ button[matButton="elevated"] {
   transition: background-color 0.3s ease;
   width: 60%;
   font-weight: 600;
-  box-shadow: 0 0 8px #00ff8066;
+  box-shadow: 0 0 8px rgba(47,185,163,0.35);
 }
 
 button[matButton="elevated"]:hover {
-  background-color: #00ff95;
+  background-color: #4dd3be; /* verde claro */
 }

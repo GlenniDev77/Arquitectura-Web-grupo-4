@@ -49,17 +49,21 @@
 
         <mat-card-actions style="display: flex; justify-content: space-between;">
           
+          @if (rolUsuario === 'ADMIN') {
           <!-- Editar -->
           <button mat-icon-button color="primary"
                   [routerLink]="['edits', usuario.id_usuario]">
             <mat-icon>edit</mat-icon>
           </button>
+          }
 
+          @if (rolUsuario === 'ADMIN') {
           <!-- Eliminar -->
           <button mat-icon-button color="warn"
                   (click)="eliminar(usuario.id_usuario)">
             <mat-icon>delete</mat-icon>
           </button>
+          }
           
         </mat-card-actions>
 

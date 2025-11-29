@@ -11,6 +11,7 @@ import { tipovehiculo } from '../../../models/TipoVehiculo';
 import { TipoVehiculoservice } from '../../../services/tipo-vehiculoservice';
 import { ActivatedRoute, Params, Route, Router } from '@angular/router';
 import { TipoVehiculo } from '../tipo-vehiculo';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-tipo-vehiculo-registrar',
@@ -20,7 +21,8 @@ import { TipoVehiculo } from '../tipo-vehiculo';
     MatSelectModule,
     MatRadioModule,
     MatDatepickerModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSnackBarModule
   ],
   templateUrl: './tipo-vehiculo-registrar.html',
   providers: [provideNativeDateAdapter()],
@@ -34,11 +36,22 @@ export class TipoVehiculoRegistrar implements OnInit {
   edicion:boolean=false
   id:number=0
 
+  mostrarMensaje(mensaje: string) {
+  this.snackBar.open(mensaje, 'Cerrar', {
+    duration: 3000,
+    horizontalPosition: 'center',
+    verticalPosition: 'top',
+    panelClass: ['mensaje-exito']
+  });
+  }
+
+
   constructor(
     private tvS: TipoVehiculoservice,
     private router: Router,
     private formBuilder: FormBuilder,
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {}
   ngOnInit(): void {
 
@@ -68,12 +81,14 @@ export class TipoVehiculoRegistrar implements OnInit {
         this.tvS.list().subscribe(data=>{
           this.tvS.setList(data)
         })
+        this.mostrarMensaje('Vehículo actualizado correctamente');
       })
       } else {
         this.tvS.insert(this.tpv).subscribe(data=>{
         this.tvS.list().subscribe(data=>{
           this.tvS.setList(data)
         })
+        this.mostrarMensaje('Vehículo registrado correctamente');
       })
       }
       this.router.navigate(['tipovehiculos'])

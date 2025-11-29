@@ -5,10 +5,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Notificacion } from '../../../models/Notificacion';
 import { Notificacionservice } from '../../../services/notificacionservice';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-notificacionlistar',
-  imports: [MatTableModule,CommonModule,MatIconModule, MatButtonModule],
+  imports: [MatTableModule,CommonModule,MatIconModule, MatButtonModule, MatCardModule],
   templateUrl: './notificacionlistar.html',
   styleUrl: './notificacionlistar.css',
 })

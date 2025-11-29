@@ -14,6 +14,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Usuarioservice } from '../../../services/usuarioservice';
 import { Zonaservice } from '../../../services/zonaservice';
 import { Usuario } from '../../../models/Usuario';
+import { Autenticador } from '../../autenticador/autenticador';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-delito-insertar',
@@ -25,7 +27,8 @@ import { Usuario } from '../../../models/Usuario';
     MatButtonModule,
     ReactiveFormsModule,
     MatNativeDateModule,
-    MatIconModule],
+    MatIconModule,
+    MatSnackBarModule],
   templateUrl: './delito-insertar.html',
   styleUrl: './delito-insertar.css',
 })
@@ -40,6 +43,14 @@ export class DelitoInsertar implements OnInit{
 
   listaZonas:Zona[]=[]
   
+  mostrarMensaje(mensaje: string) {
+  this.snackBar.open(mensaje, 'Cerrar', {
+    duration: 3500,
+    horizontalPosition: 'center',
+    verticalPosition: 'top',
+    panelClass: ['mensaje-exito']
+  });
+  }
 
   tiposDelito: { value: string; viewValue: string }[] = [
     { value: 'Hurto', viewValue: 'Hurto' },
@@ -53,7 +64,8 @@ export class DelitoInsertar implements OnInit{
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private uS:Usuarioservice,
-    private zS:Zonaservice
+    private zS:Zonaservice,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -111,12 +123,14 @@ export class DelitoInsertar implements OnInit{
           this.sS.list().subscribe((data) => {
             this.sS.setList(data);
           });
+          this.mostrarMensaje("Delito actualizado correctamente");
         });
       } else {
         this.sS.insert(this.sof).subscribe((data) => {
           this.sS.list().subscribe((data) => {
             this.sS.setList(data);
           });
+          this.mostrarMensaje("Delito registrado correctamente");
         });
       }
       this.router.navigate(['delitos']);

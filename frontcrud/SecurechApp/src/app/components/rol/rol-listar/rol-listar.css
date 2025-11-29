@@ -1,43 +1,69 @@
+/* ============================
+   TABLA PRINCIPAL
+   ============================ */
 table {
-  background: #111418;
+  background: #111418;       /* Negro */
   color: white;
+  width: 100%;
+  border-collapse: collapse;
 }
 
+/* ============================
+   CABECERAS (TH)
+   ============================ */
 th {
-  background: #00d26a;
-  color: rgb(226, 217, 217) !important;
+  background: #1e1e1e;       /* Gris oscuro */
+  color: #2fb9a3 !important; /* Verde petróleo */
   font-weight: 700;
-}
-
-td {
-  color: #e8e8e8;
-}
-
-button[matButton] {
-  background: #00d26a;
-  color: black;
-  border-radius: 8px;
+  padding: 12px;
 }
 
 th.mat-header-cell {
-  color: #d8fdd0 !important;  /* verde muy claro */
+  color: #2fb9a3 !important; /* Verde petróleo */
   font-weight: 600;
   font-size: 14px;
 }
 
-
-button[matButton]:hover {
-  background: #00ff95;
+/* ============================
+   CUERPO DE LA TABLA
+   ============================ */
+td,
+.mat-cell,
+.mat-mdc-cell {
+  color: #e8e8e8 !important; /* Blanco suave */
+  padding: 10px;
 }
 
+/* ============================
+   BOTONES
+   ============================ */
+button[matButton] {
+  background: #2fb9a3;       /* Verde petróleo */
+  color: #000000;            /* Texto negro */
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-weight: 600;
+  transition: 0.2s ease;
+  border: none;
+}
+
+button[matButton]:hover {
+  background: #4dd3be;       /* Verde claro */
+}
+
+/* ============================
+   TÍTULO
+   ============================ */
 h2 {
-  color: #00ff80 !important;  
+  color: #ffffff !important;  /* Blanco */
   font-size: 28px;
   font-weight: 700;
   margin-bottom: 20px;
 }
 
-
+/* ============================
+   TARJETAS (CARDS)
+   ============================ */
 .card-grid {
   display: flex;
   flex-wrap: wrap;
@@ -46,36 +72,42 @@ h2 {
 }
 
 .rol-card {
-  background: #1a1d21 !important; /* fondo oscuro */
-  color: #e8e8e8 !important;       /* texto claro */
+  background: #1a1d21 !important;  /* Fondo oscuro */
+  color: #e8e8e8 !important;       /* Texto claro */
   border-radius: 12px;
   padding: 15px;
 }
 
 .rol-card strong {
-  color: #00ff95;
+  color: #2fb9a3 !important;       /* Verde petróleo */
 }
 
 mat-card-title {
   font-size: 22px;
   font-weight: 700;
-  color: #00ff80 !important;
+  color: #ffffff !important;       /* Blanco */
 }
 
 mat-card-subtitle {
-  color: #bbbbbb !important;
+  color: #bcbcbc !important;       /* Gris claro */
 }
 
+/* ============================
+   ICONOS
+   ============================ */
 mat-icon {
-  color: #e8e8e8;
+  color: #e8e8e8 !important;       /* Iconos gris claro */
 }
 
+/* ============================
+   BOTONES DE ICONO (EDITAR / ELIMINAR)
+   ============================ */
 button[mat-icon-button] {
-  background: #00d26a;
+  background: #2fb9a3;
   border-radius: 8px;
+  transition: 0.2s ease;
 }
 
 button[mat-icon-button]:hover {
-  background: #00ff95;
+  background: #4dd3be;
 }
-

@@ -16,56 +16,147 @@ import { Resenia } from './components/resenia/resenia';
 import { Reseniainsertar } from './components/resenia/reseniainsertar/reseniainsertar';
 import { Ruta } from './components/ruta/ruta';
 import { Rutainsertar } from './components/ruta/rutainsertar/rutainsertar';
+import { Autenticador } from './components/autenticador/autenticador';
+import { securityGuard } from './guard/security-guard';
+import { Home } from './components/home/home';
+import { ReporteDelitoPorZyD } from './components/reporte-delito-por-zy-d/reporte-delito-por-zy-d';
+import { ReporteDelitoPorHyZ } from './components/reporte-delito-por-hy-z/reporte-delito-por-hy-z';
+import { Mapa } from './components/mapa/mapa';
+import { ReporteMasNotisPorUsuario } from './components/reporte-mas-notis-por-usuario/reporte-mas-notis-por-usuario';
+import { ReporteMasNotisPorZona } from './components/reporte-mas-notis-por-zona/reporte-mas-notis-por-zona';
+import { ReporteRutasPorTvehiculo } from './components/reporte-rutas-por-tvehiculo/reporte-rutas-por-tvehiculo';
+import { ReporteDelitosPorMes } from './components/reporte-delitos-por-mes/reporte-delitos-por-mes';
 
 export const routes: Routes = [
-    { path: '', redirectTo: '/menu', pathMatch: 'full' },
-    { path: 'menu', component: Menu },
-    { path:'tipovehiculos',component:TipoVehiculo,
-        children:[
-            {path:'nuevo',component:TipoVehiculoRegistrar},
-            {path:'edits/:id',component:TipoVehiculoRegistrar}
-        ]
-    },
-    { path:'zonas',component:Zona,
-        children:[
-            {path:'nuevo',component:Zonaregistrar},
-            {path:'edits/:id',component:Zonaregistrar}
-        ]
-    },
-    { path:'roles',component:Rol,
-        children:[
-            {path:'nuevo',component:RolInsertar},
-            {path:'edits/:id',component:RolInsertar}
-        ]
-    },
-    { path:'usuarios',component:Usuario,
-        children:[
-            {path:'nuevo',component:UsuarioInsertar},
-            {path:'edits/:id',component:UsuarioInsertar}
-        ]
-    },
-    { path:'delitos',component:Delito,
-        children:[
-            {path:'nuevo',component:DelitoInsertar},
-            {path:'edits/:id',component:DelitoInsertar}
-        ]
-    },
-    {path:'notificaciones',component:Notificacion,
-        children:[
-            {path:'nuevo',component:Notificacioninsertar},
-            {path:'edits/:id',component:Notificacioninsertar}
-        ]
-    },
-     {path:'resenias',component:Resenia,
-        children:[
-            {path:'nuevo',component:Reseniainsertar},
-            {path:'edits/:id',component:Reseniainsertar}
-        ]
-    },
-     {path:'rutas',component:Ruta,
-        children:[
-            {path:'nuevo',component:Rutainsertar},
-            {path:'edits/:id',component:Rutainsertar}
-        ]
-    }
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component: Autenticador,
+  },
+
+  //{ path: '', redirectTo: '/menu', pathMatch: 'full' },
+  //{ path: 'menu', component: Menu },
+  {
+    path: 'tipovehiculos',
+    component: TipoVehiculo,
+    children: [
+      { path: 'nuevo', component: TipoVehiculoRegistrar },
+      { path: 'edits/:id', component: TipoVehiculoRegistrar },
+    ],
+    canActivate: [securityGuard],
+  },
+
+  {
+    path: 'zonas',
+    component: Zona,
+    children: [
+      { path: 'nuevo', component: Zonaregistrar },
+      { path: 'edits/:id', component: Zonaregistrar },
+    ],
+    canActivate: [securityGuard],
+  },
+
+  {
+    path: 'roles',
+    component: Rol,
+    children: [
+      { path: 'nuevo', component: RolInsertar },
+      { path: 'edits/:id', component: RolInsertar },
+    ],
+    canActivate: [securityGuard],
+  },
+
+  {
+    path: 'usuarios',
+    component: Usuario,
+    children: [
+      { path: 'nuevo', component: UsuarioInsertar },
+      { path: 'edits/:id', component: UsuarioInsertar },
+    ],
+    canActivate: [securityGuard],
+  },
+
+  {
+    path: 'delitos',
+    component: Delito,
+    children: [
+      { path: 'nuevo', component: DelitoInsertar },
+      { path: 'edits/:id', component: DelitoInsertar },
+    ],
+    canActivate: [securityGuard],
+  },
+
+  {
+    path: 'notificaciones',
+    component: Notificacion,
+    children: [
+      { path: 'nuevo', component: Notificacioninsertar },
+      { path: 'edits/:id', component: Notificacioninsertar },
+    ],
+    canActivate: [securityGuard],
+  },
+
+  {
+    path: 'resenias',
+    component: Resenia,
+    children: [
+      { path: 'nuevo', component: Reseniainsertar },
+      { path: 'edits/:id', component: Reseniainsertar },
+    ],
+    canActivate: [securityGuard],
+  },
+
+  {
+    path: 'rutas',
+    component: Ruta,
+    children: [
+      { path: 'nuevo', component: Rutainsertar },
+      { path: 'edits/:id', component: Rutainsertar },
+    ],
+    canActivate: [securityGuard],
+  },
+
+  {
+    path: 'homes',
+    component: Home,
+    canActivate: [securityGuard],
+  },
+
+  {
+    path: 'delitosPorZyD',
+    component: ReporteDelitoPorZyD,
+    canActivate: [securityGuard],
+  },
+
+  {
+    path: 'delitosPorHyZ',
+    component: ReporteDelitoPorHyZ,
+    canActivate: [securityGuard],
+  },
+
+  {
+    path: 'masNotificacionesPorUsuario',
+    component: ReporteMasNotisPorUsuario,
+    canActivate: [securityGuard],
+  },
+
+  {
+    path: 'masNotificacionesPorZona',
+    component: ReporteMasNotisPorZona,
+    canActivate: [securityGuard],
+  },
+  {
+    path: 'cantidadRutasPorTVehiculo',
+    component: ReporteRutasPorTvehiculo,
+    canActivate: [securityGuard],
+  },
+  {
+    path: 'cantidadDelitosPorMes',
+    component: ReporteDelitosPorMes,
+    canActivate: [securityGuard],
+  },
 ];

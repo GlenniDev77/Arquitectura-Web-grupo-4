@@ -120,7 +120,6 @@ button[mat-button]:hover {
 
 /* ===== Contenido principal ===== */
 .main-content {
-  margin-left: 260px;
   padding: 20px;
   background: linear-gradient(90deg, #0f1115, #1c1f24);
   min-height: 100vh;

@@ -14,6 +14,7 @@ import { Reseniaservice } from '../../../services/reseniaservice';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Usuarioservice } from '../../../services/usuarioservice';
 import { Rutaservice } from '../../../services/rutaservice';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-reseniainsertar',
@@ -25,7 +26,8 @@ import { Rutaservice } from '../../../services/rutaservice';
     MatButtonModule,
     ReactiveFormsModule,
     MatNativeDateModule,
-    MatIconModule
+    MatIconModule,
+    MatSnackBarModule
   ],
   templateUrl: './reseniainsertar.html',
   styleUrl: './reseniainsertar.css',
@@ -36,6 +38,15 @@ export class Reseniainsertar implements OnInit {
   edicion: boolean = false;
   id: number = 0;
   resenia: Resenia = new Resenia();
+
+  mostrarMensaje(mensaje: string) {
+  this.snackBar.open(mensaje, 'Cerrar', {
+    duration: 3000,
+    horizontalPosition: 'center',
+    verticalPosition: 'top',
+    panelClass: ['mensaje-exito']
+  });
+  }
 
   listaUsuarios: Usuario[] = [];
   listaRutas: Ruta[] = [];
@@ -50,7 +61,8 @@ export class Reseniainsertar implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private uS: Usuarioservice,
-    private rtS: Rutaservice
+    private rtS: Rutaservice,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -121,6 +133,7 @@ export class Reseniainsertar implements OnInit {
             this.rS.setList(data);
             this.router.navigate(['resenias']);
           });
+          this.mostrarMensaje("Reseña actualizada correctamente");
         });
       } else {
         this.rS.insert(this.resenia).subscribe(() => {
@@ -128,6 +141,7 @@ export class Reseniainsertar implements OnInit {
             this.rS.setList(data);
             this.router.navigate(['resenias']);
           });
+          this.mostrarMensaje("Reseña registrada correctamente");
         });
       }
     } else {
