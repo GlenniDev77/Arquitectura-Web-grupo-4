@@ -1,0 +1,192 @@
+body {
+  background: linear-gradient(135deg, #0b0d10, #14181f);
+}
+
+/* Ajuste por sidebar */
+.home-wrapper {
+  margin-left: 0px;
+  padding: 20px;
+  color: #e8e8e8;
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.75)),
+    url("https://www.infobae.com/new-resizer/QxFoRrV26DUtrXr-a3aGYf9FmWc=/arc-anglerfish-arc2-prod-infobae/public/7DCWLRPPLVEBDCGXUQIPLQTPYA.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  border-radius: 10px;
+}
+
+/* ============================
+   HERO
+============================ */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to right, #111418, #1a1d21);
+  padding: 60px;
+  border-radius: 14px;
+  margin: 25px;
+}
+
+.hero-text h1 {
+  font-size: 38px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.hero-text p {
+  font-size: 16px;
+  max-width: 450px;
+  color: #cfcfcf;
+}
+
+/* Decorative replacement for image */
+.circle-deco {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: #2fb9a3;
+  opacity: 0.25;
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Animation */
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+/* ============================
+   WEATHER CARD
+============================ */
+.weather-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.weather-card {
+  background: #1a1d21;
+  color: #e8e8e8;
+  padding: 25px;
+  border-radius: 16px;
+  width: 350px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.weather-card h2 {
+  color: #ffffff;
+  margin-bottom: 15px;
+}
+
+.weather-card strong {
+  color: #2fb9a3;
+}
+
+/* ============================
+   INFO SECTION
+============================ */
+.info-section {
+  margin: 60px 25px;
+  text-align: center;
+}
+
+.info-section h2 {
+  font-size: 32px;
+  color: #ffffff;
+}
+
+.info-cards {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.info-card {
+  background: #1a1d21;
+  width: 260px;
+  padding: 25px;
+  border-radius: 14px;
+  border: 1px solid #2fb9a3;
+  text-align: center;
+  transition: 0.2s;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+  border-color: #4dd3be;
+}
+
+.info-card h3 {
+  color: #2fb9a3;
+  margin-bottom: 10px;
+}
+
+.info-card p {
+  color: #c7c7c7;
+}
+
+/* ============================
+   TECH SECTION
+============================ */
+.tech-section {
+  margin: 80px 25px;
+  text-align: center;
+}
+
+.tech-section h2 {
+  color: white;
+  font-size: 30px;
+}
+
+.tech-items {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 35px;
+}
+
+.tech-item {
+  width: 220px;
+  padding: 20px;
+  background: #1a1d21;
+  border: 1px solid #2fb9a3;
+  border-radius: 14px;
+}
+
+.tech-item h3 {
+  color: #2fb9a3;
+  margin-bottom: 8px;
+}
+
+.tech-item p {
+  color: #c7c7c7;
+}
+
+/* ============================
+   RESPONSIVE
+============================ */
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .circle-deco {
+    margin-top: 20px;
+  }
+
+  .info-cards,
+  .tech-items {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+mat-sidenav-content {
+  background: #111418 !important;
+}

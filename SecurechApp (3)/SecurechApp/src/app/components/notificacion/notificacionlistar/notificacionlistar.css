@@ -1,0 +1,54 @@
+/* ============================
+   GRID DE CARDS
+   ============================ */
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 15px;
+}
+
+/* ============================
+   CARD DE NOTIFICACIÓN
+   ============================ */
+.notif-card {
+  background: #1a1d21 !important;     /* Fondo oscuro */
+  color: #e8e8e8 !important;          /* Texto claro */
+  border-radius: 16px !important;
+  padding: 20px;
+  width: 340px;
+}
+
+/* TÍTULO */
+.notif-card .mat-mdc-card-title {
+  color: #2fb9a3 !important;          /* Verde petróleo */
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* SUBTÍTULO (mensaje resumen) */
+.notif-card .mat-mdc-card-subtitle {
+  color: #bcbcbc !important;          /* Gris claro */
+  font-size: 15px;
+}
+
+/* CONTENIDO DEL CARD */
+.notif-card mat-card-content p {
+  color: #c7c7c7 !important;
+  margin: 4px 0;
+  font-size: 15px;
+}
+
+.notif-card mat-card-content strong {
+  color: #ffffff !important;          /* Blanco fuerte */
+}
+
+/* ============================
+   TÍTULO PRINCIPAL
+   ============================ */
+h2 {
+  color: #ffffff !important;          /* Blanco */
+  font-size: 28px;
+  font-weight: 700;
+}

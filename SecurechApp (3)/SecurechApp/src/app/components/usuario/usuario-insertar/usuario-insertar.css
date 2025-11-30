@@ -1,0 +1,125 @@
+/* ============================
+   TÍTULO
+============================ */
+h2, .titulo-form {
+  color: #2fb9a3 !important;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* ============================
+   FORM FIELDS (mat-form-field)
+============================ */
+mat-form-field {
+  width: 60%;
+}
+
+/* Label del input */
+.mat-mdc-form-field-label {
+  color: #ffffff !important;
+}
+
+/* Texto dentro del input → NEGRO */
+.mat-mdc-input-element {
+  color: #000000 !important;
+}
+
+/* Caja del input */
+.mdc-text-field {
+  background: #ffffff !important; /* blanco */
+  color: #000000 !important;
+  border-radius: 8px !important;
+  border: 1px solid #2fb9a3 !important;
+}
+
+/* Placeholder */
+.mat-mdc-input-element::placeholder {
+  color: #444444 !important;
+}
+
+/* Borde al enfocar */
+.mdc-text-field--focused .mdc-notched-outline__leading,
+.mdc-text-field--focused .mdc-notched-outline__notch,
+.mdc-text-field--focused .mdc-notched-outline__trailing {
+  border-color: #2fb9a3 !important;
+}
+
+/* ============================
+   SELECT (mat-select)
+============================ */
+.mat-mdc-select-trigger {
+  color: #000000 !important;
+}
+
+.mat-mdc-select-min-line {
+  color: #000000 !important;
+}
+
+.mat-mdc-option {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+.mat-mdc-option:hover {
+  background: rgba(47,185,163,0.25) !important;
+}
+
+/* ============================
+   BOTÓN (Registrar / Editar)
+============================ */
+button[matButton="elevated"] {
+  background-color: #2fb9a3;
+  color: #000000;
+  border: none;
+  padding: 0.55rem 1.25rem;
+  font-size: 1.05rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.25s ease;
+  width: 60%;
+  font-weight: 600;
+  box-shadow: 0 0 10px rgba(47,185,163,0.35);
+}
+
+button[matButton="elevated"]:hover {
+  background-color: #4dd3be;
+}
+
+/* ============================
+   RADIO BUTTONS — TEXTO BLANCO
+============================ */
+
+/* Fuerza el color del texto (FUNCIONA SIEMPRE) */
+:host ::ng-deep mat-radio-button label {
+  color: #ffffff !important;
+}
+
+/* Alternativa por compatibilidad */
+:host ::ng-deep .mat-mdc-radio-label-content {
+  color: #ffffff !important;
+}
+
+/* Círculo externo */
+:host ::ng-deep .mdc-radio__outer-circle {
+  border-color: #2fb9a3 !important;
+}
+
+/* Círculo interno cuando está seleccionado */
+:host ::ng-deep .mdc-radio__inner-circle {
+  background-color: #2fb9a3 !important;
+  border-color: #2fb9a3 !important;
+}
+
+/* Ripple */
+:host ::ng-deep .mat-mdc-radio-ripple .mat-ripple-element {
+  background-color: rgba(47,185,163,0.35) !important;
+}
+
+/* Label HTML normal (Ej: "Estado") */
+label {
+  color: #ffffff !important;
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: inline-block;
+}

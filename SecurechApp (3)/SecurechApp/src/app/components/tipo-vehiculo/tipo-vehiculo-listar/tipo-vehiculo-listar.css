@@ -1,0 +1,71 @@
+/* ============================
+   GRID DE CARDS
+   ============================ */
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 15px;
+}
+
+/* ============================
+   CARD DE VEHÍCULO
+   ============================ */
+.vehiculo-card {
+  background: #1a1d21 !important;     /* Fondo oscuro */
+  color: #e8e8e8 !important;          /* Texto claro */
+  border-radius: 16px;
+  padding: 15px;
+  width: 330px;
+}
+
+/* Título */
+.vehiculo-card .mat-mdc-card-title {
+  color: #2fb9a3 !important;          /* Verde petróleo */
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* Subtítulo */
+.vehiculo-card .mat-mdc-card-subtitle {
+  color: #bcbcbc !important;
+}
+
+/* Contenido */
+.vehiculo-card mat-card-content p {
+  color: #c7c7c7 !important;
+  margin: 4px 0;
+  font-size: 15px;
+}
+
+.vehiculo-card mat-card-content strong {
+  color: #ffffff !important;
+}
+
+/* ============================
+   BOTONES DE ACCIÓN
+   ============================ */
+.vehiculo-card button[mat-icon-button] {
+  background: #2fb9a3 !important;    /* Verde petróleo */
+  border-radius: 8px;
+  padding: 8px;
+  transition: 0.25s ease;
+}
+
+.vehiculo-card button[mat-icon-button]:hover {
+  background: #4dd3be !important;    /* Verde claro */
+}
+
+.vehiculo-card button[mat-icon-button] mat-icon {
+  color: #000000 !important;         /* Negro */
+}
+
+/* ============================
+   TÍTULO PRINCIPAL H2
+   ============================ */
+h2 {
+  color: #ffffff !important;
+  font-size: 28px;
+  font-weight: 700;
+}

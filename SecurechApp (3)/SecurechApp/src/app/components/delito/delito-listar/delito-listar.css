@@ -1,0 +1,110 @@
+/* ============================
+   TABLA PRINCIPAL
+   ============================ */
+table {
+  background: #111418;       /* Negro */
+  color: white;              /* Blanco */
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* ============================
+   CABECERAS (TH)
+   ============================ */
+th {
+  background: #1e1e1e;       /* Gris oscuro */
+  color: #2fb9a3 !important; /* Verde petróleo */
+  font-weight: 700;
+  padding: 12px;
+}
+
+th.mat-header-cell {
+  color: #2fb9a3 !important;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* ============================
+   CELDAS (TD)
+   ============================ */
+td,
+.mat-cell,
+.mat-mdc-cell {
+  color: #e8e8e8 !important; /* Blanco suave */
+  padding: 10px;
+}
+
+/* ============================
+   BOTONES
+   ============================ */
+button[matButton] {
+  background: #2fb9a3;        /* Verde petróleo */
+  color: #000000;             /* Negro */
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-weight: 600;
+  transition: 0.2s ease;
+  border: none;
+}
+
+button[matButton]:hover {
+  background: #4dd3be;        /* Verde más claro */
+}
+
+/* ============================
+   BOTÓN ICONO (EDITAR/ELIMINAR)
+   ============================ */
+button[mat-icon-button] {
+  background: #2fb9a3;
+  border-radius: 8px;
+  transition: 0.2s ease;
+}
+
+button[mat-icon-button]:hover {
+  background: #4dd3be;
+}
+
+mat-icon {
+  color: #000000 !important;  /* Negro dentro del botón */
+}
+
+/* ============================
+   TÍTULO (H2)
+   ============================ */
+h2 {
+  color: #ffffff !important;  /* Blanco */
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* ============================
+   TARJETAS (CARDS)
+   ============================ */
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.delito-card {
+  background: #1a1d21 !important; /* Fondo oscuro */
+  color: #e8e8e8 !important;      /* Texto claro */
+  border-radius: 12px;
+  padding: 15px;
+}
+
+.delito-card strong {
+  color: #2fb9a3 !important;       /* Verde petróleo (ya no neón) */
+}
+
+mat-card-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff !important;        /* Blanco */
+}
+
+mat-card-subtitle {
+  color: #bcbcbc !important;        /* Gris claro */
+}

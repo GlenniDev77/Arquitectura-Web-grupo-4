@@ -1,0 +1,62 @@
+.contenedor {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.mapa-caja {
+  width: 90%;
+  max-width: 800px;
+  height: 400px;
+  border: 2px solid #326c3a;
+  border-radius: 8px;
+}
+
+.panel {
+  width: 90%;
+  max-width: 400px;
+  padding: 15px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+.panel input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 5px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+}
+
+.btn {
+  width: 100%;
+  padding: 10px;
+  background: #007bff;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.sugerencias {
+  list-style: none;
+  padding: 0;
+  background: white;
+  border: 1px solid #ccc;
+  max-height: 150px;
+  overflow-y: auto;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.sugerencias li {
+  padding: 6px;
+  cursor: pointer;
+}
+
+.sugerencias li:hover {
+  background: #eee;
+}

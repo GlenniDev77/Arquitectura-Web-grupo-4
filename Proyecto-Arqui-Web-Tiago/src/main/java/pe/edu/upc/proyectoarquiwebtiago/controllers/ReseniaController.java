@@ -24,7 +24,7 @@ public class ReseniaController {
     private IUsuarioService uS;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('AUTORIDAD') or hasAuthority('MODERADOR')")
+    //@PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('AUTORIDAD') or hasAuthority('MODERADOR')")
     public List<ReseniaDTOList> list() {
         return this.rS.list().stream().map(y -> {
             ModelMapper mapper = new ModelMapper();
@@ -34,7 +34,7 @@ public class ReseniaController {
 
 
     @PostMapping
-    @PreAuthorize("hasAuthority('USER')")
+    //@PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<String> insert(@RequestBody ReseniaDTOInsert dto) {
         ModelMapper mapper = new ModelMapper();
         Resenia d = mapper.map(dto, Resenia.class);
@@ -48,7 +48,7 @@ public class ReseniaController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('AUTORIDAD') or hasAuthority('MODERADOR')")
+    //@PreAuthorize("hasAuthority('ADMIN') or hasAnyAuthority('AUTORIDAD') or hasAuthority('MODERADOR')")
     public ResponseEntity<?> listarReseniaPorId(@PathVariable("id") Integer id) {
         Resenia res = rS.listIdResenia(id);
         if (res == null) {
@@ -62,7 +62,7 @@ public class ReseniaController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR')")
+    //@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MODERADOR')")
     public ResponseEntity<String> eliminarResenia(@PathVariable("id") Integer id) {
         Resenia u = rS.listIdResenia(id);
         if (u == null) {

@@ -1,0 +1,48 @@
+<div class="container">
+  <div style="text-align: center; margin: 5%">
+    <h2>Registrar Notificacion</h2>
+  </div>
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+      @if (edicion) {
+      <mat-form-field class="example-full-width">
+        <mat-label>ID:</mat-label>
+        <input matInput formControlName="codigo" readonly="true" />
+        <mat-error> @if (form.get('codigo')?.hasError('required')) { Ingrese ID!! } </mat-error>
+      </mat-form-field>
+      }
+      <br />
+      <mat-form-field>
+        <mat-label>Mensaje</mat-label>
+        <input matInput formControlName="mensaje" />
+        <mat-error>
+          @if (form.get('mensaje')?.hasError('required')) { Ingrese Mensaje! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="FK">
+          @for (dev of listaUsuarios; track dev) {
+          <mat-option [value]="dev.id_usuario">{{ dev.nombre }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field>
+        <mat-label>Zona</mat-label>
+        <mat-select formControlName="FK2">
+          @for (dev of listaZonas; track dev) {
+          <mat-option [value]="dev.idZona">{{ dev.nombre}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <div>
+        <button matButton="elevated">Registrar</button>
+      </div>
+    </form>
+  </div>
+</div>
