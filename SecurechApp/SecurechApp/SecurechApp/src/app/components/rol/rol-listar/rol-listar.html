@@ -1,0 +1,57 @@
+<div class="container">
+  <div style="text-align: center; margin: 5%;">
+    <h2>Roles</h2>
+  </div>
+
+  <div class="card-grid">
+
+    @for (rol of getRolesPaginados(); track rol.id_rol) {
+      <mat-card class="rol-card mat-elevation-z4" style="width: 350px;">
+
+        <mat-card-header>
+          <mat-card-title>{{ rol.nombre_rol }}</mat-card-title>
+          <mat-card-subtitle>ID: {{ rol.id_rol }}</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+
+          <p><strong>Usuario asignado:</strong>
+            @if (rol.user) {
+              {{ rol.user.nombre }}
+            } @else {
+              Sin usuario
+            }
+          </p>
+
+        </mat-card-content>
+
+        <mat-card-actions style="display: flex; justify-content: space-between;">
+
+          <button mat-icon-button [routerLink]="['edits', rol.id_rol]">
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <button mat-icon-button color="warn" (click)="eliminar(rol.id_rol)">
+            <mat-icon>delete</mat-icon>
+          </button>
+
+        </mat-card-actions>
+
+      </mat-card>
+    }
+
+  </div>
+
+  <div style="display: flex; justify-content: center; margin: 20px 0;">
+
+  <mat-paginator 
+  [length]="roles.length"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[6, 12, 18]"
+  showFirstLastButtons
+  (page)="cambiarPagina($event)">
+  </mat-paginator>
+
+  </div>
+
+</div>

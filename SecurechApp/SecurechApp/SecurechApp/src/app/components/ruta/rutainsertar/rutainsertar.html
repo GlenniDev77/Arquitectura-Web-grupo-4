@@ -1,0 +1,89 @@
+<div class="ruta-container">
+
+  <!-- COLUMNA IZQUIERDA: MAPA -->
+  <div class="mapa-columna">
+    <app-mapa
+      [mapId]="'mapaRutaInsertar'"
+      (datosSeleccionados)="recibirDatosMapa($event)"
+      (rutaTrazada)="onRutaTrazada($event)"
+    >
+    </app-mapa>
+  </div>
+
+  <!-- COLUMNA DERECHA: FORMULARIO -->
+  <div class="form-columna">
+
+    <h2 class="titulo">Registrar Ruta</h2>
+
+    <form [formGroup]="form" (ngSubmit)="aceptar()" class="formulario">
+
+      <div *ngIf="edicion">
+        <mat-form-field class="example-full-width">
+          <mat-label>ID</mat-label>
+          <input matInput formControlName="id_ruta" readonly />
+        </mat-form-field>
+      </div>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Origen</mat-label>
+        <input matInput formControlName="origen" readonly />
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Latitud Origen</mat-label>
+        <input matInput type="number" formControlName="origen_latitud" readonly />
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Longitud Origen</mat-label>
+        <input matInput type="number" formControlName="origen_longitud" readonly />
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Destino</mat-label>
+        <input matInput formControlName="destino" readonly />
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Latitud Destino</mat-label>
+        <input matInput type="number" formControlName="destino_latitud" readonly />
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Longitud Destino</mat-label>
+        <input matInput type="number" formControlName="destino_longitud" readonly />
+      </mat-form-field>
+
+      
+<div class="seleccion-input">
+  <mat-form-field>
+        <mat-label>Seleccionar Usuario</mat-label>
+        <mat-select formControlName="FK">
+          <mat-option *ngFor="let usuario of listaUsuarios" [value]="usuario.id_usuario">
+            {{ usuario.nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+<mat-form-field>
+        <mat-label>Seleccionar Tipo de Vehículo</mat-label>
+        <mat-select formControlName="FK2">
+          <mat-option *ngFor="let tipo of listaTipovehiculos" [value]="tipo.id_tipovehiculo">
+            {{ tipo.nombre_vehiculo }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+</div>
+      
+
+      <button mat-raised-button color="primary"
+        class="btn-registrar"
+        type="submit"
+        [disabled]="!rutaTrazada || form.invalid">
+        {{ edicion ? 'Actualizar' : 'Registrar' }}
+      </button>
+
+    </form>
+
+  </div>
+</div>
