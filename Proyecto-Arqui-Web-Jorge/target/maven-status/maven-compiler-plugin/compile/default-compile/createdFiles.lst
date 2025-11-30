@@ -1,3 +1,4 @@
+pe\edu\upc\proyectoarquiwebjorge\dtos\UsuarioDTO.class
 pe\edu\upc\proyectoarquiwebjorge\dtos\UsuarioDTOList.class
 pe\edu\upc\proyectoarquiwebjorge\repositories\IRolRepository.class
 pe\edu\upc\proyectoarquiwebjorge\repositories\INotificacionRepository.class
@@ -14,6 +15,7 @@ pe\edu\upc\proyectoarquiwebjorge\dtos\NotificacionDTOList.class
 pe\edu\upc\proyectoarquiwebjorge\serviceimplements\RolServiceImplement.class
 pe\edu\upc\proyectoarquiwebjorge\entities\Resenia.class
 pe\edu\upc\proyectoarquiwebjorge\entities\Rol.class
+pe\edu\upc\proyectoarquiwebjorge\dtos\RolDTOComplete.class
 pe\edu\upc\proyectoarquiwebjorge\servicesinterfaces\IRolService.class
 pe\edu\upc\proyectoarquiwebjorge\dtos\ReseniaDTOList.class
 pe\edu\upc\proyectoarquiwebjorge\dtos\RolDTO.class
@@ -45,11 +47,13 @@ pe\edu\upc\proyectoarquiwebjorge\securities\JwtRequestFilter.class
 pe\edu\upc\proyectoarquiwebjorge\dtos\RolDTOInsert.class
 pe\edu\upc\proyectoarquiwebjorge\dtos\AntiguedadUltimoDelitoDTO.class
 pe\edu\upc\proyectoarquiwebjorge\entities\Usuario.class
+pe\edu\upc\proyectoarquiwebjorge\util\CORS.class
 pe\edu\upc\proyectoarquiwebjorge\securities\SwaggerConfig.class
 pe\edu\upc\proyectoarquiwebjorge\controllers\TVehiculoController.class
 pe\edu\upc\proyectoarquiwebjorge\entities\TipoVehiculo.class
 pe\edu\upc\proyectoarquiwebjorge\controllers\ZonaController.class
 pe\edu\upc\proyectoarquiwebjorge\servicesinterfaces\INotificacionService.class
+pe\edu\upc\proyectoarquiwebjorge\dtos\RolDTOList.class
 pe\edu\upc\proyectoarquiwebjorge\serviceimplements\ZonaServiceImplement.class
 pe\edu\upc\proyectoarquiwebjorge\securities\WebSecurityConfig.class
 pe\edu\upc\proyectoarquiwebjorge\dtos\RutaDTOList.class
@@ -64,6 +68,7 @@ pe\edu\upc\proyectoarquiwebjorge\dtos\UsuariosConMasReportesDTO.class
 pe\edu\upc\proyectoarquiwebjorge\controllers\RutaController.class
 pe\edu\upc\proyectoarquiwebjorge\dtos\MasNotisxZonaDTO.class
 pe\edu\upc\proyectoarquiwebjorge\dtos\ZonaDTO.class
+pe\edu\upc\proyectoarquiwebjorge\dtos\UsuarioDTOMod.class
 pe\edu\upc\proyectoarquiwebjorge\dtos\QuantityDelitoZonaDistritoDTO.class
 pe\edu\upc\proyectoarquiwebjorge\serviceimplements\RutaServiceImplements.class
 pe\edu\upc\proyectoarquiwebjorge\entities\Zona.class
