@@ -1,0 +1,115 @@
+/* ============================
+   FONDO GENERAL
+============================ */
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(90deg, #0f1115, #1c1f24);
+  font-family: 'Inter', sans-serif;
+}
+
+/* ============================
+   CONTENEDOR PRINCIPAL
+============================ */
+.container {
+  background: rgba(20, 22, 25, 0.9);
+  padding: 25px;
+  border-radius: 12px;
+  width: 280px;
+  border: 1px solid rgba(47,185,163,0.35);
+  box-shadow: 0px 0px 12px rgba(47,185,163,0.25);
+  text-align: center;
+}
+
+/* ============================
+   LOGO MÁS PEQUEÑO
+============================ */
+.container img {
+  width: 80px;
+  margin-bottom: 15px;
+}
+
+/* ============================
+   TÍTULO
+============================ */
+h2 {
+  color: #2fb9a3 !important;
+  font-size: 20px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+/* ============================
+   INPUTS MÁS ANGOSTOS
+============================ */
+mat-form-field {
+  width: 90%;
+  margin-bottom: 10px;
+}
+
+/* Label - Verde */
+.mat-mdc-form-field-label {
+  color: #2fb9a3 !important;
+}
+
+/* Input - Texto NEGRO (no blanco) */
+.mat-mdc-input-element {
+  color: #000000 !important; /* TEXTO NEGRO */
+  background: transparent !important;
+}
+
+/* Caja de input - Fondo CLARO */
+.mdc-text-field {
+  background: #f8f9fa !important; /* FONDO CLARO */
+  border: 1px solid #2fb9a3 !important;
+  border-radius: 6px !important;
+}
+
+/* Placeholder - Gris oscuro */
+.mat-mdc-input-element::placeholder {
+  color: #6c757d !important;
+}
+
+/* Hover / Focus border */
+.mdc-text-field--focused .mdc-notched-outline__leading,
+.mdc-text-field--focused .mdc-notched-outline__notch,
+.mdc-text-field--focused .mdc-notched-outline__trailing {
+  border-color: #4dd3be !important;
+}
+
+/* ============================
+   BOTÓN VERDE
+============================ */
+.btn-login {
+  background-color: #2fb9a3 !important;
+  color: #ffffff !important;
+  border: none !important;
+  padding: 12px 20px !important;
+  font-size: 14px !important;
+  border-radius: 6px !important;
+  cursor: pointer;
+  width: 90% !important;
+  font-weight: 600 !important;
+  margin-top: 10px;
+  box-shadow: none !important;
+}
+
+.btn-login:hover {
+  background-color: #4dd3be !important;
+}
+
+/* ============================
+   RESPONSIVE
+============================ */
+@media (max-width: 480px) {
+  .container {
+    width: 250px;
+    padding: 20px 15px;
+  }
+  
+  .container img {
+    width: 70px;
+  }
+}

@@ -1,0 +1,54 @@
+
+/* reporte-delito-por-zy-d.component.css */
+.title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #1a1d21, #0f1218);
+  border-radius: 12px;
+  border: 1px solid #2a2e35;
+  margin: 20px auto;
+  max-width: 600px;
+}
+
+.title {
+  margin-bottom: 20px;
+}
+
+.titulo-delito {
+    color: #fafafa; /* elige el color que quieras */
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.chart-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.no-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  color: #8a8a8a;
+}
+
+.no-data-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+  color: #2fb9a3;
+}
+
+.no-data-message {
+  font-size: 1rem;
+  text-align: center;
+  margin: 0;
+}
