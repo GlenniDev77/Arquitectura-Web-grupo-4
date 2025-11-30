@@ -45,7 +45,6 @@ public class UsuarioServiceImplement implements IUsuarioService {
         return uS.buscarPorNombreUs(nombreUsuario);
     }
 
-
     @Override
     public List<String[]> TotalUsuXzona() {
         return uS.TotalUsuXzona();

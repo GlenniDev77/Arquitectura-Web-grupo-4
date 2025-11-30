@@ -5,7 +5,7 @@
 
   <div class="card-grid">
 
-    @for (delito of dataSource.data; track delito.id_reportedelito) {
+    @for (delito of getDelitosPaginados(); track delito.id_reportedelito) {
 
       <mat-card class="delito-card mat-elevation-z4" style="width: 350px;">
 
@@ -51,6 +51,16 @@
 
     }
 
+  </div>
+
+  <div style="display: flex; justify-content: center; margin: 20px 0;">
+    <mat-paginator 
+      [length]="delitos.length"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[6, 12, 18]"
+      showFirstLastButtons
+      (page)="cambiarPagina($event)">
+    </mat-paginator>
   </div>
 
 </div>

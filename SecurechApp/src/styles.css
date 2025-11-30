@@ -10,3 +10,66 @@ html, body {
   padding: 0;
   height: 100%;
 }
+
+/* ============================
+   PAGINADOR MDC — GLOBAL
+   ============================ */
+
+.mat-mdc-paginator {
+  background: #1a1d21 !important;
+  color: #e8e8e8 !important;
+  border-radius: 12px;
+  padding: 10px 20px !important;
+}
+
+/* Textos */
+.mat-mdc-paginator-range-label,
+.mat-mdc-paginator-page-size-label {
+  color: #e8e8e8 !important;
+}
+
+/* Flechas MDC */
+.mdc-icon-button {
+  background: #2fb9a3 !important;
+  border-radius: 8px !important;
+  transition: 0.25s ease-in-out !important;
+}
+
+.mdc-icon-button:hover {
+  background: #4dd3be !important;
+}
+
+/* Iconos dentro de las flechas */
+.mdc-icon-button mat-icon {
+  color: #000000 !important;
+}
+
+/* Deshabilitados */
+.mdc-icon-button:disabled {
+  background: #3b3b3b !important;
+  opacity: 0.4 !important;
+}
+
+/* Select del paginator */
+.mat-mdc-select-value-text {
+  color: #2fb9a3 !important;
+  font-weight: 600;
+}
+
+.mat-mdc-select-arrow svg {
+  fill: #2fb9a3 !important;
+}
+
+.mat-mdc-select-panel {
+  background: #1a1d21 !important;
+  color: #e8e8e8 !important;
+}
+
+.mat-mdc-option {
+  color: #e8e8e8 !important;
+}
+
+.mat-mdc-option:hover {
+  background: #2fb9a3 !important;
+  color: #000 !important;
+}
