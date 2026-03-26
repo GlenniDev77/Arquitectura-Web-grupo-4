@@ -1,0 +1,148 @@
+CREACION DE CRUD EN LARAVEL
+//si aun no instalas : composer global require laravel/installer
+
+laravel new practicas
+none
+n
+1
+n
+mysql
+n
+n
+
+--Providers/AppServiceProvider.php --agregar
+use Illuminate\Support\Facades\Schema;
+Schema::defaultStringLength(191);                   //en boot
+
+
+cambiar el nombre de la base de datos en .env
+
+php artisan migrate
+php artisan serve // para correr el programa
+
+--creando programas
+crear un modelo: php artisan make:model Empleados -mcr
+
+--ingresar a migrations -- empleados
+modificaremos para completar la tabla
+sintaxis:
+            $table->string('Nombre');
+            $table->string('ApellidoPaterno');
+//https://laravel.com/docs/5.0/schema 
+
+--
+crear en views
+carpeta empleados
+create, edit, index, blade.php
+
+--
+vincular lor routes con el controller
+routes:
+Route::controller(EmpleadosController::class)->group(function (){
+Route::get("/empleados", "index")->name("empleados.index");
+Route::get("/empleados/create","create")->name("empleados.create");
+Route::post("/empleados", "store")->name("empleados.store");
+Route::get("/empleados/{id}", "show")->name("empleados.show");
+Route::get("/empleados/{id}/edit","edit")->name("empleados.edit");
+Route::patch("/empleados/{id}","update")->name("empleados.update");
+Route::delete("/empleados/{id}", "destroy")->name("empleados.destroy");
+});
+
+en el controller
+return view('empleados/index');
+
+--
+en views
+create.blade.php:
+<h1>Seccion para empleados</h1>
+<form action="{{ url('/empleados')}}" method="post" enctype="multipart/form-data">
+{{ csrf_field() }}
+    <label for="Nombre">{{'Nombre'}}</label>
+    <input type="text" name="Nombre" id="Nombre" value="">
+<br>
+    <label for="ApellidoPaterno">{{'Apellido Paterno'}}</label>
+    <input type="text" name="ApellidoPaterno" id="ApellidoPaterno" value="">
+<br>
+    <label for="ApellidoMaterno">{{'Apellido Materno'}}</label>
+    <input type="text" name="ApellidoMaterno" id="ApellidoMaterno" value="">
+<br>
+    <label for="Correo">{{'Correo'}}</label>
+    <input type="email" name="Correo" id="Correo" value="">
+<br>
+    <label for="Foto">{{'Foto'}}</label>
+    <input type="file" name="Foto" id="Foto" value="">
+<br>
+
+    <input type="submit" value="Agregar">
+</form>
+
+--Controller 
+
+use App\Models\Empleados;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
+store:
+
+        //$datosEmpleado=request()->all();
+        $datosEmpleado=request()->except('_token');
+        Empleados::insert($datosEmpleado);
+        return response()->json($datosEmpleado);
+
+create:
+return view("empleados/create");
+index:
+return view("empleados/index");
+
+//la foto que suben se guarda en: storage app public uploads
+
+b-table-header	
+
+php artisan storage:link
+
+
+---enviar mensaje por accion
+views:
+@@if (Session::has('Mensaje')){{
+    Session::get('Mensaje')
+}}
+
+controler:
+return redirect('empleados')->with('Mensaje','Empleado agregado correctamente');
+
+---------form heredado
+for para todos:
+<h1>Seccion para empleados</h1>
+<form action="{{ url('/empleados')}}" method="post" enctype="multipart/form-data">
+{{ csrf_field() }}
+@include('empleados.form',['Modo'=>'crear'])                                               // para heredar el formulario
+
+</form>
+
+en form:
+{{ $Modo=='crear' ? 'Agregar empleado' : 'Modificar empleado'}}                            //distingir la info y forms ya que al ser el mismo form porque es heredado tenemos que saber donde estamos*/
+
+
+
+--LOGIN - REGISTRO
+npm install
+php artisan breeze:install
+blade
+n
+
+volver a agregar las rutas en routes
+
+ensima de todo viws
+<x-guest-layout>
+    <!-- Session Status -->
+    <x-auth-session-status class="mb-4" :status="session('status')" />
+
+abajo
+</x-guest-layout>
+
+--correr npm run dev siempre
+
+Documentación de validate en laravel: https://laravel.com/docs/5.8/validation
+
+
